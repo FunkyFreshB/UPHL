@@ -43,7 +43,17 @@ public class S_UserInteraction : MonoBehaviour {
 
         recognizer.HoldStarted += (args) =>
         {
-            HoldActions();
+            HoldStartActions();
+        };
+
+        recognizer.HoldCompleted += (args) =>
+        {
+            HoldEndActions();
+        };
+
+        recognizer.HoldCanceled += (args) =>
+        {
+            HoldEndActions();
         };
 
         recognizer.StartCapturingGestures();
@@ -82,7 +92,7 @@ public class S_UserInteraction : MonoBehaviour {
                 audioData.Play(0);
                 Instantiate(obj, hit.point, Quaternion.Euler(90, 0, 0));
                 placedTOT++;
-            }
+            }/*
             if (hit.collider.tag == "Draggable")
             {
                 audioData.pitch = Random.Range(0.5f, 1.2f);
@@ -102,20 +112,34 @@ public class S_UserInteraction : MonoBehaviour {
             else if(hit.collider.tag != "Draggable")
             {
                 draggin = false;
-            }
+            }*/
         }
     }
 
-    void HoldActions()
+    void HoldStartActions()
     {
         Vector3 mp = Input.mousePosition; mp.z = 10; mp = Camera.main.ScreenToWorldPoint(mp);
         mp = transform.forward;
 
         RaycastHit hit;
+        if (Physics.Raycast(transform.position, mp, out hit))
+        {
+            if (hit.collider.tag == "Draggable")
+            {
+                focussedObj = hit.collider.gameObject;
+                hitObjDist = Vector3.Distance(transform.position, focussedObj.transform.position);
+                draggin = true;
+            }
+        }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    void HoldEndActions()
+    {
+        draggin = false;
+    }
+
+    // Update is called once per frame
+    void Update () {
         MouseKeyboardDebug();
         TextStuff();
 
@@ -177,24 +201,16 @@ public class S_UserInteraction : MonoBehaviour {
                 {
                     audioData.pitch = Random.Range(0.5f, 1.2f);
                     audioData.Play(0);
-                    Debug.Log("HIT");
 
-                    if (draggin)
-                    {
-                        draggin = false;
-                    }
-                    else
-                    {
-                        focussedObj = hit.collider.gameObject;
-                        hitObjDist = Vector3.Distance(transform.position, focussedObj.transform.position);
-                        draggin = true;
-                    }
-                }
-                else
-                {
-                    draggin = false;
+                    focussedObj = hit.collider.gameObject;
+                    hitObjDist = Vector3.Distance(transform.position, focussedObj.transform.position);
+                    draggin = true;
                 }
             }
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            draggin = false;
         }
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         rb.velocity = transform.TransformDirection(new Vector3(0,0,Input.GetAxis("Vertical")*2));

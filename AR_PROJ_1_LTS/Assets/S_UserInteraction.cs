@@ -21,7 +21,7 @@ public class S_UserInteraction : MonoBehaviour {
     GestureRecognizer recognizer;
 
     // UI
-    public Text destroyTXT;
+    public TextMesh destroyTXT;
     int destroyTOT = 0;
     int destroyablesTOT = 0;
 
@@ -112,6 +112,7 @@ public class S_UserInteraction : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         MouseDebug();
+        TextStuff();
 
         Vector3 mp = Input.mousePosition; mp.z = 10; mp = Camera.main.ScreenToWorldPoint(mp);
         mp = transform.forward;
@@ -180,5 +181,11 @@ public class S_UserInteraction : MonoBehaviour {
                 }
             }
         }
+    }
+
+    void TextStuff()
+    {
+        destroyTXT.transform.LookAt(this.transform);
+        destroyTXT.text = destroyTOT + "/" + destroyablesTOT;
     }
 }

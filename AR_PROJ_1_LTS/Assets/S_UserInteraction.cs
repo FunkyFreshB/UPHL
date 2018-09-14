@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class S_UserInteraction : MonoBehaviour {
 
+    bool sw = true;
     public GameObject curse;
     private MeshRenderer meshr;
 
@@ -24,6 +25,9 @@ public class S_UserInteraction : MonoBehaviour {
     public TextMesh destroyTXT;
     int destroyTOT = 0;
     int destroyablesTOT = 0;
+    public TextMesh placedTXT;
+    int placedTOT = 0;
+    public GameObject UIobj;
 
     private void Awake()
     {
@@ -77,6 +81,7 @@ public class S_UserInteraction : MonoBehaviour {
                 audioData.pitch = Random.Range(0.5f, 1.2f);
                 audioData.Play(0);
                 Instantiate(obj, hit.point, Quaternion.Euler(90, 0, 0));
+                placedTOT++;
             }
             if (hit.collider.tag == "Draggable")
             {
@@ -111,7 +116,7 @@ public class S_UserInteraction : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        MouseDebug();
+        MouseKeyboardDebug();
         TextStuff();
 
         Vector3 mp = Input.mousePosition; mp.z = 10; mp = Camera.main.ScreenToWorldPoint(mp);
@@ -127,6 +132,8 @@ public class S_UserInteraction : MonoBehaviour {
             }
 
             curse.transform.position = hit.point;
+            curse.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+
             meshr.enabled = true;
         }
         else
@@ -135,7 +142,14 @@ public class S_UserInteraction : MonoBehaviour {
         }
     }
 
-    void MouseDebug()
+    void TextStuff()
+    {
+       // UIobj.transform.LookAt(this.transform);
+        destroyTXT.text = destroyTOT + " DESTROYED";
+        placedTXT.text = placedTOT + " PLACED";
+    }
+
+    void MouseKeyboardDebug()
     {
         Vector3 mp2 = Input.mousePosition; mp2.z = 10; mp2 = Camera.main.ScreenToWorldPoint(mp2);
 
@@ -157,6 +171,7 @@ public class S_UserInteraction : MonoBehaviour {
                     audioData.pitch = Random.Range(0.5f, 1.2f);
                     audioData.Play(0);
                     Instantiate(obj, hit.point, Quaternion.Euler(90, 0, 0));
+                    placedTOT++;
                 }
                 if (hit.collider.tag == "Draggable")
                 {
@@ -181,11 +196,21 @@ public class S_UserInteraction : MonoBehaviour {
                 }
             }
         }
-    }
+        Rigidbody rb = transform.GetComponent<Rigidbody>();
+        rb.velocity = transform.TransformDirection(new Vector3(0,0,Input.GetAxis("Vertical")*2));
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            sw = !sw;
+            Debug.Log(sw);
+        }
 
-    void TextStuff()
-    {
-        destroyTXT.transform.LookAt(this.transform);
-        destroyTXT.text = destroyTOT + "/" + destroyablesTOT;
+        if (sw)
+        {
+            transform.Rotate(0, Input.GetAxis("Horizontal") * 3, 0);
+        }
+        else
+        {
+            transform.Rotate(Input.GetAxis("Horizontal") * 3, 0, 0);
+        }
     }
 }

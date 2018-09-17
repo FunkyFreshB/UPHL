@@ -8,7 +8,7 @@
 JonatanSDemo.sln: modified
 GeneratedProjects\UWP\Assembly-CSharp\project.json: 1D02BC64BAC0D041019673A1C4C51737
 JonatanSDemo\App.cs: 7CB9111E6B678EA745C11A07BE11019A
-JonatanSDemo\JonatanSDemo.csproj: 916DB68C0F1DBC260A49EFD81C7B3DB2
+JonatanSDemo\JonatanSDemo.csproj: 196D91FCCE8FDF13F61F2443F58C38A4
 JonatanSDemo\JonatanSDemo.csproj.user: modified
 JonatanSDemo\Package.appxmanifest: 25537D8647D108F69C7AFC0E14B19FDD
 JonatanSDemo\project.json: 1D02BC64BAC0D041019673A1C4C51737

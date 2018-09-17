@@ -31,13 +31,13 @@
     <AppXManifest Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\bin\x86\Release\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-09-14T13:53:04.610</Modified>
+      <Modified>2018-09-17T07:53:54.768</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\bin\x86\Release\JonatanSDemo.exe">
       <PackagePath>entrypoint\JonatanSDemo.exe</PackagePath>
-      <Modified>2018-09-14T13:52:48.982</Modified>
+      <Modified>2018-09-17T07:53:40.088</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\.nuget\packages\microsoft.applicationinsights\1.0.0\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll">
       <PackagePath>Microsoft.ApplicationInsights.dll</PackagePath>
@@ -501,7 +501,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Resource.res">
       <PackagePath>Resource.res</PackagePath>
-      <Modified>2018-09-14T13:52:01.156</Modified>
+      <Modified>2018-09-17T07:52:38.549</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
@@ -539,15 +539,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Data\boot.config">
       <PackagePath>Data\boot.config</PackagePath>
-      <Modified>2018-09-14T13:51:15.322</Modified>
+      <Modified>2018-09-17T07:51:55.946</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Data\globalgamemanagers">
       <PackagePath>Data\globalgamemanagers</PackagePath>
-      <Modified>2018-09-14T13:51:14.268</Modified>
+      <Modified>2018-09-17T07:51:49.385</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Data\level0">
       <PackagePath>Data\level0</PackagePath>
-      <Modified>2018-09-14T13:51:13.076</Modified>
+      <Modified>2018-09-17T07:51:48.249</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Data\Resources\unity default resources">
       <PackagePath>Data\Resources\unity default resources</PackagePath>
@@ -555,23 +555,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Data\Resources\unity_builtin_extra">
       <PackagePath>Data\Resources\unity_builtin_extra</PackagePath>
-      <Modified>2018-09-14T13:51:15.319</Modified>
+      <Modified>2018-09-17T07:51:55.946</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Data\globalgamemanagers.assets">
       <PackagePath>Data\globalgamemanagers.assets</PackagePath>
-      <Modified>2018-09-14T13:51:14.416</Modified>
+      <Modified>2018-09-17T07:51:49.546</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Data\sharedassets0.assets">
       <PackagePath>Data\sharedassets0.assets</PackagePath>
-      <Modified>2018-09-14T13:51:14.639</Modified>
+      <Modified>2018-09-17T07:51:51.125</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Data\level0.resS">
       <PackagePath>Data\level0.resS</PackagePath>
-      <Modified>2018-09-14T13:51:13.075</Modified>
+      <Modified>2018-09-17T07:51:48.249</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Data\managedAssemblies.txt">
       <PackagePath>Data\managedAssemblies.txt</PackagePath>
-      <Modified>2018-09-14T13:52:01.091</Modified>
+      <Modified>2018-09-17T07:52:38.489</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -580,223 +580,223 @@
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\bin\x86\Release\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-09-14T13:52:49.842</Modified>
+      <Modified>2018-09-17T07:53:41.275</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.TilemapModule.dll">
       <PackagePath>UnityEngine.TilemapModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.360</Modified>
+      <Modified>2018-09-17T07:53:49.730</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.TextRenderingModule.dll">
       <PackagePath>UnityEngine.TextRenderingModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.374</Modified>
+      <Modified>2018-09-17T07:53:49.738</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.TerrainPhysicsModule.dll">
       <PackagePath>UnityEngine.TerrainPhysicsModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.380</Modified>
+      <Modified>2018-09-17T07:53:49.741</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.UIElementsModule.dll">
       <PackagePath>UnityEngine.UIElementsModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.407</Modified>
+      <Modified>2018-09-17T07:53:49.764</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.TerrainModule.dll">
       <PackagePath>UnityEngine.TerrainModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.413</Modified>
+      <Modified>2018-09-17T07:53:49.770</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.SpriteMaskModule.dll">
       <PackagePath>UnityEngine.SpriteMaskModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.413</Modified>
+      <Modified>2018-09-17T07:53:49.773</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.SharedInternalsModule.dll">
       <PackagePath>UnityEngine.SharedInternalsModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.420</Modified>
+      <Modified>2018-09-17T07:53:49.777</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.StyleSheetsModule.dll">
       <PackagePath>UnityEngine.StyleSheetsModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.420</Modified>
+      <Modified>2018-09-17T07:53:49.781</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.SpriteShapeModule.dll">
       <PackagePath>UnityEngine.SpriteShapeModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.420</Modified>
+      <Modified>2018-09-17T07:53:49.783</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.UIModule.dll">
       <PackagePath>UnityEngine.UIModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.434</Modified>
+      <Modified>2018-09-17T07:53:49.788</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.VRModule.dll">
       <PackagePath>UnityEngine.VRModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.470</Modified>
+      <Modified>2018-09-17T07:53:49.803</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.VideoModule.dll">
       <PackagePath>UnityEngine.VideoModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.471</Modified>
+      <Modified>2018-09-17T07:53:49.811</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.VehiclesModule.dll">
       <PackagePath>UnityEngine.VehiclesModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.471</Modified>
+      <Modified>2018-09-17T07:53:49.814</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.WindModule.dll">
       <PackagePath>UnityEngine.WindModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.480</Modified>
+      <Modified>2018-09-17T07:53:49.817</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.WebModule.dll">
       <PackagePath>UnityEngine.WebModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.482</Modified>
+      <Modified>2018-09-17T07:53:49.821</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.UnityWebRequestWWWModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestWWWModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.490</Modified>
+      <Modified>2018-09-17T07:53:49.824</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.UnityConnectModule.dll">
       <PackagePath>UnityEngine.UnityConnectModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.491</Modified>
+      <Modified>2018-09-17T07:53:49.827</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.UnityAnalyticsModule.dll">
       <PackagePath>UnityEngine.UnityAnalyticsModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.491</Modified>
+      <Modified>2018-09-17T07:53:49.831</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.UNETModule.dll">
       <PackagePath>UnityEngine.UNETModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.509</Modified>
+      <Modified>2018-09-17T07:53:49.839</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.UnityWebRequestTextureModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestTextureModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.511</Modified>
+      <Modified>2018-09-17T07:53:49.842</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.UnityWebRequestModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.513</Modified>
+      <Modified>2018-09-17T07:53:49.847</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.UnityWebRequestAudioModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestAudioModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.520</Modified>
+      <Modified>2018-09-17T07:53:49.850</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.CoreModule.dll">
       <PackagePath>UnityEngine.CoreModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.721</Modified>
+      <Modified>2018-09-17T07:53:50.044</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.ClothModule.dll">
       <PackagePath>UnityEngine.ClothModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.729</Modified>
+      <Modified>2018-09-17T07:53:50.047</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.AudioModule.dll">
       <PackagePath>UnityEngine.AudioModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.732</Modified>
+      <Modified>2018-09-17T07:53:50.056</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.dll">
       <PackagePath>UnityEngine.dll</PackagePath>
-      <Modified>2018-09-14T13:51:32.165</Modified>
+      <Modified>2018-09-17T07:52:11.539</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.DirectorModule.dll">
       <PackagePath>UnityEngine.DirectorModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.742</Modified>
+      <Modified>2018-09-17T07:53:50.059</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.CrashReportingModule.dll">
       <PackagePath>UnityEngine.CrashReportingModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.742</Modified>
+      <Modified>2018-09-17T07:53:50.062</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.AssetBundleModule.dll">
       <PackagePath>UnityEngine.AssetBundleModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.750</Modified>
+      <Modified>2018-09-17T07:53:50.065</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.AccessibilityModule.dll">
       <PackagePath>UnityEngine.AccessibilityModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.750</Modified>
+      <Modified>2018-09-17T07:53:50.068</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.ARModule.dll">
       <PackagePath>UnityEngine.ARModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.750</Modified>
+      <Modified>2018-09-17T07:53:50.073</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.AnimationModule.dll">
       <PackagePath>UnityEngine.AnimationModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.780</Modified>
+      <Modified>2018-09-17T07:53:50.083</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.AIModule.dll">
       <PackagePath>UnityEngine.AIModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.781</Modified>
+      <Modified>2018-09-17T07:53:50.092</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.GameCenterModule.dll">
       <PackagePath>UnityEngine.GameCenterModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.789</Modified>
+      <Modified>2018-09-17T07:53:50.096</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.PerformanceReportingModule.dll">
       <PackagePath>UnityEngine.PerformanceReportingModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.789</Modified>
+      <Modified>2018-09-17T07:53:50.099</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.ParticleSystemModule.dll">
       <PackagePath>UnityEngine.ParticleSystemModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.800</Modified>
+      <Modified>2018-09-17T07:53:50.110</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.ParticlesLegacyModule.dll">
       <PackagePath>UnityEngine.ParticlesLegacyModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.811</Modified>
+      <Modified>2018-09-17T07:53:50.114</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.ScreenCaptureModule.dll">
       <PackagePath>UnityEngine.ScreenCaptureModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.811</Modified>
+      <Modified>2018-09-17T07:53:50.117</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.PhysicsModule.dll">
       <PackagePath>UnityEngine.PhysicsModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.820</Modified>
+      <Modified>2018-09-17T07:53:50.126</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.Physics2DModule.dll">
       <PackagePath>UnityEngine.Physics2DModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.831</Modified>
+      <Modified>2018-09-17T07:53:50.136</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.ImageConversionModule.dll">
       <PackagePath>UnityEngine.ImageConversionModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.840</Modified>
+      <Modified>2018-09-17T07:53:50.140</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.GridModule.dll">
       <PackagePath>UnityEngine.GridModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.845</Modified>
+      <Modified>2018-09-17T07:53:50.143</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.JSONSerializeModule.dll">
       <PackagePath>UnityEngine.JSONSerializeModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.845</Modified>
+      <Modified>2018-09-17T07:53:50.145</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.InputModule.dll">
       <PackagePath>UnityEngine.InputModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.850</Modified>
+      <Modified>2018-09-17T07:53:50.149</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.IMGUIModule.dll">
       <PackagePath>UnityEngine.IMGUIModule.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.861</Modified>
+      <Modified>2018-09-17T07:53:50.168</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.Timeline.dll">
       <PackagePath>UnityEngine.Timeline.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.890</Modified>
+      <Modified>2018-09-17T07:53:50.196</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\nunit.framework.dll">
       <PackagePath>nunit.framework.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.932</Modified>
+      <Modified>2018-09-17T07:53:50.228</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.UI.dll">
       <PackagePath>UnityEngine.UI.dll</PackagePath>
-      <Modified>2018-09-14T13:53:00.010</Modified>
+      <Modified>2018-09-17T07:53:50.296</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.SpatialTracking.dll">
       <PackagePath>UnityEngine.SpatialTracking.dll</PackagePath>
-      <Modified>2018-09-14T13:53:00.010</Modified>
+      <Modified>2018-09-17T07:53:50.300</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.HoloLens.dll">
       <PackagePath>UnityEngine.HoloLens.dll</PackagePath>
-      <Modified>2018-09-14T13:53:00.021</Modified>
+      <Modified>2018-09-17T07:53:50.309</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.StandardEvents.dll">
       <PackagePath>UnityEngine.StandardEvents.dll</PackagePath>
-      <Modified>2018-09-14T13:53:00.032</Modified>
+      <Modified>2018-09-17T07:53:50.317</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\UnityEngine.Networking.dll">
       <PackagePath>UnityEngine.Networking.dll</PackagePath>
-      <Modified>2018-09-14T13:53:00.081</Modified>
+      <Modified>2018-09-17T07:53:50.367</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\Assembly-CSharp.dll">
       <PackagePath>Assembly-CSharp.dll</PackagePath>
-      <Modified>2018-09-14T13:52:59.340</Modified>
+      <Modified>2018-09-17T07:53:49.708</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\hololens\Desktop\Github\UPHL\JonatanSDemo\App\JonatanSDemo\bin\x86\Release\Core\JonatanSDemo.exe">
       <PackagePath>JonatanSDemo.exe</PackagePath>
-      <Modified>2018-09-14T13:53:04.601</Modified>
+      <Modified>2018-09-17T07:53:54.764</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

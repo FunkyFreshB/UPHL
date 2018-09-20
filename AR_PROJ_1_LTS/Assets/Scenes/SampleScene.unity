@@ -314,7 +314,6 @@ GameObject:
   m_Component:
   - component: {fileID: 250322656}
   - component: {fileID: 250322659}
-  - component: {fileID: 250322658}
   - component: {fileID: 250322657}
   m_Layer: 0
   m_Name: LOGO
@@ -370,20 +369,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &250322658
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 250322655}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &250322659
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -821,6 +806,7 @@ MonoBehaviour:
   obj: {fileID: 1838284575762948, guid: 17857886bc48d1949a6f9d0e27bebc75, type: 2}
   focussedObj: {fileID: 0}
   dragPos: {x: 0, y: 0, z: 0}
+  audioData: {fileID: 0}
   destroyTXT: {fileID: 943372226}
   placedTXT: {fileID: 1490069334}
   UIobj: {fileID: 75002523}

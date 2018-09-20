@@ -16,7 +16,7 @@ public class S_UserInteraction : MonoBehaviour {
     public Vector3 dragPos;
     float hitObjDist;
 
-    AudioSource audioData;
+    public AudioSource audioData;
 
     bool draggin = false;
 
@@ -38,6 +38,8 @@ public class S_UserInteraction : MonoBehaviour {
         Instance = this;
 
         recognizer = new GestureRecognizer();
+        recognizer.SetRecognizableGestures(GestureSettings.Hold | GestureSettings.Tap);
+
         recognizer.Tapped += (args) =>
         {
             TapActions();
@@ -111,12 +113,11 @@ public class S_UserInteraction : MonoBehaviour {
                 if (focussedObj == null)
                 {
                     focussedObj = hit.collider.gameObject;
-                    focussedObj.GetComponent<Material>().color = Color.red;
+                    //focussedObj.GetComponent<Material>().color = Color.red;
                     return;
                 }
                 else
                 {
-                    focussedObj.GetComponent<Material>().color = Color.white;
                     focussedObj = null;
                 }
             }

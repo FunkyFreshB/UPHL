@@ -21,7 +21,14 @@ public class GazeGestureManager : MonoBehaviour {
                 FocusedObject.SendMessageUpwards("OnSelect", SendMessageOptions.DontRequireReceiver);
             }
         };
+
         recognizer.StartCapturingGestures();
+
+        /*recognizer.HoldStarted += (HoldStartedEventArgs) => {
+            if (FocusedObject != null) {
+                FocusedObject.SendMessageUpwards("OnSelect", SendMessageOptions.DontRequireReceiver);
+            }
+        }*/
     }
 
     // Update is called once per frame

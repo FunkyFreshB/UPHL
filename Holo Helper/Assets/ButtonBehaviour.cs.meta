@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 42b456a6e9000d7439b8c6c1b407d1ac
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - actMan: {fileID: 1799653113006972, guid: 5723296ccb8c5754d97c8d75568c576d, type: 2}
+  - matBg: {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
+  - matFocus: {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -114,7 +114,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4185421108738530
 Transform:
   m_ObjectHideFlags: 1
@@ -481,21 +481,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 0}
+  storedActs: {fileID: 0}
   menus:
   - {fileID: 1877577062822690}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  pages:
+  - {fileID: 0}
+  - {fileID: 0}
   materials:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
+  visibleActs: 5
   isAdmin: 1
   isActivity: 0
   isEdit: 0
   isCreate: 0
   isDelete: 0
   isReturn: 0
+  isPageLeft: 0
+  isPageRight: 0
 --- !u!114 &114479051143480216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -508,18 +515,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1799653113006972, guid: 5723296ccb8c5754d97c8d75568c576d, type: 2}
+  storedActs: {fileID: 0}
   menus:
   - {fileID: 1877577062822690}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  pages:
+  - {fileID: 0}
+  - {fileID: 0}
   materials:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
+  visibleActs: 5
   isAdmin: 0
   isActivity: 0
   isEdit: 0
   isCreate: 0
   isDelete: 0
   isReturn: 0
+  isPageLeft: 0
+  isPageRight: 0

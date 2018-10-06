@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ActivityManager : MonoBehaviour {
-
+    
     public GameObject buttonBase;
     public ArrayList activities = new ArrayList();
-    private int noOfActivities = 0;
+    private int noOfActivities;
+    private int noOfPages;
+    private GameObject selectedObj;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +17,7 @@ public class ActivityManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-    //    this.transform.LookAt(Camera.main.transform);
+
 	}
 
     public GameObject CreateActivity(string name)
@@ -27,31 +29,76 @@ public class ActivityManager : MonoBehaviour {
         
         activities.Add(newActivity);
         if (activities.Count > noOfActivities)
-        {
+        {            
+            if (noOfActivities % newActivity.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
+            {
+                noOfPages++;
+            }
+
             noOfActivities++;
-            Debug.Log("Added " + name);
+
             return newActivity;
         }
         else
         {
-            Debug.Log("Added NOTHING!?");
             return null;
         }
     }
-    public bool DeleteActivity(int index)
+    public bool DeleteActivity(GameObject button)
     {
-         activities.RemoveAt(index);
-        
-        if(activities.Count < noOfActivities)
+        // GameObject act = button.GetActivity();
+        // int index = act.GetActivityNumber():
+        // activities.RemoveAt(index);
+        activities.Remove(button);
+
+        Debug.Log("NOA: " + noOfActivities);
+        Debug.Log("a.C: " + activities.Count);
+
+        if (activities.Count < noOfActivities)
         {
             noOfActivities--;
-            Debug.Log("Removed " + name);
+
+            if (noOfActivities % button.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
+            {
+                noOfPages--;
+            }
+
             return true;
         }
         else
         {
             Debug.Log("Removed NOTHING!?");
             return false;
+        }
+    }
+
+    public int GetActivityAmount()
+    {
+        return noOfActivities;
+    }
+
+    public int GetPageAmount()
+    {
+        return noOfPages;
+    }
+
+    public GameObject GetSelectedObject()
+    {
+        return selectedObj;
+    }
+
+    public bool SetSelectedObject(GameObject so)
+    {
+        selectedObj = so;
+        if (selectedObj == null)
+        {
+            Debug.Log("NULL OBJ");
+            return false;
+        }
+        else
+        {
+            Debug.Log(selectedObj.name);
+            return true;
         }
     }
 }

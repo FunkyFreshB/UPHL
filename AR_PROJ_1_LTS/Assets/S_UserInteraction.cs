@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
+using UnityEngine.XR.WSA;
 using UnityEngine.UI;
 
 public class S_UserInteraction : MonoBehaviour {
 
+    bool sw = true;
     public GameObject curse;
     private MeshRenderer meshr;
 
     public GameObject obj;
-    GameObject focussedObj;
+    public GameObject focussedObj;
+    public Vector3 dragPos;
     float hitObjDist;
 
-    AudioSource audioData;
+    public AudioSource audioData;
 
     bool draggin = false;
 
@@ -21,9 +24,12 @@ public class S_UserInteraction : MonoBehaviour {
     GestureRecognizer recognizer;
 
     // UI
-    public Text destroyTXT;
+    public TextMesh destroyTXT;
     int destroyTOT = 0;
     int destroyablesTOT = 0;
+    public TextMesh placedTXT;
+    int placedTOT = 0;
+    public GameObject UIobj;
 
     private void Awake()
     {
@@ -32,6 +38,8 @@ public class S_UserInteraction : MonoBehaviour {
         Instance = this;
 
         recognizer = new GestureRecognizer();
+        recognizer.SetRecognizableGestures(GestureSettings.Hold | GestureSettings.Tap);
+
         recognizer.Tapped += (args) =>
         {
             TapActions();
@@ -39,7 +47,28 @@ public class S_UserInteraction : MonoBehaviour {
 
         recognizer.HoldStarted += (args) =>
         {
-            HoldActions();
+            if (focussedObj != null) { 
+                focussedObj.SendMessageUpwards("OnHoldStart");
+            }
+           //HoldStartActions();
+        };
+
+        recognizer.HoldCompleted += (args) =>
+        {
+            if (focussedObj != null)
+            {
+                focussedObj.SendMessageUpwards("OnHoldCompleted");
+            }
+            // HoldEndActions();
+        };
+
+        recognizer.HoldCanceled += (args) =>
+        {
+            if (focussedObj != null)
+            {
+                focussedObj.SendMessageUpwards("OnHoldCompleted");
+            }
+            //HoldEndActions();
         };
 
         recognizer.StartCapturingGestures();
@@ -77,7 +106,22 @@ public class S_UserInteraction : MonoBehaviour {
                 audioData.pitch = Random.Range(0.5f, 1.2f);
                 audioData.Play(0);
                 Instantiate(obj, hit.point, Quaternion.Euler(90, 0, 0));
+                placedTOT++;
             }
+            if(hit.collider.tag == "Draggable")
+            {
+                if (focussedObj == null)
+                {
+                    focussedObj = hit.collider.gameObject;
+                    //focussedObj.GetComponent<Material>().color = Color.red;
+                    return;
+                }
+                else
+                {
+                    focussedObj = null;
+                }
+            }
+            /*
             if (hit.collider.tag == "Draggable")
             {
                 audioData.pitch = Random.Range(0.5f, 1.2f);
@@ -97,35 +141,53 @@ public class S_UserInteraction : MonoBehaviour {
             else if(hit.collider.tag != "Draggable")
             {
                 draggin = false;
+            }*/
+        }
+    }
+/*
+    void HoldStartActions()
+    {
+        Vector3 mp = transform.forward;
+
+        SpatialMappingRenderer renderer = this.GetComponent<SpatialMappingRenderer>();
+        
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, mp, out hit))
+        {
+            if (hit.collider.tag == "Draggable")
+            {
+                focussedObj = hit.collider.gameObject;
+                hitObjDist = Vector3.Distance(transform.position, focussedObj.transform.position);
+                draggin = true;
             }
         }
     }
 
-    void HoldActions()
+    void HoldEndActions()
     {
-        Vector3 mp = Input.mousePosition; mp.z = 10; mp = Camera.main.ScreenToWorldPoint(mp);
-        mp = transform.forward;
+        draggin = false;
+        focussedObj = null;
+    }*/
 
-        RaycastHit hit;
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        MouseDebug();
+    // Update is called once per frame
+    void Update () {
+        MouseKeyboardDebug();
+        TextStuff();
+        if (draggin)
+        {
+            dragPos = transform.position + transform.forward * hitObjDist;
+        }
 
         Vector3 mp = Input.mousePosition; mp.z = 10; mp = Camera.main.ScreenToWorldPoint(mp);
         mp = transform.forward;
         RaycastHit hit;
         if (Physics.Raycast(transform.position, mp, out hit))
         {
-            if (draggin)
-            {
-                float g = focussedObj.transform.position.z;
-                focussedObj.transform.position =
-                    transform.position + transform.forward * hitObjDist;
-            }
 
             curse.transform.position = hit.point;
+            curse.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+
             meshr.enabled = true;
         }
         else
@@ -134,7 +196,14 @@ public class S_UserInteraction : MonoBehaviour {
         }
     }
 
-    void MouseDebug()
+    void TextStuff()
+    {
+       // UIobj.transform.LookAt(this.transform);
+        destroyTXT.text = destroyTOT + " DESTROYED";
+        placedTXT.text = placedTOT + " PLACED";
+    }
+
+    void MouseKeyboardDebug()
     {
         Vector3 mp2 = Input.mousePosition; mp2.z = 10; mp2 = Camera.main.ScreenToWorldPoint(mp2);
 
@@ -156,29 +225,49 @@ public class S_UserInteraction : MonoBehaviour {
                     audioData.pitch = Random.Range(0.5f, 1.2f);
                     audioData.Play(0);
                     Instantiate(obj, hit.point, Quaternion.Euler(90, 0, 0));
+                    placedTOT++;
                 }
                 if (hit.collider.tag == "Draggable")
                 {
                     audioData.pitch = Random.Range(0.5f, 1.2f);
                     audioData.Play(0);
-                    Debug.Log("HIT");
-
-                    if (draggin)
+                    if (focussedObj == null)
                     {
-                        draggin = false;
-                    }
-                    else
-                    {
+                        Debug.Log("HiT");
                         focussedObj = hit.collider.gameObject;
+                        focussedObj.transform.localScale = new Vector3(1.1f,1.1f,1.1f);
                         hitObjDist = Vector3.Distance(transform.position, focussedObj.transform.position);
                         draggin = true;
                     }
-                }
-                else
-                {
-                    draggin = false;
+                    else
+                    {
+                        focussedObj.transform.localScale = new Vector3(1f, 1f, 1f);
+                        Debug.Log("sHiT");
+                        draggin = false;
+                        focussedObj = null;
+                    }
                 }
             }
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            draggin = false;
+        }
+        Rigidbody rb = transform.GetComponent<Rigidbody>();
+        rb.velocity = transform.TransformDirection(new Vector3(0,0,Input.GetAxis("Vertical")*2));
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            sw = !sw;
+            Debug.Log(sw);
+        }
+
+        if (sw)
+        {
+            transform.Rotate(0, Input.GetAxis("Horizontal") * 3, 0);
+        }
+        else
+        {
+            transform.Rotate(Input.GetAxis("Horizontal") * 3, 0, 0);
         }
     }
 }

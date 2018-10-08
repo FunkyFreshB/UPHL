@@ -1,8 +1,8 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <UnityWSASolutionName>AR_PROJ_1</UnityWSASolutionName>
-        <UnityWSASolutionDir>C:\Users\sebas\Documents\Unity\AR_PROJ_1_LTS\Apps\</UnityWSASolutionDir>
-        <UnityProjectDir>C:\Users\sebas\Documents\Unity\AR_PROJ_1_LTS\</UnityProjectDir>
+        <UnityWSASolutionName>AR Demo - Place, Pop & Drag</UnityWSASolutionName>
+        <UnityWSASolutionDir>C:\Users\sebas\Documents\GitHub\UPHL\AR_PROJ_1_LTS\Apps\</UnityWSASolutionDir>
+        <UnityProjectDir>C:\Users\sebas\Documents\GitHub\UPHL\AR_PROJ_1_LTS\</UnityProjectDir>
         <UnityWSAPlayerDir>C:\Program Files\Unity LTS\Editor\Data\PlaybackEngines\MetroSupport\</UnityWSAPlayerDir>
         <UnityWSAToolsDir>$(UnityWSASolutionDir)Unity\Tools\</UnityWSAToolsDir>
     </PropertyGroup>

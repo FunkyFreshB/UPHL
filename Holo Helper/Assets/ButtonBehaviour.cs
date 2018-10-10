@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 using UnityEngine.XR.WSA.Input;
+using HoloToolkit.UI.Keyboard;
 
 public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     public GameObject actMan;
     public GameObject storedActs;
     public GameObject[] menus = new GameObject[5];
-    public GameObject[] pages = new GameObject[2];
     public Material[] materials = new Material[2];
 
     private ActivityManager ams;
@@ -17,6 +17,8 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     public int visibleActs = 5;
     private Vector3[] activityPos;
     private int currentPage = 0;
+    private int activityID = -1;
+    private int pageID = -1;
 
     GameObject obj;
     GameObject focusedObj;
@@ -29,10 +31,16 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     public bool isReturn = false;
     public bool isPageLeft = false;
     public bool isPageRight = false;
+    bool isCreateKeyboard = false;
+
+    bool isKeyboard = false;
+    Keyboard keyboard;
+    string keyboardText = "";
 
     // Use this for initialization
     void Start ()
     {
+        keyboard = Keyboard.Instance;
 
         activityPos = new Vector3[visibleActs];
 
@@ -48,23 +56,45 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     {
         ams = actMan.GetComponent<ActivityManager>();
 
-        if (ams.GetPageAmount() == 0)
-        {
-            pages[0].SetActive(false);
-            pages[1].SetActive(false);
-            Debug.Log("0 P: " + ams.GetPageAmount());
-        }
-        else
-        {
-            pages[0].SetActive(true);
-            pages[1].SetActive(true);
-            Debug.Log("  P: " + ams.GetPageAmount());
-        }
-
         if(this.gameObject == ams.GetSelectedObject())
         {
             ams.GetSelectedObject().GetComponent<Renderer>().material = materials[1];
         }
+
+        if (isKeyboard)
+        {
+            if (!keyboard.isActiveAndEnabled)
+            {
+                if (isCreateKeyboard)
+                {
+                    InstantiateActivityButton(keyboardText);
+                    keyboardText = "";
+                    isKeyboard = false;
+                }
+                else
+                {
+                    ams.SetName(keyboardText);
+                    keyboardText = "";
+                    isKeyboard = false;
+                }
+            }
+
+            keyboardText = keyboard.InputField.text;
+        }
+    }
+
+    void InstantiateActivityButton(string name)
+    {
+        obj = ams.CreateActivity(name);
+        obj.GetComponent<ButtonBehaviour>().storedActs = storedActs;
+        obj.GetComponent<ButtonBehaviour>().isAdmin = true;
+        obj.GetComponent<ButtonBehaviour>().isActivity = true;
+        obj.transform.localScale = new Vector3(0.23f, 0.0234f, 0.02f);
+        obj.transform.GetChild(0).localScale = new Vector3(0.07f, 0.7f, 1);
+        obj.transform.SetParent(storedActs.transform);
+
+        // position of menu based on amount of activities
+        obj.transform.localPosition = activityPos[(ams.GetActivityAmount() - 1) % visibleActs];
     }
 
     public void OnInputClicked(InputClickedEventData eventData)
@@ -92,7 +122,6 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         {
             if (isActivity)
             {
-                ams.activities.IndexOf(23);
                 GetComponentInChildren<TextMesh>().text = obj.name;
             }
         }
@@ -145,19 +174,9 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     {
         if (isCreate)
         {
-            // TANGENTBORD HÄR
-            obj = ams.CreateActivity("name " + ams.GetActivityAmount());
-            obj.GetComponent<ButtonBehaviour>().storedActs = storedActs;
-            obj.GetComponent<ButtonBehaviour>().isAdmin = true;
-            obj.GetComponent<ButtonBehaviour>().isActivity = true;
-            obj.GetComponent<ButtonBehaviour>().pages[0] = pages[0];
-            obj.GetComponent<ButtonBehaviour>().pages[1] = pages[1];
-            obj.transform.localScale = new Vector3(0.23f, 0.0234f, 0.02f);
-            obj.transform.GetChild(0).localScale = new Vector3(0.07f, 0.7f, 1);
-            obj.transform.SetParent(storedActs.transform);
-
-            // position of menu based on amount of activities
-            obj.transform.localPosition = activityPos[(ams.GetActivityAmount() - 1) % visibleActs];
+            isCreateKeyboard = true;
+            isKeyboard = true;
+            keyboard.PresentKeyboard(keyboardText, Keyboard.LayoutType.Alpha);
         }
         if (isActivity)
         {
@@ -169,8 +188,10 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         }
         if (isEdit)
         {
-            menus[3].SetActive(true);
-            menus[1].SetActive(false);
+            isKeyboard = true;
+            keyboard.PresentKeyboard(keyboardText, Keyboard.LayoutType.Alpha);
+            //menus[3].SetActive(true);
+            //menus[1].SetActive(false);
         }
         if (isDelete)
         {

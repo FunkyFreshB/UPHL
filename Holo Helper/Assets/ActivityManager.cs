@@ -5,20 +5,31 @@ using UnityEngine;
 public class ActivityManager : MonoBehaviour {
     
     public GameObject buttonBase;
-    public ArrayList activities = new ArrayList();
+    public List<GameObject> activities = new List<GameObject>();
     private int noOfActivities;
     private int noOfPages;
     private GameObject selectedObj;
+    public  GameObject storedObj;
+    public int currentPage = 0;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         DontDestroyOnLoad(this);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-	}
+        if(noOfPages > 0)
+        {
+            storedObj.transform.GetChild(0).gameObject.SetActive(true);
+            storedObj.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            storedObj.transform.GetChild(0).gameObject.SetActive(false);
+            storedObj.transform.GetChild(1).gameObject.SetActive(false);
+        }
+    }
 
     public GameObject CreateActivity(string name)
     {
@@ -26,6 +37,7 @@ public class ActivityManager : MonoBehaviour {
         newActivity.name = name;
         newActivity.GetComponentInChildren<TextMesh>().text = name;
         newActivity.transform.position = this.transform.position;
+        newActivity.transform.rotation = this.transform.rotation;
         
         activities.Add(newActivity);
         if (activities.Count > noOfActivities)
@@ -33,10 +45,11 @@ public class ActivityManager : MonoBehaviour {
             if (noOfActivities % newActivity.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
             {
                 noOfPages++;
+                currentPage = noOfPages;
             }
 
             noOfActivities++;
-
+            
             return newActivity;
         }
         else
@@ -50,9 +63,9 @@ public class ActivityManager : MonoBehaviour {
         // int index = act.GetActivityNumber():
         // activities.RemoveAt(index);
         activities.Remove(button);
+        Destroy(button);
 
-        Debug.Log("NOA: " + noOfActivities);
-        Debug.Log("a.C: " + activities.Count);
+        Debug.Log("nOA: " + noOfActivities + ", a.C: " + activities.Count);
 
         if (activities.Count < noOfActivities)
         {
@@ -61,6 +74,7 @@ public class ActivityManager : MonoBehaviour {
             if (noOfActivities % button.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
             {
                 noOfPages--;
+                currentPage = noOfPages;
             }
 
             return true;
@@ -97,8 +111,16 @@ public class ActivityManager : MonoBehaviour {
         }
         else
         {
-            Debug.Log(selectedObj.name);
+            Debug.Log("Name: " + selectedObj.name);
             return true;
         }
+    }
+
+    public void SetName(string name)
+    {
+        Debug.Log("Prev: " + selectedObj.name + ", " + selectedObj.GetComponentInChildren<TextMesh>().text);
+        selectedObj.name = name;
+        selectedObj.GetComponentInChildren<TextMesh>().text = name;
+        Debug.Log("Next: " + selectedObj.name + ", " + selectedObj.GetComponentInChildren<TextMesh>().text);
     }
 }

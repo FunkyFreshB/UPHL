@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Activity : MonoBehaviour {
+public class SphereNext : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

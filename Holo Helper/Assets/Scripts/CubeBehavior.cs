@@ -13,6 +13,7 @@ public class CubeBehavior : MonoBehaviour, IInputClickHandler
 
         public void OnInputClicked(InputClickedEventData eventData)
         {
+        /*
         Instructions in1 = new Instructions("TESTTEXT1");
         Instructions in2 = new Instructions("TESTTEXT2");
         Instructions in3 = new Instructions("TESTTEXT3");
@@ -21,7 +22,7 @@ public class CubeBehavior : MonoBehaviour, IInputClickHandler
         activityList.activities.Add(act);
 
         activityList.Save(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
-        
+        */
 
     }
 

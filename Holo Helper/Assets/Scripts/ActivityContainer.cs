@@ -7,7 +7,13 @@ using System.IO;
 public class ActivityContainer
 {
     [XmlArray("Activities"), XmlArrayItem("Activity")]
-    public List<Activity> activities = new List<Activity>();
+    public List<Activity> activities;
+
+    public ActivityContainer()
+    {
+        activities = new List<Activity>();
+    }
+
 
     public void Save(string path)
     {
@@ -28,9 +34,23 @@ public class ActivityContainer
     }
 
     //Loads the xml directly from the given string. Useful in combination with www.text.
+    //Kommer förmodligen inte användas
     public static ActivityContainer LoadFromText(string text)
     {
         var serializer = new XmlSerializer(typeof(ActivityContainer));
         return serializer.Deserialize(new StringReader(text)) as ActivityContainer;
     }
+
+
+    public void createAcitivity(string name)
+    {
+        activities.Add(new Activity(name));
+    }
+
+
+    public void removeActivity()
+    {
+
+    }
+
 }

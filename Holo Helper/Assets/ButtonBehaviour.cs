@@ -12,8 +12,6 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     public GameObject[] menus = new GameObject[5];
     public Material[] materials = new Material[2];
 
-    private ActivityManager ams;
-
     public int visibleActs = 5;
     private Vector3[] activityPos;
     private int currentPage = 0;
@@ -21,7 +19,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     private int pageID = -1;
 
     GameObject obj;
-    GameObject focusedObj;
+    public GameObject gazedAtObj;      // currently gazed at button
 
     public bool isAdmin;
     public bool isActivity = false;
@@ -54,11 +52,10 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 	// Update is called once per frame
 	void Update ()
     {
-        ams = actMan.GetComponent<ActivityManager>();
 
-        if(this.gameObject == ams.GetSelectedObject())
+        if(this.gameObject == actMan.GetComponent<ActivityManager>().GetSelectedObject())
         {
-            ams.GetSelectedObject().GetComponent<Renderer>().material = materials[1];
+            actMan.GetComponent<ActivityManager>().GetSelectedObject().GetComponent<Renderer>().material = materials[1];
         }
 
         if (isKeyboard)
@@ -73,7 +70,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                 }
                 else
                 {
-                    ams.SetName(keyboardText);
+                    actMan.GetComponent<ActivityManager>().SetName(this.gameObject, keyboardText);
                     keyboardText = "";
                     isKeyboard = false;
                 }
@@ -85,7 +82,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     void InstantiateActivityButton(string name)
     {
-        obj = ams.CreateActivity(name);
+        obj = actMan.GetComponent<ActivityManager>().CreateActivity(name);
         obj.GetComponent<ButtonBehaviour>().storedActs = storedActs;
         obj.GetComponent<ButtonBehaviour>().isAdmin = true;
         obj.GetComponent<ButtonBehaviour>().isActivity = true;
@@ -94,7 +91,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         obj.transform.SetParent(storedActs.transform);
 
         // position of menu based on amount of activities
-        obj.transform.localPosition = activityPos[(ams.GetActivityAmount() - 1) % visibleActs];
+        obj.transform.localPosition = activityPos[(actMan.GetComponent<ActivityManager>().GetActivityAmount() - 1) % visibleActs];
     }
 
     public void OnInputClicked(InputClickedEventData eventData)
@@ -112,7 +109,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         // 1: Administrator Menu
         else if (menus[1].activeSelf)
         {
-            AdminMenu(eventData);
+            actMan.GetComponent<ActivityManager>().OnAdminButtonPress(eventData, this.gameObject);
         }
 
         // ---------------------------------------------
@@ -141,7 +138,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     public void OnFocusEnter()
     {
-        focusedObj = this.gameObject;
+        gazedAtObj = this.gameObject;
 
         // Highlight looked at object
         this.gameObject.GetComponent<Renderer>().material = materials[1];
@@ -149,8 +146,10 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     public void OnFocusExit()
     {
+        gazedAtObj = null;
+
         // Unhighlight looked at object, so long as it's not the selected object
-        if (this.gameObject != ams.GetSelectedObject())
+        if (this.gameObject != actMan.GetComponent<ActivityManager>().GetSelectedObject())
         {
             this.gameObject.GetComponent<Renderer>().material = materials[0];
         }
@@ -170,60 +169,10 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         }
     }
 
-    public void AdminMenu(InputClickedEventData eventData)
+    public void CreateKeyboard(bool iC)
     {
-        if (isCreate)
-        {
-            isCreateKeyboard = true;
-            isKeyboard = true;
-            keyboard.PresentKeyboard(keyboardText, Keyboard.LayoutType.Alpha);
-        }
-        if (isActivity)
-        {
-            if (ams.GetSelectedObject() != null)
-            {
-                ams.GetSelectedObject().GetComponent<Renderer>().material = materials[0];
-            }
-            ams.SetSelectedObject(focusedObj);
-        }
-        if (isEdit)
-        {
-            isKeyboard = true;
-            keyboard.PresentKeyboard(keyboardText, Keyboard.LayoutType.Alpha);
-            //menus[3].SetActive(true);
-            //menus[1].SetActive(false);
-        }
-        if (isDelete)
-        {
-            ams.DeleteActivity(ams.GetSelectedObject());
-        }
-        if (isReturn)
-        {
-            storedActs.SetActive(false);
-            menus[0].SetActive(true);
-            menus[1].SetActive(false);
-        }
-        if (isPageRight)
-        {
-            if (currentPage < ams.GetPageAmount())
-            {
-                currentPage++;
-            }
-            else
-            {
-                currentPage = 0;
-            }
-        }
-        if (isPageLeft)
-        {
-            if (currentPage > 0)
-            {
-                currentPage--;
-            }
-            else
-            {
-                currentPage = ams.GetPageAmount();
-            }
-        }
+        isCreateKeyboard = iC;
+        isKeyboard = true;
+        keyboard.PresentKeyboard(keyboardText, Keyboard.LayoutType.Alpha);
     }
 }

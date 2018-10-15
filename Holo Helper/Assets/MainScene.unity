@@ -265,6 +265,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
   isEdit: 0
@@ -704,6 +705,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
   isEdit: 0
@@ -1460,6 +1462,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
   isEdit: 1
@@ -1790,6 +1793,11 @@ Prefab:
       propertyPath: storedObj
       value: 
       objectReference: {fileID: 454752450}
+    - target: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+        type: 2}
+      propertyPath: selectedObj
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5723296ccb8c5754d97c8d75568c576d, type: 2}
   m_IsPrefabParent: 0
@@ -1852,6 +1860,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
   isEdit: 0

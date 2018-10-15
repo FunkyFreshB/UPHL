@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 65117412624312572}
   - component: {fileID: 23163332733784826}
   - component: {fileID: 114343703629873302}
-  - component: {fileID: 114414238337866790}
   m_Layer: 0
   m_Name: BUTTON
   m_TagString: Button
@@ -202,13 +201,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  pages:
-  - {fileID: 1364513999975560, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
-  - {fileID: 1171226454358772, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
   materials:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  gazedAtObj: {fileID: 0}
   isAdmin: 0
   isActivity: 0
   isEdit: 0
@@ -217,30 +214,3 @@ MonoBehaviour:
   isReturn: 0
   isPageLeft: 0
   isPageRight: 0
-  kbPf: {fileID: 146120, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
---- !u!114 &114414238337866790
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1689008370354704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c87b4a5817577d54fa5c9451215f893b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InputField: {fileID: 0}
-  InputFieldSlide: {fileID: 0}
-  SliderEnabled: 1
-  SubmitOnEnter: 1
-  AlphaKeyboard: {fileID: 0}
-  SymbolKeyboard: {fileID: 0}
-  AlphaSubKeys: {fileID: 0}
-  AlphaWebKeys: {fileID: 0}
-  AlphaMailKeys: {fileID: 0}
-  m_MaxScale: 1
-  m_MinScale: 1
-  m_MaxDistance: 3.5
-  m_MinDistance: 0.25
-  CloseOnInactivity: 1
-  CloseOnInactivityTime: 15

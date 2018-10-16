@@ -3,6 +3,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 
+[System.Serializable]
 [XmlRoot("AcitivitlistsAndInstructions")]
 public class ActivityContainer
 {
@@ -42,13 +43,13 @@ public class ActivityContainer
     }
 
 
-    public void createAcitivity(string name)
+    public void CreateActivity(string name)
     {
         activities.Add(new Activity(name));
     }
 
 
-    public void removeActivity()
+    public void RemoveActivity()
     {
 
     }

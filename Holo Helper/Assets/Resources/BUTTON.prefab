@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114343703629873302}
   m_Layer: 0
   m_Name: BUTTON
-  m_TagString: Button
+  m_TagString: ActivityButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,6 +205,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  connectedAct:
+    instructions: []
   gazedAtObj: {fileID: 0}
   isAdmin: 0
   isActivity: 0

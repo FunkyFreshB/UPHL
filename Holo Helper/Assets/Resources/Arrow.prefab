@@ -37,8 +37,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4395830704722604}
+  - component: {fileID: 114754228225794772}
+  - component: {fileID: 114798432253078958}
   m_Layer: 0
-  m_Name: Arrow
+  m_Name: Standard instruction step 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -294,3 +296,60 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114754228225794772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1607538137828828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87713fbad4edbc46a3cc23770b0b4c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: 6
+  handedness: 0
+  trackedObjectToReference: 0
+  additionalOffset: {x: 0, y: 0, z: 0}
+  additionalRotation: {x: 0, y: 0, z: 0}
+  transformTarget: {fileID: 0}
+  updateSolvers: 1
+--- !u!114 &114798432253078958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1607538137828828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb8d335111f5e24a8cbf8d993f71e34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpdateLinkedTransform: 0
+  MoveLerpTime: 0.1
+  RotateLerpTime: 0.1
+  ScaleLerpTime: 0
+  MaintainScale: 1
+  GoalPosition: {x: 0, y: 0, z: 0}
+  GoalRotation: {x: 0, y: 0, z: 0, w: 0}
+  GoalScale: {x: 0, y: 0, z: 0}
+  Smoothing: 1
+  Lifetime: 0
+  MagneticSurface:
+    serializedVersion: 2
+    m_Bits: 0
+  MaxDistance: 3
+  CloseDistance: 0.5
+  SurfaceNormalOffset: 0.5
+  SurfaceRayOffset: 0
+  raycastMode: 0
+  BoxRaysPerEdge: 3
+  OrthoBoxCast: 0
+  MaximumNormalVariance: 0.5
+  SphereSize: 1
+  VolumeCastSizeOverride: 0
+  UseLinkedAltScaleOverride: 0
+  raycastDirection: 2
+  orientationMode: 1
+  OrientBlend: 0.65
+  OnSurface: 0

@@ -14,9 +14,6 @@ public class Activity{
     [XmlArray("Instructions"), XmlArrayItem("Instruction")]
     public List<Instructions> instructions;
 
-    [XmlIgnore]
-    public GameObject buttonBase;
-
     [XmlElement("stepCounter")]
     public int stepCounter { get; set; }
 
@@ -31,16 +28,13 @@ public class Activity{
         stepCounter = 1;
         instructions = new List<Instructions>();
         instructions.Add(new Instructions("Standard instruction step 1",stepCounter));
-
-        buttonBase = Resources.Load("BUTTON") as GameObject;
-        buttonBase.name = name;
     }
 
     public Activity()
     {
-        this.name = "Standard Activity";
-        instructions = new List<Instructions>();
-        instructions.Add(new Instructions("Standard instruction step 1",stepCounter));
+       // this.name = "Standard Activity";
+        //instructions = new List<Instructions>();
+        //instructions.Add(new Instructions("Standard instruction step 1",stepCounter));
     }
 
     ~Activity()
@@ -50,10 +44,13 @@ public class Activity{
 
     public void reInitializer()
     {
-
+        foreach(Instructions i in instructions)
+        {
+            i.reInitializer();
+        }
     }
 
-    public void addInstruction(string description)
+    public void AddInstruction(string description)
     {
         stepCounter++;
         instructions.Add(new Instructions(description,stepCounter));
@@ -62,7 +59,7 @@ public class Activity{
 
 
     //Hur gör vi detta? Behöver veta snarast för implementera resten.
-    public void removInstruction()
+    public void RemoveInstruction()
     {
         if(stepCounter > 0)
         {
@@ -70,14 +67,14 @@ public class Activity{
         }
     }
 
-    public void changeActivityName(string newName)
+    public void ChangeActivityName(string newName)
     {
         this.name = newName;
     }
 
 
 
-    public void nextStep()
+    public void NextStep()
     {
         if(currentStep != stepCounter-1)
         {
@@ -87,7 +84,7 @@ public class Activity{
         }
     }
 
-    public void previousStep()
+    public void PreviousStep()
     {
         if(currentStep != 0)
         {
@@ -97,7 +94,7 @@ public class Activity{
         }
     }
 
-    public void repeatStep()
+    public void RepeatStep()
     {
         GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().
             StartSpeaking("Step " + currentStep + " " + instructions[currentStep].instructionText);
@@ -105,7 +102,7 @@ public class Activity{
 
 
 
-    public void printIns()
+    public void PrintIns()
     {
         /*
         foreach(Instructions element in instructions)
@@ -116,7 +113,7 @@ public class Activity{
         
     }
 
-    public void createCubes()
+    public void CreateCubes()
     {
         foreach(Instructions element in instructions)
         {

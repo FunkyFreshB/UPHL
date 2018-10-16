@@ -33,18 +33,24 @@ public class Instructions
 
     public void reInitializer()
     {
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+       /* GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cube = Resources.Load("Arrow") as GameObject;
         cube.name = this.instructionText;
         cube.AddComponent<TapToPlace>();
-        cube.AddComponent<SolverSurfaceMagnetism>().MagneticSurface = GameObject.Find("SpatialMapping").layer;
+        //cube.AddComponent<SolverSurfaceMagnetism>().MagneticSurface = GameObject.Find("SpatialMapping").layer;
         cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
         cube.AddComponent<IndicatorBehaviour>().instruction = this;
         cube.AddComponent<WorldAnchorManager>().PersistentAnchors = true;
         indicator = cube;
+        */
     }
 
-    public void changeVisibility()
+    public Instructions()
+    {
+
+    }
+
+    public void ChangeVisibility()
     {
         if (visible)
         {
@@ -58,10 +64,6 @@ public class Instructions
         }
     }
 
-    public Instructions()
-    {
-
-    }
 
     ~Instructions()
     {

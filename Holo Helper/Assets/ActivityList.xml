@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<AcitivitlistsAndInstructions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Activities>
+    <Activity>
+      <Instructions>
+        <Instruction visible="true">
+          <instructionText>Standard instruction step 1</instructionText>
+          <StepNumber>1</StepNumber>
+        </Instruction>
+      </Instructions>
+      <name>FirstOne</name>
+      <stepCounter>1</stepCounter>
+      <CurrentStep>0</CurrentStep>
+    </Activity>
+  </Activities>
+</AcitivitlistsAndInstructions>

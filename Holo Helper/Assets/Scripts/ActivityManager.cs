@@ -2,18 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 // kan nog kallas MenuManager istället
 public class ActivityManager : MonoBehaviour {
 
+    public ActivityContainer container;
+    private Activity foundAct;
     public GameObject buttonBase;
-    public List<GameObject> activities = new List<GameObject>();
+    public GameObject storedObj;
+    
     private int noOfActivities;
     private int noOfPages;
-    private GameObject selectedObj = null;
-    public GameObject storedObj;
     public int currentPage = 0;
-    private int pressd = 0;
+
+    private GameObject selectedObj = null;
+    private Activity selectedAct;
 
     /* ------------------------------------ */
     /* General Functions */
@@ -22,13 +28,28 @@ public class ActivityManager : MonoBehaviour {
     void Start () {
         // keep this object for every scene
         DontDestroyOnLoad(this);
-	}
+
+        container = null;
+      container = ActivityContainer.Load(Path.Combine(Application.dataPath, "ActivityList.xml"));
+
+        if(container == null)
+        {
+            container = new ActivityContainer();
+        }
+       // container.CreateActivity("FirstOne");
+       // container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
+
+        foreach (Activity a in container.activities)
+        {
+            a.reInitializer();
+            GetComponent<ButtonBehaviour>().InstantiateActivityButton(a.name, a);
+        }
+
+       // container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
+    }
 	
 	// Update is called once per frame
 	void Update () {
-
-
-        Debug.Log("so " + selectedObj);
 
         // display arrow keys if we have more than 1 page (more than 5 activities)
         if (noOfPages > 0)
@@ -43,79 +64,25 @@ public class ActivityManager : MonoBehaviour {
         }
     }
 
-
-    /* ------------------------------------ */
-    /* Button Functions */
-
-    public void OnAdminButtonPress(InputClickedEventData eventData, GameObject button)
-    {
-        ButtonBehaviour bb = button.GetComponent<ButtonBehaviour>();
-
-        pressd++;
-        Debug.Log(pressd);
-
-        if (bb.isCreate)
-        {
-            bb.CreateKeyboard(true);
-        }
-        else if (bb.isActivity)
-        {
-            if (GetSelectedObject() != null)
-            {
-                GetSelectedObject().GetComponent<Renderer>().material = bb.materials[0];
-            }
-
-            SetSelectedObject(bb.gazedAtObj);
-        }
-        else if (bb.isEdit)
-        {
-            bb.CreateKeyboard(false);
-            //menus[3].SetActive(true);
-            //menus[1].SetActive(false);
-        }
-        else if (bb.isDelete)
-        {
-            DeleteActivity(GetSelectedObject());
-        }
-        else if (bb.isReturn)
-        {
-            bb.storedActs.SetActive(false);
-            bb.menus[0].SetActive(true);
-            bb.menus[1].SetActive(false);
-        }
-
-        // Change page
-        else if (bb.isPageRight)
-        {
-            if (currentPage < GetPageAmount())
-            {
-                currentPage++;
-            }
-            else
-            {
-                currentPage = 0;
-            }
-            Debug.Log(currentPage);
-        }
-        else if (bb.isPageLeft)
-        {
-            if (currentPage > 0)
-            {
-                currentPage--;
-            }
-            else
-            {
-                currentPage = GetPageAmount();
-            }
-            Debug.Log(currentPage);
-        }
-    }
-
     /* ------------------------------------ */
     /* ActivityManager Functions */
 
     public void ChangePage()
     {
+        foreach(GameObject b in GameObject.FindGameObjectsWithTag("ActivityButton"))
+        {
+            b.SetActive(false);
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (b.GetComponent<ButtonBehaviour>().connectedAct == container.activities[currentPage * 5 + i])
+                {
+                    b.SetActive(true);
+                }
+            }
+        }
+
+
         // for each activity
         // SetActive(false);
         // activities[page*5+0].SetActive(true);
@@ -125,32 +92,30 @@ public class ActivityManager : MonoBehaviour {
         // activities[page*5+4].SetActive(true);
     }
 
-    public void SetupActivityButtons()
+    public GameObject CreateActivity(string name, Activity act)
     {
-        // läs in aktiviteter
-        // för varje aktivitet, CreateActivity(aktvitetsnamn)
-
-        // ska endast göras om ex. en FirstTime variabel = false. sätts till true efteråt
-    }
-
-    public GameObject CreateActivity(string name)
-    {
-        // ActivityContainer.Save(name);
-        // lägg activity i en lista och gör koden som följer
+        if (act != null)
+        {
+            foundAct = act;
+            name = act.name;
+        }
+        else
+        {
+            container.CreateActivity(name);                                         //
+            foundAct = container.activities.Find(x => x.name == name);     //
+        }
 
         // setup buttons for each activity
         GameObject newActivity = Instantiate(buttonBase);
-        // newActivity.activity = ActivityContainer.Load(name);
+        newActivity.GetComponent<ButtonBehaviour>().connectedAct = foundAct;    //
         newActivity.name = name;
         newActivity.GetComponent<ButtonBehaviour>().actMan = this.gameObject;
         newActivity.GetComponentInChildren<TextMesh>().text = name;
         newActivity.transform.position = this.transform.position;
         newActivity.transform.rotation = this.transform.rotation;
-        
-        activities.Add(newActivity);
 
         // increase noOfActivities and also noOfPages if enough activities
-        if (activities.Count > noOfActivities)
+        if (container.activities.Count > noOfActivities)
         {            
             if (noOfActivities % newActivity.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
             {
@@ -178,12 +143,10 @@ public class ActivityManager : MonoBehaviour {
         // GameObject act = button.GetActivity();
         // int index = act.GetActivityNumber():
         // activities.RemoveAt(index);
-        activities.Remove(button);
-        Destroy(button);
 
-        Debug.Log("nOA: " + noOfActivities + ", a.C: " + activities.Count);
+        Debug.Log("nOA: " + noOfActivities + ", a.C: " + container.activities.Count);
 
-        if (activities.Count < noOfActivities)
+        if (container.activities.Count < noOfActivities)
         {
             noOfActivities--;
 
@@ -238,12 +201,9 @@ public class ActivityManager : MonoBehaviour {
     }
 
     /** Edit the name of an activity. */
-    public void SetName(GameObject act, string name)
+    public void SetName(string name)
     {
-        //selectedObj = act;
-        Debug.Log("Prev: " + selectedObj.name + ", " + selectedObj.GetComponentInChildren<TextMesh>().text);
         selectedObj.name = name;
         selectedObj.GetComponentInChildren<TextMesh>().text = name;
-        Debug.Log("Next: " + selectedObj.name + ", " + selectedObj.GetComponentInChildren<TextMesh>().text);
     }
 }

@@ -265,6 +265,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  connectedAct:
+    instructions: []
   gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
@@ -705,6 +707,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  connectedAct:
+    instructions: []
   gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
@@ -1157,7 +1161,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.2
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1235,6 +1239,18 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.0004
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.0004
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.0004
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
   m_IsPrefabParent: 0
@@ -1293,7 +1309,7 @@ Transform:
   m_GameObject: {fileID: 790941141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 1162515148}
   - {fileID: 454752451}
@@ -1482,6 +1498,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  connectedAct:
+    instructions: []
   gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
@@ -1577,7 +1595,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonBase: {fileID: 1689008370354704, guid: 5335dcc025917e248b1ceeef9c58c46c, type: 2}
-  activities: []
   storedObj: {fileID: 454752450}
   currentPage: 0
 --- !u!4 &1162515148
@@ -1918,6 +1935,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  connectedAct:
+    instructions: []
   gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0

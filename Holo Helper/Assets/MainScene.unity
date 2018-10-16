@@ -874,6 +874,16 @@ Prefab:
       propertyPath: pages.Array.data[0]
       value: 
       objectReference: {fileID: 1677602506}
+    - target: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+        type: 2}
+      propertyPath: isReturn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+        type: 2}
+      propertyPath: isPageRight
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
   m_IsPrefabParent: 0
@@ -981,6 +991,16 @@ Prefab:
       propertyPath: pages.Array.data[1]
       value: 
       objectReference: {fileID: 801693859}
+    - target: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+        type: 2}
+      propertyPath: isReturn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+        type: 2}
+      propertyPath: isPageLeft
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
   m_IsPrefabParent: 0
@@ -1527,16 +1547,54 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1037739286}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1162515146 stripped
+--- !u!1 &1162515146
 GameObject:
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 1799653113006972, guid: 5723296ccb8c5754d97c8d75568c576d,
     type: 2}
   m_PrefabInternal: {fileID: 1980592642}
---- !u!4 &1162515148 stripped
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1162515148}
+  - component: {fileID: 1162515147}
+  m_Layer: 0
+  m_Name: ACT_MANAGER
+  m_TagString: ACTMAN
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1162515147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1980592642}
+  m_GameObject: {fileID: 1162515146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86795762abee4e43bd507c12d7c80d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonBase: {fileID: 1689008370354704, guid: 5335dcc025917e248b1ceeef9c58c46c, type: 2}
+  activities: []
+  storedObj: {fileID: 454752450}
+  currentPage: 0
+--- !u!4 &1162515148
 Transform:
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 4756162777457932, guid: 5723296ccb8c5754d97c8d75568c576d,
     type: 2}
   m_PrefabInternal: {fileID: 1980592642}
+  m_GameObject: {fileID: 1162515146}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 301826305}
+  m_Father: {fileID: 790941144}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1347245856
 GameObject:
   m_ObjectHideFlags: 0

@@ -201,13 +201,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  pages:
-  - {fileID: 0}
-  - {fileID: 1171226454358772}
   materials:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
   isEdit: 0

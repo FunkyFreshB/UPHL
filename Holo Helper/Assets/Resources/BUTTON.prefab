@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42b456a6e9000d7439b8c6c1b407d1ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actMan: {fileID: 1799653113006972, guid: 5723296ccb8c5754d97c8d75568c576d, type: 2}
+  actMan: {fileID: 0}
   storedActs: {fileID: 0}
   menus:
   - {fileID: 1877577062822690, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}

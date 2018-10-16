@@ -10,10 +10,10 @@ public class ActivityManager : MonoBehaviour {
     public List<GameObject> activities = new List<GameObject>();
     private int noOfActivities;
     private int noOfPages;
-    GameObject selectedObj = null;
+    private GameObject selectedObj = null;
     public GameObject storedObj;
     public int currentPage = 0;
-    public int pressd = 0;
+    private int pressd = 0;
 
     /* ------------------------------------ */
     /* General Functions */
@@ -83,6 +83,8 @@ public class ActivityManager : MonoBehaviour {
             bb.menus[0].SetActive(true);
             bb.menus[1].SetActive(false);
         }
+
+        // Change page
         else if (bb.isPageRight)
         {
             if (currentPage < GetPageAmount())
@@ -93,6 +95,7 @@ public class ActivityManager : MonoBehaviour {
             {
                 currentPage = 0;
             }
+            Debug.Log(currentPage);
         }
         else if (bb.isPageLeft)
         {
@@ -104,11 +107,23 @@ public class ActivityManager : MonoBehaviour {
             {
                 currentPage = GetPageAmount();
             }
+            Debug.Log(currentPage);
         }
     }
 
     /* ------------------------------------ */
     /* ActivityManager Functions */
+
+    public void ChangePage()
+    {
+        // for each activity
+        // SetActive(false);
+        // activities[page*5+0].SetActive(true);
+        // activities[page*5+1].SetActive(true);
+        // activities[page*5+2].SetActive(true);
+        // activities[page*5+3].SetActive(true);
+        // activities[page*5+4].SetActive(true);
+    }
 
     public void SetupActivityButtons()
     {
@@ -127,6 +142,7 @@ public class ActivityManager : MonoBehaviour {
         GameObject newActivity = Instantiate(buttonBase);
         // newActivity.activity = ActivityContainer.Load(name);
         newActivity.name = name;
+        newActivity.GetComponent<ButtonBehaviour>().actMan = this.gameObject;
         newActivity.GetComponentInChildren<TextMesh>().text = name;
         newActivity.transform.position = this.transform.position;
         newActivity.transform.rotation = this.transform.rotation;
@@ -211,6 +227,7 @@ public class ActivityManager : MonoBehaviour {
 
         if (selectedObj == so)
         {
+            Debug.Log(selectedObj);
             return true;
         }
         else

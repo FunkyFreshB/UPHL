@@ -25,19 +25,21 @@ public class ActivityManager : MonoBehaviour {
         DontDestroyOnLoad(this);
 
         container = null;
-      container = ActivityContainer.Load(Path.Combine(Application.dataPath, "ActivityList.xml"));
+        container = ActivityContainer.Load(Path.Combine(Application.dataPath, "ActivityList.xml"));
 
         if(container == null)
         {
             container = new ActivityContainer();
         }
-       // container.CreateActivity("FirstOne");
-       // container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
+        // container.CreateActivity("FirstOne");
+        // container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
 
         foreach (Activity a in container.activities)
         {
             a.reInitializer();
         }
+
+        UpdatePageAmount();
 
        // container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
     }
@@ -45,6 +47,14 @@ public class ActivityManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+    }
+
+    /* ------------------------------------ */
+    /* ActivityManager Functions */
+
+    /** Show the arrow keys if we have more than 1 page. */
+    public void UpdatePageAmount()
+    {
         // display arrow keys if we have more than 1 page (more than 5 activities)
         if (noOfPages > 0)
         {
@@ -58,18 +68,18 @@ public class ActivityManager : MonoBehaviour {
         }
     }
 
-    /* ------------------------------------ */
-    /* ActivityManager Functions */
-
+    /** Decide which activities to display. */
     public void ChangePage()
     {
-        foreach(GameObject b in GameObject.FindGameObjectsWithTag("ActivityButton"))
+        foreach (GameObject b in GameObject.FindGameObjectsWithTag("ActivityButton"))
         {
             b.SetActive(false);
 
+            Debug.Log(b.name);
+
             for (int i = 0; i < 5; i++)
             {
-                if (b.GetComponent<ButtonBehaviour>().connectedAct == container.activities[currentPage * 5 + i])
+                if (container.activities[currentPage * 5 + i] != null && b.GetComponent<ButtonBehaviour>().connectedAct == container.activities[currentPage * 5 + i])
                 {
                     b.SetActive(true);
                 }
@@ -86,6 +96,7 @@ public class ActivityManager : MonoBehaviour {
         // activities[page*5+4].SetActive(true);
     }
 
+    /** Create a button with an attached activity. If no activity exists, create new. Else, set button's name to that of activity. */
     public GameObject CreateActivity(string name, Activity act)
     {
         if (act != null)
@@ -110,15 +121,18 @@ public class ActivityManager : MonoBehaviour {
 
         // increase noOfActivities and also noOfPages if enough activities
         if (container.activities.Count > noOfActivities)
-        {            
-            if (noOfActivities % newActivity.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
+        {
+
+            if ((noOfActivities) % newActivity.GetComponent<ButtonBehaviour>().visibleActs == 0 && (noOfActivities) != 0)
             {
                 noOfPages++;
                 currentPage = noOfPages;
+                UpdatePageAmount();
+                ChangePage();
             }
 
             noOfActivities++;
-            
+
             return newActivity;
         }
         else
@@ -138,6 +152,8 @@ public class ActivityManager : MonoBehaviour {
         // int index = act.GetActivityNumber():
         // activities.RemoveAt(index);
 
+        container.RemoveActivity(button);
+        Object.Destroy(button);
         Debug.Log("nOA: " + noOfActivities + ", a.C: " + container.activities.Count);
 
         if (container.activities.Count < noOfActivities)
@@ -148,8 +164,10 @@ public class ActivityManager : MonoBehaviour {
             {
                 noOfPages--;
                 currentPage = noOfPages;
+                UpdatePageAmount();
+                ChangePage();
             }
-
+            
             return true;
         }
         else

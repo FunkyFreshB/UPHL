@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4955581612671584}
   m_Layer: 0
-  m_Name: FirstOneStandard instruction step 1
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

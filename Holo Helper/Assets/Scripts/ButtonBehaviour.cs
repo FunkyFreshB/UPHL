@@ -228,6 +228,8 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             {
                 currentPage = 0;
             }
+
+            ams.ChangePage();
             Debug.Log(currentPage);
         }
         else if (isPageLeft)
@@ -240,6 +242,8 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             {
                 currentPage = ams.GetPageAmount();
             }
+
+            ams.ChangePage();
             Debug.Log(currentPage);
         }
     }

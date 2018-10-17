@@ -2,6 +2,7 @@
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
+using UnityEngine;
 
 [System.Serializable]
 [XmlRoot("AcitivitlistsAndInstructions")]
@@ -49,9 +50,15 @@ public class ActivityContainer
     }
 
 
-    public void RemoveActivity()
+    public void RemoveActivity(GameObject selectedActivity)
     {
+        Activity temp = selectedActivity.GetComponent<ButtonBehaviour>().connectedAct;
+        activities.Remove(temp);
 
+        if(temp == null)
+        {
+            Debug.Log("Activity " + temp + " destroyed");
+        }
     }
 
 }

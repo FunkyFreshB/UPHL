@@ -31,8 +31,6 @@ public class ActivityManager : MonoBehaviour {
         {
             container = new ActivityContainer();
         }
-        // container.CreateActivity("FirstOne");
-        // container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
 
         foreach (Activity a in container.activities)
         {
@@ -40,8 +38,6 @@ public class ActivityManager : MonoBehaviour {
         }
 
         UpdatePageAmount();
-
-       // container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
     }
 	
 	// Update is called once per frame
@@ -74,19 +70,19 @@ public class ActivityManager : MonoBehaviour {
         foreach (GameObject b in GameObject.FindGameObjectsWithTag("ActivityButton"))
         {
             b.SetActive(false);
-
-            Debug.Log(b.name);
-
+            
             for (int i = 0; i < 5; i++)
             {
-                if (container.activities[currentPage * 5 + i] != null && b.GetComponent<ButtonBehaviour>().connectedAct == container.activities[currentPage * 5 + i])
+                Debug.Log("b: " + b.GetComponent<ButtonBehaviour>().connectedAct + ", act: " + container.activities[currentPage * 5 + i]);
+                /*
+                if (b.GetComponent<ButtonBehaviour>().connectedAct == container.activities[currentPage * 5 + i])
                 {
                     b.SetActive(true);
-                }
+                    break;
+                }*/
             }
         }
-
-
+        
         // for each activity
         // SetActive(false);
         // activities[page*5+0].SetActive(true);
@@ -122,8 +118,7 @@ public class ActivityManager : MonoBehaviour {
         // increase noOfActivities and also noOfPages if enough activities
         if (container.activities.Count > noOfActivities)
         {
-
-            if ((noOfActivities) % newActivity.GetComponent<ButtonBehaviour>().visibleActs == 0 && (noOfActivities) != 0)
+            if (noOfActivities % newActivity.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
             {
                 noOfPages++;
                 currentPage = noOfPages;
@@ -141,23 +136,15 @@ public class ActivityManager : MonoBehaviour {
         }
     }
 
+    /** Removes an activity and its button. */
     public bool DeleteActivity(GameObject button)
     {
-        // börja med att radera en aktivitet
-        // ta samtidigt bort aktivitet från en knapp.
-        // om knappen inte har en aktivitet, radera knappen
-        // minska sen antal aktiviteter (och sidor om så behövs)
-
-        // GameObject act = button.GetActivity();
-        // int index = act.GetActivityNumber():
-        // activities.RemoveAt(index);
-
         container.RemoveActivity(button);
-        Object.Destroy(button);
-        Debug.Log("nOA: " + noOfActivities + ", a.C: " + container.activities.Count);
 
         if (container.activities.Count < noOfActivities)
         {
+            Object.Destroy(button);
+
             noOfActivities--;
 
             if (noOfActivities % button.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
@@ -172,7 +159,7 @@ public class ActivityManager : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Removed NOTHING!?");
+            Debug.Log("ERR: Nothing removed");
             return false;
         }
     }
@@ -202,7 +189,6 @@ public class ActivityManager : MonoBehaviour {
 
         if (selectedObj == so)
         {
-            Debug.Log(selectedObj);
             return true;
         }
         else

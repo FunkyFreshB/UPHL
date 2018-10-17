@@ -13,6 +13,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     public GameObject[] menus = new GameObject[5];
     public Material[] materials = new Material[2];
     private ActivityManager ams;
+    bool firstTime = true;
 
     // Page info
     public int visibleActs = 5;
@@ -23,9 +24,9 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     private GameObject obj;
     public Activity connectedAct;
-    public GameObject gazedAtObj;      // currently gazed at button
+    public GameObject gazedAtObj;      // currently gazed at object
 
-    public bool isAdmin;
+    public bool isAdmin = false;
     public bool isActivity = false;
     public bool isEdit = false;
     public bool isCreate = false;
@@ -53,14 +54,11 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         activityPos[2] = new Vector3(0, 0.04565f, 0);
         activityPos[3] = new Vector3(0, 0.0164f, 0);
         activityPos[4] = new Vector3(0, -0.01285f, 0);
-
-
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-
         if(this.gameObject == ams.GetSelectedObject())
         {
             ams.GetSelectedObject().GetComponent<Renderer>().material = materials[1];
@@ -88,7 +86,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         }
     }
 
-
+    /** Create a new button with the correct initialization. */
     public void InstantiateActivityButton(string name, Activity act)
     {
         obj = ams.CreateActivity(name, act);
@@ -168,11 +166,14 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     {
         if (isAdmin)
         {
-            //Lägga in kod som skapar gameobjects från ActivityContainer om det redan finns några activities från XML filen.
-            
-            foreach(Activity a in ams.container.activities)
+            if (firstTime)
             {
-                InstantiateActivityButton(a.name, a);
+                foreach (Activity a in ams.container.activities)
+                {
+                    InstantiateActivityButton(a.name, a);
+                }
+
+                firstTime = false;
             }
             
             menus[1].SetActive(true);
@@ -180,6 +181,16 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         }
         else
         {
+            if (firstTime)
+            {
+                foreach (Activity a in ams.container.activities)
+                {
+                    InstantiateActivityButton(a.name, a);
+                }
+
+                firstTime = false;
+            }
+
             menus[2].SetActive(true);
             menus[0].SetActive(false);
         }

@@ -44,7 +44,10 @@ public class Instructions
         
     }
 
-    
+    public void removeIndicator()
+    {
+        Object.Destroy(indicator);
+    }
 
     public void ChangeVisibility()
     {

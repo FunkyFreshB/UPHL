@@ -10,7 +10,7 @@
           <instructionText>Standard instruction step 2</instructionText>
         </Instruction>
       </Instructions>
-      <name>FirstOne</name>
+      <name>First One</name>
       <CurrentStep>0</CurrentStep>
     </Activity>
     <Activity>
@@ -22,7 +22,43 @@
           <instructionText>Standard instruction step 2</instructionText>
         </Instruction>
       </Instructions>
-      <name>SecondOne</name>
+      <name>Second One</name>
+      <CurrentStep>0</CurrentStep>
+    </Activity>
+    <Activity>
+      <Instructions>
+        <Instruction visible="true">
+          <instructionText>Standard instruction step 1</instructionText>
+        </Instruction>
+        <Instruction visible="true">
+          <instructionText>Standard instruction step 2</instructionText>
+        </Instruction>
+      </Instructions>
+      <name>Three One</name>
+      <CurrentStep>0</CurrentStep>
+    </Activity>
+    <Activity>
+      <Instructions>
+        <Instruction visible="true">
+          <instructionText>Standard instruction step 1</instructionText>
+        </Instruction>
+        <Instruction visible="true">
+          <instructionText>Standard instruction step 2</instructionText>
+        </Instruction>
+      </Instructions>
+      <name>4th One</name>
+      <CurrentStep>0</CurrentStep>
+    </Activity>
+    <Activity>
+      <Instructions>
+        <Instruction visible="true">
+          <instructionText>Standard instruction step 1</instructionText>
+        </Instruction>
+        <Instruction visible="true">
+          <instructionText>Standard instruction step 2</instructionText>
+        </Instruction>
+      </Instructions>
+      <name>5th One</name>
       <CurrentStep>0</CurrentStep>
     </Activity>
   </Activities>

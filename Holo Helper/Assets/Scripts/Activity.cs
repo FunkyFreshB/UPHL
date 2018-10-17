@@ -33,7 +33,7 @@ public class Activity{
 
     ~Activity()
     {
-        Debug.Log("Activity" + name + " have been removed");
+       // Debug.Log("Activity" + name + " have been removed");
     }
 
     public void reInitializer()
@@ -54,7 +54,7 @@ public class Activity{
     //Hur gör vi detta? Behöver veta snarast för implementera resten.
     public void RemoveInstruction()
     {
-        
+         
     }
 
     public void NextStep()

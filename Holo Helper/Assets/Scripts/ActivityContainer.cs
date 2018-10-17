@@ -53,11 +53,16 @@ public class ActivityContainer
     public void RemoveActivity(GameObject selectedActivity)
     {
         Activity temp = selectedActivity.GetComponent<ButtonBehaviour>().connectedAct;
+
+        foreach (Instructions i in temp.instructions)
+        {
+            i.removeIndicator();
+        }
         activities.Remove(temp);
 
-        if(temp == null)
+        if (temp == null)
         {
-            Debug.Log("Activity " + temp + " destroyed");
+           // Debug.Log("Activity " + temp + " destroyed");
         }
     }
 

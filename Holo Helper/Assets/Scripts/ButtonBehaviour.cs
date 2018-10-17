@@ -231,31 +231,29 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         // Change page
         else if (isPageRight)
         {
-            if (currentPage < ams.GetPageAmount())
+            if (ams.GetCurrentPage() < ams.GetPageAmount())
             {
-                currentPage++;
+                ams.SetCurrentPage(ams.GetCurrentPage() + 1);
             }
             else
             {
-                currentPage = 0;
+                ams.SetCurrentPage(ams.GetPageAmount());
             }
 
             ams.ChangePage();
-            Debug.Log(currentPage);
         }
         else if (isPageLeft)
         {
-            if (currentPage > 0)
+            if (ams.GetCurrentPage() > 0)
             {
-                currentPage--;
+                ams.SetCurrentPage(ams.GetCurrentPage() - 1);
             }
             else
             {
-                currentPage = ams.GetPageAmount();
+                ams.SetCurrentPage(0);
             }
 
             ams.ChangePage();
-            Debug.Log(currentPage);
         }
     }
 

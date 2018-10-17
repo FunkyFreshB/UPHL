@@ -8,6 +8,8 @@ public class ActivityManager : MonoBehaviour {
     private Activity foundAct;
     public GameObject buttonBase;
     public GameObject storedObj;
+    private GameObject newActivity;
+    private GameObject storedAct;
     
     private int noOfActivities;
     private int noOfPages;
@@ -23,6 +25,8 @@ public class ActivityManager : MonoBehaviour {
     void Start () {
         // keep this object for every scene
         DontDestroyOnLoad(this);
+
+        storedObj = GameObject.Find("Stored Activities");
 
         container = null;
         container = ActivityContainer.Load(Path.Combine(Application.dataPath, "ActivityList.xml"));
@@ -42,8 +46,6 @@ public class ActivityManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-       // UpdateActivityPosition();
     }
 
     /* ------------------------------------ */
@@ -68,41 +70,63 @@ public class ActivityManager : MonoBehaviour {
     /** Decide which activities to display. */
     public void ChangePage()
     {
-        foreach (GameObject b in GameObject.FindGameObjectsWithTag("ActivityButton"))
+        int currentButt = 0;
+
+        for(int h = 0; h < storedObj.transform.childCount; h++)
         {
-            b.SetActive(false);
-            
-            for (int i = 0; i < 5; i++)
+            if(currentButt >= 2)
             {
-                Debug.Log("b: " + b.GetComponent<ButtonBehaviour>().connectedAct + ", act: " + container.activities[currentPage * 5 + i]);
-                /*
-                if (b.GetComponent<ButtonBehaviour>().connectedAct == container.activities[currentPage * 5 + i])
+                Debug.Log("currentPage: " + currentPage);
+                if ((currentButt - 2) < (currentPage * 5) || (currentButt - 2) > (currentPage * 5 + 4))
                 {
-                    b.SetActive(true);
-                    break;
-                }*/
+                    if (storedObj.transform.GetChild(h).gameObject != null)
+                    {
+                        storedObj.transform.GetChild(h).gameObject.SetActive(false);
+                    }
+                }
+                else
+                {
+                    if (storedObj.transform.GetChild(h).gameObject != null)
+                    {
+                        storedObj.transform.GetChild(h).gameObject.SetActive(true);
+                    }
+                }
             }
+
+            currentButt++;
         }
-        
-        // for each activity
-        // SetActive(false);
-        // activities[page*5+0].SetActive(true);
-        // activities[page*5+1].SetActive(true);
-        // activities[page*5+2].SetActive(true);
-        // activities[page*5+3].SetActive(true);
-        // activities[page*5+4].SetActive(true);
     }
 
     /** Update the position of all activities */
     public void UpdateActivityPosition()
     {
-        int current = 0;
+        int currentButt = 0;
 
+        for (int h = 0; h < storedObj.transform.childCount; h++)
+        {
+            if (currentButt >= 2)
+            {
+                //storedObj.transform.GetChild(h).gameObject.SetActive(true);
+
+                if (storedObj.transform.GetChild(h).gameObject != selectedObj)
+                {
+                    storedObj.transform.GetChild(h).gameObject.transform.localPosition = storedObj.transform.GetChild(h).gameObject.GetComponent<ButtonBehaviour>().activityPos[(currentButt - 2) % 5];
+                    currentButt++;
+                }
+            }
+
+            currentButt++;
+        }
+        
+        /*
         foreach (GameObject b in GameObject.FindGameObjectsWithTag("ActivityButton"))
         {
-            b.transform.localPosition = b.GetComponent<ButtonBehaviour>().activityPos[current % 5];
-            current++;
-        }
+            if (b != selectedObj)
+            {
+                b.transform.localPosition = b.GetComponent<ButtonBehaviour>().activityPos[current % 5];
+                current++;
+            }
+        }*/
     }
 
     /** Create a button with an attached activity. If no activity exists, create new. Else, set button's name to that of activity. */
@@ -120,7 +144,7 @@ public class ActivityManager : MonoBehaviour {
         }
 
         // setup buttons for each activity
-        GameObject newActivity = Instantiate(buttonBase);
+        newActivity = Instantiate(buttonBase);
         newActivity.GetComponent<ButtonBehaviour>().connectedAct = foundAct;    //
         newActivity.name = name;
         newActivity.GetComponent<ButtonBehaviour>().actMan = this.gameObject;
@@ -169,7 +193,7 @@ public class ActivityManager : MonoBehaviour {
             }
 
             UpdateActivityPosition();
-
+            
             return true;
         }
         else
@@ -184,11 +208,23 @@ public class ActivityManager : MonoBehaviour {
     {
         return noOfActivities;
     }
-
+    
     /** Return amount of pages we have. */
     public int GetPageAmount()
     {
         return noOfPages;
+    }
+
+    /** Get which page we're currently on. */
+    public int GetCurrentPage()
+    {
+        return currentPage;
+    }
+
+    /** Set which page we're currently on. */
+    public void SetCurrentPage(int cP)
+    {
+        currentPage = cP;
     }
 
     /** Return the currently selected activity. */

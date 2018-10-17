@@ -16,17 +16,11 @@ public class Instructions
     [XmlAttribute("visible")]
     public bool visible;
 
-    //Behövs verkligen denna variable? Vi kan bara ta instructionText och leta efter det.
-    [XmlElement("StepNumber")]
-    public int stepNumber { get; set; }
-
-
     // TODO What script do we need or should we implement our own?
-    public Instructions(string text, int stepNumber,string activityName)
+    public Instructions(string text,string activityName)
     {
         instructionText = text;
         visible = true;
-        this.stepNumber = stepNumber;
         this.reInitializer(activityName);
     }
 
@@ -45,6 +39,7 @@ public class Instructions
         //cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
         cube.AddComponent<IndicatorBehaviour>().instruction = this;
         indicator = cube;
+        indicator.transform.SetParent(GameObject.Find("MenuPos").transform);
         indicator.SetActive(false);
         
     }

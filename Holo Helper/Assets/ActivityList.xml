@@ -5,15 +5,24 @@
       <Instructions>
         <Instruction visible="true">
           <instructionText>Standard instruction step 1</instructionText>
-          <StepNumber>1</StepNumber>
         </Instruction>
         <Instruction visible="true">
           <instructionText>Standard instruction step 2</instructionText>
-          <StepNumber>2</StepNumber>
         </Instruction>
       </Instructions>
       <name>FirstOne</name>
-      <stepCounter>2</stepCounter>
+      <CurrentStep>0</CurrentStep>
+    </Activity>
+    <Activity>
+      <Instructions>
+        <Instruction visible="true">
+          <instructionText>Standard instruction step 1</instructionText>
+        </Instruction>
+        <Instruction visible="true">
+          <instructionText>Standard instruction step 2</instructionText>
+        </Instruction>
+      </Instructions>
+      <name>SecondOne</name>
       <CurrentStep>0</CurrentStep>
     </Activity>
   </Activities>

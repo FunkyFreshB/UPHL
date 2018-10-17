@@ -13,9 +13,6 @@ public class Activity{
     [XmlArray("Instructions"), XmlArrayItem("Instruction")]
     public List<Instructions> instructions;
 
-    [XmlElement("stepCounter")]
-    public int stepCounter { get; set; }
-
     [XmlElement("CurrentStep")]
     public int currentStep { get; set;}
 
@@ -23,9 +20,8 @@ public class Activity{
     {
         this.name = name;
         currentStep = 0;
-        stepCounter = 1;
         instructions = new List<Instructions>();
-        instructions.Add(new Instructions("Standard instruction step 1",stepCounter,this.name));
+        instructions.Add(new Instructions("Standard instruction step 1",this.name));
     }
 
     public Activity()
@@ -50,8 +46,7 @@ public class Activity{
 
     public void AddInstruction(string description)
     {
-        stepCounter++;
-        instructions.Add(new Instructions(description,stepCounter,this.name));
+        instructions.Add(new Instructions(description,this.name));
     }
 
 
@@ -59,15 +54,12 @@ public class Activity{
     //Hur gör vi detta? Behöver veta snarast för implementera resten.
     public void RemoveInstruction()
     {
-        if(stepCounter > 0)
-        {
-
-        }
+        
     }
 
     public void NextStep()
     {
-        if(currentStep != stepCounter-1)
+        if(currentStep != instructions.Count - 1)
         {
             currentStep++;
             GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().

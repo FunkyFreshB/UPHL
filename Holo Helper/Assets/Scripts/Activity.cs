@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using HoloToolkit.Unity.SpatialMapping;
 using System.Xml;
 using System.Xml.Serialization;
 using HoloToolkit.Unity;
@@ -20,14 +19,13 @@ public class Activity{
     [XmlElement("CurrentStep")]
     public int currentStep { get; set;}
 
-   //TODO Hur ska vi göra med buttonBase, fråga Sebastian.
     public Activity(string name)
     {
         this.name = name;
         currentStep = 0;
         stepCounter = 1;
         instructions = new List<Instructions>();
-        instructions.Add(new Instructions("Standard instruction step 1",stepCounter));
+        instructions.Add(new Instructions("Standard instruction step 1",stepCounter,this.name));
     }
 
     public Activity()
@@ -46,14 +44,14 @@ public class Activity{
     {
         foreach(Instructions i in instructions)
         {
-            i.reInitializer();
+            i.reInitializer(this.name);
         }
     }
 
     public void AddInstruction(string description)
     {
         stepCounter++;
-        instructions.Add(new Instructions(description,stepCounter));
+        instructions.Add(new Instructions(description,stepCounter,this.name));
     }
 
 
@@ -66,13 +64,6 @@ public class Activity{
 
         }
     }
-
-    public void ChangeActivityName(string newName)
-    {
-        this.name = newName;
-    }
-
-
 
     public void NextStep()
     {
@@ -113,17 +104,4 @@ public class Activity{
         
     }
 
-    public void CreateCubes()
-    {
-        foreach(Instructions element in instructions)
-        {
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube.name = element.instructionText;
-            cube.AddComponent<TapToPlace>();
-            cube.AddComponent<IndicatorBehaviour>().instruction = element;
-            element.indicator = cube;
-            GameObject obj = GameObject.Find("Test");
-            element.indicator.transform.parent = obj.transform;
-        }
-    }
 }

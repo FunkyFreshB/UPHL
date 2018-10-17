@@ -88,6 +88,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         }
     }
 
+
     public void InstantiateActivityButton(string name, Activity act)
     {
         obj = ams.CreateActivity(name, act);
@@ -167,6 +168,13 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     {
         if (isAdmin)
         {
+            //Lägga in kod som skapar gameobjects från ActivityContainer om det redan finns några activities från XML filen.
+            
+            foreach(Activity a in ams.container.activities)
+            {
+                InstantiateActivityButton(a.name, a);
+            }
+            
             menus[1].SetActive(true);
             menus[0].SetActive(false);
         }

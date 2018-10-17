@@ -1,10 +1,5 @@
-﻿using HoloToolkit.Unity.InputModule;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
 
 // kan nog kallas MenuManager istället
 public class ActivityManager : MonoBehaviour {
@@ -42,7 +37,6 @@ public class ActivityManager : MonoBehaviour {
         foreach (Activity a in container.activities)
         {
             a.reInitializer();
-            GetComponent<ButtonBehaviour>().InstantiateActivityButton(a.name, a);
         }
 
        // container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
@@ -201,9 +195,10 @@ public class ActivityManager : MonoBehaviour {
     }
 
     /** Edit the name of an activity. */
-    public void SetName(string name)
+    public void SetName(string newName)
     {
-        selectedObj.name = name;
-        selectedObj.GetComponentInChildren<TextMesh>().text = name;
+        foundAct = container.activities.Find(x => x.name == selectedObj.name);
+        foundAct.name = selectedObj.name = newName;
+        selectedObj.GetComponentInChildren<TextMesh>().text = newName;
     }
 }

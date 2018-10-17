@@ -17,7 +17,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     // Page info
     public int visibleActs = 5;
-    private Vector3[] activityPos;
+    public Vector3[] activityPos;
     private int currentPage = 0;
     private int activityID = -1;
     private int pageID = -1;

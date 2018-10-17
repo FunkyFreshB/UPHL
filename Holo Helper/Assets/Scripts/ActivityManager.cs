@@ -43,6 +43,7 @@ public class ActivityManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+       // UpdateActivityPosition();
     }
 
     /* ------------------------------------ */
@@ -90,6 +91,18 @@ public class ActivityManager : MonoBehaviour {
         // activities[page*5+2].SetActive(true);
         // activities[page*5+3].SetActive(true);
         // activities[page*5+4].SetActive(true);
+    }
+
+    /** Update the position of all activities */
+    public void UpdateActivityPosition()
+    {
+        int current = 0;
+
+        foreach (GameObject b in GameObject.FindGameObjectsWithTag("ActivityButton"))
+        {
+            b.transform.localPosition = b.GetComponent<ButtonBehaviour>().activityPos[current % 5];
+            current++;
+        }
     }
 
     /** Create a button with an attached activity. If no activity exists, create new. Else, set button's name to that of activity. */
@@ -154,7 +167,9 @@ public class ActivityManager : MonoBehaviour {
                 UpdatePageAmount();
                 ChangePage();
             }
-            
+
+            UpdateActivityPosition();
+
             return true;
         }
         else

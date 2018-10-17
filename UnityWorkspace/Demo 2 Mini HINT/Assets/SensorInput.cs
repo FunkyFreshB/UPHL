@@ -8,6 +8,7 @@ public class SensorInput : MonoBehaviour {
     Material cachedMaterial;
 
     void Start() {
+        activeMaterial = new Material(GetComponent<Renderer>().material.shader);
         activeMaterial.color = Color.red;
         cachedMaterial = GetComponent<Renderer>().material;
     }

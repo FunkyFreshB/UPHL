@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HoloToolkit.Unity.InputModule;
 
+<<<<<<< HEAD:UnityWorkspace/Demo 2 Mini HINT/Assets/HoldToOpenMenu.cs
 public class HoldToOpenMenu : MonoBehaviour, IFocusable, IInputHandler, ISourceStateHandler {
 
     private bool isFocused;
@@ -39,6 +39,12 @@ public class HoldToOpenMenu : MonoBehaviour, IFocusable, IInputHandler, ISourceS
 
     // Use this for initialization
     void Start () {
+=======
+public class Move_Rotate_Scale : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+>>>>>>> 8a0bf37e49ebbb2680bb7af4e7701ebd028a9283:UnityWorkspace/Demo 2 Mini HINT/Assets/Move_Rotate_Scale.cs
 		
 	}
 	

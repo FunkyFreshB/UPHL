@@ -267,21 +267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  storedActs: {fileID: 454752450}
-  menus:
-  - {fileID: 862666574}
-  - {fileID: 301826304}
-  - {fileID: 357496710}
-  - {fileID: 0}
-  - {fileID: 0}
-  materials:
-  - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
-  - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
-  visibleActs: 5
-  activityPos: []
   connectedAct:
     instructions: []
-  gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
   isEdit: 0
@@ -402,7 +389,7 @@ Prefab:
       objectReference: {fileID: 301826304}
     - target: {fileID: 1877577062822690, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114227555401426572, guid: b7aab077fc155d949a0252efc0ebe694,
         type: 2}
@@ -767,21 +754,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  storedActs: {fileID: 454752450}
-  menus:
-  - {fileID: 862666574}
-  - {fileID: 301826304}
-  - {fileID: 357496710}
-  - {fileID: 0}
-  - {fileID: 0}
-  materials:
-  - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
-  - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
-  visibleActs: 5
-  activityPos: []
   connectedAct:
     instructions: []
-  gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
   isEdit: 0
@@ -984,7 +958,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &357496711
 Transform:
   m_ObjectHideFlags: 0
@@ -1348,7 +1322,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 146120, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_LocalScale.x
@@ -1618,21 +1592,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  storedActs: {fileID: 454752450}
-  menus:
-  - {fileID: 862666574}
-  - {fileID: 301826304}
-  - {fileID: 357496710}
-  - {fileID: 0}
-  - {fileID: 0}
-  materials:
-  - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
-  - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
-  visibleActs: 5
-  activityPos: []
   connectedAct:
     instructions: []
-  gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
   isEdit: 1
@@ -1819,6 +1780,15 @@ MonoBehaviour:
     activities: []
   buttonBase: {fileID: 1689008370354704, guid: 5335dcc025917e248b1ceeef9c58c46c, type: 2}
   storedObj: {fileID: 454752450}
+  menus:
+  - {fileID: 862666574}
+  - {fileID: 301826304}
+  - {fileID: 357496710}
+  - {fileID: 0}
+  - {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
+  - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   currentPage: 0
 --- !u!4 &1162515148
 Transform:
@@ -2078,21 +2048,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  storedActs: {fileID: 454752450}
-  menus:
-  - {fileID: 862666574}
-  - {fileID: 301826304}
-  - {fileID: 357496710}
-  - {fileID: 0}
-  - {fileID: 0}
-  materials:
-  - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
-  - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
-  visibleActs: 5
-  activityPos: []
   connectedAct:
     instructions: []
-  gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
   isEdit: 0
@@ -2444,6 +2401,31 @@ Prefab:
       propertyPath: selectedObj
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+        type: 2}
+      propertyPath: menus.Array.data[0]
+      value: 
+      objectReference: {fileID: 862666574}
+    - target: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+        type: 2}
+      propertyPath: menus.Array.data[1]
+      value: 
+      objectReference: {fileID: 301826304}
+    - target: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+        type: 2}
+      propertyPath: menus.Array.data[2]
+      value: 
+      objectReference: {fileID: 357496710}
+    - target: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+        type: 2}
+      propertyPath: materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
+    - target: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+        type: 2}
+      propertyPath: materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5723296ccb8c5754d97c8d75568c576d, type: 2}
   m_IsPrefabParent: 0
@@ -2495,21 +2477,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  storedActs: {fileID: 454752450}
-  menus:
-  - {fileID: 862666574}
-  - {fileID: 301826304}
-  - {fileID: 357496710}
-  - {fileID: 0}
-  - {fileID: 0}
-  materials:
-  - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
-  - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
-  visibleActs: 5
-  activityPos: []
   connectedAct:
     instructions: []
-  gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
   isEdit: 0

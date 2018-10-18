@@ -9,22 +9,21 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     // Other objects
     public GameObject actMan;
-    public GameObject storedActs;
-    public GameObject[] menus = new GameObject[5];
-    public Material[] materials = new Material[2];
+    private GameObject storedActs;
+    private GameObject[] menus = new GameObject[5];
+    private Material[] materials = new Material[2];
     private ActivityManager ams;
-    bool firstTime = true;
 
     // Page info
-    public int visibleActs = 5;
-    public Vector3[] activityPos;
+    private int visibleActs = 5;
+    private Vector3[] activityPos;
     private int currentPage = 0;
     private int activityID = -1;
     private int pageID = -1;
 
     private GameObject obj;
     public Activity connectedAct;
-    public GameObject gazedAtObj;      // currently gazed at object
+    private GameObject gazedAtObj;      // currently gazed at object
 
     public bool isAdmin = false;
     public bool isActivity = false;
@@ -34,8 +33,8 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     public bool isReturn = false;
     public bool isPageLeft = false;
     public bool isPageRight = false;
-    bool isCreateKeyboard = false;
 
+    bool isCreateKeyboard = false;
     bool isKeyboard = false;
     Keyboard keyboard;
     string keyboardText = "";
@@ -45,25 +44,12 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     {
         ams = actMan.GetComponent<ActivityManager>();
 
-       /* menus[0].SetActive(true);
-
-        for (int i = 1; i < menus.Length; i++)
-        {
-            if (menus[i] != null)
-            {
-                menus[i].SetActive(false);
-            }
-        }*/
+        menus = ams.menus;
+        materials = ams.materials;
+        storedActs = ams.storedObj;
+        activityPos = ams.GetActivityPos();
 
         keyboard = Keyboard.Instance;
-
-        activityPos = new Vector3[visibleActs];
-
-        activityPos[0] = new Vector3(0, 0.10415f, 0);
-        activityPos[1] = new Vector3(0, 0.0749f, 0);
-        activityPos[2] = new Vector3(0, 0.04565f, 0);
-        activityPos[3] = new Vector3(0, 0.0164f, 0);
-        activityPos[4] = new Vector3(0, -0.01285f, 0);
     }
 	
 	// Update is called once per frame
@@ -84,6 +70,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                     keyboardText = "";
                     isKeyboard = false;
                     menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
+                    menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
                 }
                 else
                 {
@@ -102,7 +89,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     {
         obj = ams.CreateActivity(name, act);
         obj.GetComponent<ButtonBehaviour>().storedActs = storedActs;
-        obj.GetComponent<ButtonBehaviour>().isAdmin = true;
+        obj.GetComponent<ButtonBehaviour>().menus = menus;
         obj.GetComponent<ButtonBehaviour>().isActivity = true;
         obj.transform.localScale = new Vector3(0.23f, 0.0234f, 0.02f);
         obj.transform.GetChild(0).localScale = new Vector3(0.07f, 0.7f, 1);
@@ -135,10 +122,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         // 2: User Menu
         else if (menus[2].activeSelf)
         {
-            if (isActivity)
-            {
-
-            }
+            UserMenu(eventData);
         }
 
         // ---------------------------------------------
@@ -175,41 +159,36 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     public void MainMenu(InputClickedEventData eventData)
     {
+        if (ams.GetFirstTime())
+        {
+            foreach (Activity a in ams.container.activities)
+            {
+                InstantiateActivityButton(a.name, a);
+            }
+
+            ams.SetFirstTime(false);
+        }
+
         if (isAdmin)
         {
-            if (firstTime)
-            {
-                foreach (Activity a in ams.container.activities)
-                {
-                    InstantiateActivityButton(a.name, a);
-                }
-
-                firstTime = false;
-            }
-            
+            ams.SetCurrentPage(0);
+            ams.ChangePage();
             menus[1].SetActive(true);
             menus[0].SetActive(false);
+            menus[2].SetActive(false);
         }
         else
         {
-            if (firstTime)
-            {
-                foreach (Activity a in ams.container.activities)
-                {
-                    InstantiateActivityButton(a.name, a);
-                }
-
-                firstTime = false;
-            }
-
+            ams.SetCurrentPage(0);
+            ams.ChangePage();
             menus[2].SetActive(true);
             menus[0].SetActive(false);
+            menus[1].SetActive(false);
         }
     }
 
     public void AdminMenu(InputClickedEventData eventData)
     {
-
         if (isCreate)
         {
             CreateKeyboard(true);
@@ -239,6 +218,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             storedActs.SetActive(false);
             menus[0].SetActive(true);
             menus[1].SetActive(false);
+            menus[2].SetActive(false);
         }
 
         // Change page
@@ -269,6 +249,56 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
             ams.ChangePage();
             menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
+        }
+    }
+
+    public void UserMenu(InputClickedEventData eventData)
+    {
+        if (isActivity)
+        {
+            if (ams.GetSelectedObject() != null)
+            {
+                ams.GetSelectedObject().GetComponent<Renderer>().material = materials[0];
+            }
+
+            ams.SetSelectedObject(gazedAtObj);
+        }
+        else if (isReturn)
+        {
+            storedActs.SetActive(false);
+            menus[0].SetActive(true);
+            menus[1].SetActive(false);
+            menus[2].SetActive(false);
+        }
+
+        // Change page
+        else if (isPageRight)
+        {
+            if (ams.GetCurrentPage() < ams.GetPageAmount())
+            {
+                ams.SetCurrentPage(ams.GetCurrentPage() + 1);
+            }
+            else
+            {
+                ams.SetCurrentPage(ams.GetPageAmount());
+            }
+
+            ams.ChangePage();
+            menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
+        }
+        else if (isPageLeft)
+        {
+            if (ams.GetCurrentPage() > 0)
+            {
+                ams.SetCurrentPage(ams.GetCurrentPage() - 1);
+            }
+            else
+            {
+                ams.SetCurrentPage(0);
+            }
+
+            ams.ChangePage();
+            menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
     }
 

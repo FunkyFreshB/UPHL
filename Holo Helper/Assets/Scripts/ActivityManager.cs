@@ -8,8 +8,12 @@ public class ActivityManager : MonoBehaviour {
     private Activity foundAct;
     public GameObject buttonBase;
     public GameObject storedObj;
+    public GameObject[] menus = new GameObject[5];
+    public Material[] materials = new Material[2];
+    private Vector3[] activityPos = new Vector3[5];
     private GameObject newActivity;
     private GameObject storedAct;
+    private bool firstTime = true;
     
     private int noOfActivities;
     private int noOfPages;
@@ -22,11 +26,13 @@ public class ActivityManager : MonoBehaviour {
     /* General Functions */
 
     // Use this for initialization
-    void Start () {
-        // keep this object for every scene
-        DontDestroyOnLoad(this);
-
-        storedObj = GameObject.Find("Stored Activities");
+    void Start ()
+    {
+        activityPos[0] = new Vector3(0, 0.10415f, 0);
+        activityPos[1] = new Vector3(0, 0.0749f, 0);
+        activityPos[2] = new Vector3(0, 0.04565f, 0);
+        activityPos[3] = new Vector3(0, 0.0164f, 0);
+        activityPos[4] = new Vector3(0, -0.01285f, 0);
 
         container = null;
         container = ActivityContainer.Load(Path.Combine(Application.dataPath, "ActivityList.xml"));
@@ -108,7 +114,7 @@ public class ActivityManager : MonoBehaviour {
                 {
                     if (!hasPassedSO)
                     {
-                        storedObj.transform.GetChild(h).gameObject.transform.localPosition = storedObj.transform.GetChild(h).gameObject.GetComponent<ButtonBehaviour>().activityPos[currentButt % 5];
+                        storedObj.transform.GetChild(h).gameObject.transform.localPosition = activityPos[currentButt % 5];
 
                         if ((h - 2) >= (currentPage * 5) && (h - 2) <= (currentPage * 5 + 4))
                         {
@@ -117,7 +123,7 @@ public class ActivityManager : MonoBehaviour {
                     }
                     else
                     {
-                        storedObj.transform.GetChild(h).gameObject.transform.localPosition = storedObj.transform.GetChild(h).gameObject.GetComponent<ButtonBehaviour>().activityPos[currentButt % 5];
+                        storedObj.transform.GetChild(h).gameObject.transform.localPosition = activityPos[currentButt % 5];
 
                         if ((h - 3) >= (currentPage * 5) && (h - 3) <= (currentPage * 5 + 4))
                         {
@@ -133,16 +139,6 @@ public class ActivityManager : MonoBehaviour {
                 }
             }
         }
-        
-        /*
-        foreach (GameObject b in GameObject.FindGameObjectsWithTag("ActivityButton"))
-        {
-            if (b != selectedObj)
-            {
-                b.transform.localPosition = b.GetComponent<ButtonBehaviour>().activityPos[current % 5];
-                current++;
-            }
-        }*/
     }
 
     /** Create a button with an attached activity. If no activity exists, create new. Else, set button's name to that of activity. */
@@ -171,7 +167,7 @@ public class ActivityManager : MonoBehaviour {
         // increase noOfActivities and also noOfPages if enough activities
         if (container.activities.Count > noOfActivities)
         {
-            if (noOfActivities % newActivity.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
+            if (noOfActivities % 5 == 0 && noOfActivities != 0)
             {
                 noOfPages++;
                 UpdatePageAmount();
@@ -201,7 +197,7 @@ public class ActivityManager : MonoBehaviour {
 
             noOfActivities--;
 
-            if (noOfActivities % button.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
+            if (noOfActivities % 5 == 0 && noOfActivities != 0)
             {
                 noOfPages--;
                 UpdatePageAmount();
@@ -270,11 +266,28 @@ public class ActivityManager : MonoBehaviour {
         }
     }
 
+    /** Get firstTime to see if initialization has been completed. */
+    public bool GetFirstTime()
+    {
+        return firstTime;
+    }
+
+    /** Set firstTime to clarify that initialization is done. */
+    public void SetFirstTime(bool status)
+    {
+        firstTime = status;
+    }
+
     /** Edit the name of an activity. */
     public void SetName(string newName)
     {
         foundAct = container.activities.Find(x => x.name == selectedObj.name);
         foundAct.name = selectedObj.name = newName;
         selectedObj.GetComponentInChildren<TextMesh>().text = newName;
+    }
+
+    public Vector3[] GetActivityPos()
+    {
+        return activityPos;
     }
 }

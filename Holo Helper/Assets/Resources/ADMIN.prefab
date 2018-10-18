@@ -148,7 +148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1620556238207740
 GameObject:
   m_ObjectHideFlags: 1
@@ -1180,6 +1180,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  activityPos: []
+  connectedAct:
+    instructions: []
   gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
@@ -1212,6 +1215,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  activityPos: []
+  connectedAct:
+    instructions: []
   gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
@@ -1244,6 +1250,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  activityPos: []
+  connectedAct:
+    instructions: []
   gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
@@ -1276,6 +1285,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  activityPos: []
+  connectedAct:
+    instructions: []
   gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
@@ -1308,6 +1320,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  activityPos: []
+  connectedAct:
+    instructions: []
   gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0
@@ -1340,6 +1355,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   visibleActs: 5
+  activityPos: []
+  connectedAct:
+    instructions: []
   gazedAtObj: {fileID: 0}
   isAdmin: 1
   isActivity: 0

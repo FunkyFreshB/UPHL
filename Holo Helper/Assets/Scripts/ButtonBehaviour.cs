@@ -45,6 +45,16 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     {
         ams = actMan.GetComponent<ActivityManager>();
 
+       /* menus[0].SetActive(true);
+
+        for (int i = 1; i < menus.Length; i++)
+        {
+            if (menus[i] != null)
+            {
+                menus[i].SetActive(false);
+            }
+        }*/
+
         keyboard = Keyboard.Instance;
 
         activityPos = new Vector3[visibleActs];
@@ -73,6 +83,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                     InstantiateActivityButton(keyboardText, null);
                     keyboardText = "";
                     isKeyboard = false;
+                    menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
                 }
                 else
                 {
@@ -198,6 +209,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     public void AdminMenu(InputClickedEventData eventData)
     {
+
         if (isCreate)
         {
             CreateKeyboard(true);
@@ -220,6 +232,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         else if (isDelete)
         {
             ams.DeleteActivity(ams.GetSelectedObject());
+            menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
         else if (isReturn)
         {
@@ -241,6 +254,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             }
 
             ams.ChangePage();
+            menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
         else if (isPageLeft)
         {
@@ -254,6 +268,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             }
 
             ams.ChangePage();
+            menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
     }
 

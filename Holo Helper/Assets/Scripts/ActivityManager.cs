@@ -70,14 +70,11 @@ public class ActivityManager : MonoBehaviour {
     /** Decide which activities to display. */
     public void ChangePage()
     {
-        int currentButt = 0;
-
         for(int h = 0; h < storedObj.transform.childCount; h++)
         {
-            if(currentButt >= 2)
+            if(h >= 2)
             {
-                Debug.Log("currentPage: " + currentPage);
-                if ((currentButt - 2) < (currentPage * 5) || (currentButt - 2) > (currentPage * 5 + 4))
+                if ((h - 2) < (currentPage * 5) || (h - 2) > (currentPage * 5 + 4))
                 {
                     if (storedObj.transform.GetChild(h).gameObject != null)
                     {
@@ -92,8 +89,6 @@ public class ActivityManager : MonoBehaviour {
                     }
                 }
             }
-
-            currentButt++;
         }
     }
 
@@ -101,21 +96,42 @@ public class ActivityManager : MonoBehaviour {
     public void UpdateActivityPosition()
     {
         int currentButt = 0;
+        bool hasPassedSO = false;
 
         for (int h = 0; h < storedObj.transform.childCount; h++)
         {
-            if (currentButt >= 2)
+            if (h >= 2)
             {
                 //storedObj.transform.GetChild(h).gameObject.SetActive(true);
 
                 if (storedObj.transform.GetChild(h).gameObject != selectedObj)
                 {
-                    storedObj.transform.GetChild(h).gameObject.transform.localPosition = storedObj.transform.GetChild(h).gameObject.GetComponent<ButtonBehaviour>().activityPos[(currentButt - 2) % 5];
+                    if (!hasPassedSO)
+                    {
+                        storedObj.transform.GetChild(h).gameObject.transform.localPosition = storedObj.transform.GetChild(h).gameObject.GetComponent<ButtonBehaviour>().activityPos[currentButt % 5];
+
+                        if ((h - 2) >= (currentPage * 5) && (h - 2) <= (currentPage * 5 + 4))
+                        {
+                            storedObj.transform.GetChild(h).gameObject.SetActive(true);
+                        }
+                    }
+                    else
+                    {
+                        storedObj.transform.GetChild(h).gameObject.transform.localPosition = storedObj.transform.GetChild(h).gameObject.GetComponent<ButtonBehaviour>().activityPos[currentButt % 5];
+
+                        if ((h - 3) >= (currentPage * 5) && (h - 3) <= (currentPage * 5 + 4))
+                        {
+                            storedObj.transform.GetChild(h).gameObject.SetActive(true);
+                        }
+                    }
+
                     currentButt++;
                 }
+                else
+                {
+                    hasPassedSO = true;
+                }
             }
-
-            currentButt++;
         }
         
         /*
@@ -158,10 +174,11 @@ public class ActivityManager : MonoBehaviour {
             if (noOfActivities % newActivity.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
             {
                 noOfPages++;
-                currentPage = noOfPages;
                 UpdatePageAmount();
-                ChangePage();
             }
+
+            currentPage = noOfPages;
+            ChangePage();
 
             noOfActivities++;
 
@@ -187,13 +204,17 @@ public class ActivityManager : MonoBehaviour {
             if (noOfActivities % button.GetComponent<ButtonBehaviour>().visibleActs == 0 && noOfActivities != 0)
             {
                 noOfPages--;
-                currentPage = noOfPages;
                 UpdatePageAmount();
-                ChangePage();
+
+                if (currentPage >= noOfPages)
+                {
+                    currentPage = noOfPages;
+                    ChangePage();
+                }
             }
 
             UpdateActivityPosition();
-            
+
             return true;
         }
         else

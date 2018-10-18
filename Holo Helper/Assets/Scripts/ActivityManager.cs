@@ -20,6 +20,7 @@ public class ActivityManager : MonoBehaviour {
     public int currentPage = 0;
 
     private GameObject selectedObj = null;
+    private Instructions selectedInstruction = null;
     private Activity selectedAct;
 
     /* ------------------------------------ */
@@ -184,6 +185,13 @@ public class ActivityManager : MonoBehaviour {
         {
             return null;
         }
+    }
+    /** Create a button with an attached instruction. If no instruction exists, create new. Else, set button's name to that of instruction. */
+    public GameObject CreateInstruction(GameObject button)
+    {
+
+
+        return null;
     }
 
     /** Removes an activity and its button. */

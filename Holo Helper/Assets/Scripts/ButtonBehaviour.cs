@@ -27,6 +27,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     public bool isAdmin = false;
     public bool isActivity = false;
+    public bool isInstruction = false;
     public bool isEdit = false;
     public bool isCreate = false;
     public bool isDelete = false;
@@ -71,6 +72,14 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                     isKeyboard = false;
                     menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
                     menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
+                }
+
+                else if (isActivity && isEdit)
+                {
+                    actMan.GetComponent<ActivityManager>().SetName(keyboardText);
+                    keyboardText = "";
+                    menus[3].transform.GetChild(0).GetComponent<TextMesh>().text = ams.GetSelectedObject().name;
+                    isKeyboard = false;
                 }
                 else
                 {
@@ -127,15 +136,19 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
         // ---------------------------------------------
 
-        // 3: Activity Menu
+        // 3: Edit Menu
         else if (menus[3].activeSelf)
         {
-
+            ActivityEditMenu(eventData);
         }
 
         // ---------------------------------------------
 
-        // 4: Edit Menu
+        // 4: Activity Menu
+        else if (menus[3].activeSelf)
+        {
+
+        }
     }
 
     public void OnFocusEnter()
@@ -176,6 +189,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             menus[1].SetActive(true);
             menus[0].SetActive(false);
             menus[2].SetActive(false);
+            menus[3].SetActive(false);
         }
         else
         {
@@ -184,6 +198,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             menus[2].SetActive(true);
             menus[0].SetActive(false);
             menus[1].SetActive(false);
+            menus[3].SetActive(false);
         }
     }
 
@@ -204,8 +219,13 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         }
         else if (isEdit)
         {
-            CreateKeyboard(false);
-            //menus[3].SetActive(true);
+            //CreateKeyboard(false);
+            storedActs.SetActive(false);
+            menus[0].SetActive(false);
+            menus[1].SetActive(false);
+            menus[2].SetActive(false);
+            menus[3].SetActive(true);
+            menus[3].transform.GetChild(0).GetComponent<TextMesh>().text = ams.GetSelectedObject().name;
             //menus[1].SetActive(false);
         }
         else if (isDelete)
@@ -302,7 +322,38 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         }
     }
 
-    public void CreateKeyboard(bool iC)
+    public void ActivityEditMenu(InputClickedEventData eventData)
+    {
+        if (isCreate)
+        {
+            CreateKeyboard(true);
+        }
+
+        else if (isInstruction)
+        {
+            if (ams.GetSelectedObject() != null)
+            {
+                ams.GetSelectedObject().GetComponent<Renderer>().material = materials[0];
+            }
+
+
+        }
+
+        else if (isActivity && isEdit)
+        {
+            CreateKeyboard(false);
+        }
+
+        else if (isReturn)
+        {
+            storedActs.SetActive(false);
+            menus[1].SetActive(true);
+            menus[2].SetActive(false);
+            menus[3].SetActive(false);
+            
+        }
+    }
+        public void CreateKeyboard(bool iC)
     {
         isCreateKeyboard = iC;
         isKeyboard = true;

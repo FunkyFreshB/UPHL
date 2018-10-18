@@ -3,21 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 
-public class Move_Rotate_Scale : MonoBehaviour, IFocusable, IInputHandler, ISourceStateHandler {
+public class HoldToOpenMenu : MonoBehaviour, IFocusable, IInputHandler, ISourceStateHandler {
+
+    private bool isFocused;
+    private bool isHolding;
+
+
     public void OnFocusEnter() {
-        throw new System.NotImplementedException();
+        isFocused = true;
     }
 
     public void OnFocusExit() {
-        throw new System.NotImplementedException();
+        isFocused = false;
     }
 
     public void OnInputDown(InputEventData eventData) {
-        throw new System.NotImplementedException();
+        if(isFocused) {
+            isHolding = true;
+        }
     }
 
     public void OnInputUp(InputEventData eventData) {
-        throw new System.NotImplementedException();
+        if(isHolding) {
+            isHolding = false;
+        }
     }
 
     public void OnSourceDetected(SourceStateEventData eventData) {

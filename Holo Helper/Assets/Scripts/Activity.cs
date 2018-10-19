@@ -36,6 +36,16 @@ public class Activity{
        // Debug.Log("Activity" + name + " have been removed");
     }
 
+    public void setName(string newName)
+    {
+        this.name = newName;
+
+        foreach(Instructions i in instructions)
+        {
+            i.setInstructionName(i.instructionText, this.name);
+        }
+    }
+
     public void reInitializer()
     {
         foreach(Instructions i in instructions)
@@ -49,12 +59,17 @@ public class Activity{
         instructions.Add(new Instructions(description,this.name));
     }
 
-
-
-    //Hur gör vi detta? Behöver veta snarast för implementera resten.
-    public void RemoveInstruction()
+    public void RemoveInstruction(GameObject selectedInstruction)
     {
-         
+        Instructions temp = selectedInstruction.GetComponent<ButtonBehaviour>().connectedInstruction;
+
+        temp.removeIndicator();
+        instructions.Remove(temp);
+
+        if (temp == null)
+        {
+            // Debug.Log("Activity " + temp + " destroyed");
+        }
     }
 
     public void NextStep()
@@ -82,8 +97,6 @@ public class Activity{
         GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().
             StartSpeaking("Step " + currentStep + " " + instructions[currentStep].instructionText);
     }
-
-
 
     public void PrintIns()
     {

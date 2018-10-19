@@ -269,11 +269,17 @@ MonoBehaviour:
   actMan: {fileID: 1162515146}
   connectedAct:
     instructions: []
+  connectedInstruction:
+    indicator: {fileID: 0}
+    visible: 0
   isAdmin: 1
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isCreate: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
   isDelete: 0
   isReturn: 1
   isPageLeft: 0
@@ -529,6 +535,93 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1001 &151103424
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2005851290}
+    m_Modifications:
+    - target: {fileID: 4797681234774748, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.135
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797681234774748, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.045999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797681234774748, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797681234774748, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797681234774748, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797681234774748, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797681234774748, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797681234774748, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+        type: 2}
+      propertyPath: actMan
+      value: 
+      objectReference: {fileID: 1162515146}
+    - target: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+        type: 2}
+      propertyPath: storedActs
+      value: 
+      objectReference: {fileID: 2005851289}
+    - target: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+        type: 2}
+      propertyPath: menus.Array.data[0]
+      value: 
+      objectReference: {fileID: 862666574}
+    - target: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+        type: 2}
+      propertyPath: menus.Array.data[1]
+      value: 
+      objectReference: {fileID: 301826304}
+    - target: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+        type: 2}
+      propertyPath: pages.Array.data[1]
+      value: 
+      objectReference: {fileID: 1337192623}
+    - target: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+        type: 2}
+      propertyPath: pages.Array.data[0]
+      value: 
+      objectReference: {fileID: 1525332782}
+    - target: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+        type: 2}
+      propertyPath: isReturn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+        type: 2}
+      propertyPath: isPageRight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+        type: 2}
+      propertyPath: menus.Array.data[2]
+      value: 
+      objectReference: {fileID: 357496710}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &166716289
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,11 +939,17 @@ MonoBehaviour:
   actMan: {fileID: 1162515146}
   connectedAct:
     instructions: []
-  isAdmin: 1
+  connectedInstruction:
+    indicator: {fileID: 0}
+    visible: 0
+  isAdmin: 0
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isCreate: 1
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 1
+  isCreateInstruction: 0
   isDelete: 0
   isReturn: 0
   isPageLeft: 0
@@ -1093,14 +1192,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 454752450}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1677602507}
   - {fileID: 801693860}
-  m_Father: {fileID: 790941144}
-  m_RootOrder: 1
+  m_Father: {fileID: 1162515148}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &570381738
 Prefab:
@@ -1239,11 +1338,17 @@ MonoBehaviour:
   actMan: {fileID: 1162515146}
   connectedAct:
     instructions: []
+  connectedInstruction:
+    indicator: {fileID: 0}
+    visible: 0
   isAdmin: 0
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isCreate: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
   isDelete: 0
   isReturn: 1
   isPageLeft: 0
@@ -1621,11 +1726,17 @@ MonoBehaviour:
   actMan: {fileID: 1162515146}
   connectedAct:
     instructions: []
+  connectedInstruction:
+    indicator: {fileID: 0}
+    visible: 0
   isAdmin: 0
   isActivity: 0
   isInstruction: 0
-  isEdit: 1
-  isCreate: 0
+  isEdit: 0
+  isEditActivity: 0
+  isEditInstruction: 1
+  isCreateActivity: 0
+  isCreateInstruction: 0
   isDelete: 0
   isReturn: 0
   isPageLeft: 0
@@ -1723,7 +1834,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -1731,7 +1842,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.1
+      value: -0.171
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_SizeDelta.x
@@ -1855,7 +1966,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1162515148}
-  - {fileID: 454752451}
   - {fileID: 440230942}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1939,11 +2049,17 @@ MonoBehaviour:
   actMan: {fileID: 1162515146}
   connectedAct:
     instructions: []
+  connectedInstruction:
+    indicator: {fileID: 0}
+    visible: 0
   isAdmin: 0
   isActivity: 1
   isInstruction: 0
   isEdit: 1
-  isCreate: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
   isDelete: 0
   isReturn: 0
   isPageLeft: 0
@@ -2101,11 +2217,17 @@ MonoBehaviour:
   actMan: {fileID: 1162515146}
   connectedAct:
     instructions: []
+  connectedInstruction:
+    indicator: {fileID: 0}
+    visible: 0
   isAdmin: 0
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isCreate: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
   isDelete: 1
   isReturn: 0
   isPageLeft: 0
@@ -2318,11 +2440,17 @@ MonoBehaviour:
   actMan: {fileID: 1162515146}
   connectedAct:
     instructions: []
+  connectedInstruction:
+    indicator: {fileID: 0}
+    visible: 0
   isAdmin: 1
   isActivity: 0
   isInstruction: 0
   isEdit: 1
-  isCreate: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
   isDelete: 0
   isReturn: 0
   isPageLeft: 0
@@ -2505,6 +2633,7 @@ MonoBehaviour:
     activities: []
   buttonBase: {fileID: 1689008370354704, guid: 5335dcc025917e248b1ceeef9c58c46c, type: 2}
   storedObj: {fileID: 454752450}
+  storedObj2: {fileID: 2005851289}
   menus:
   - {fileID: 862666574}
   - {fileID: 301826304}
@@ -2515,6 +2644,14 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
   currentPage: 0
+  noOfInstruction: 0
+  noOfPagesInstruction: 0
+  currentPageInstruction: 0
+  selectedInstruction:
+    indicator: {fileID: 0}
+    visible: 0
+  selectedAct:
+    instructions: []
 --- !u!4 &1162515148
 Transform:
   m_ObjectHideFlags: 0
@@ -2529,6 +2666,8 @@ Transform:
   - {fileID: 301826305}
   - {fileID: 357496711}
   - {fileID: 1016069313}
+  - {fileID: 454752451}
+  - {fileID: 2005851290}
   m_Father: {fileID: 790941144}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2582,11 +2721,17 @@ MonoBehaviour:
   actMan: {fileID: 1162515146}
   connectedAct:
     instructions: []
+  connectedInstruction:
+    indicator: {fileID: 0}
+    visible: 0
   isAdmin: 0
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isCreate: 1
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 1
   isDelete: 0
   isReturn: 0
   isPageLeft: 0
@@ -2647,6 +2792,103 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1202757625}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1337192623 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1171226454358772, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1341867769}
+--- !u!4 &1337192624 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4384457249748310, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1341867769}
+--- !u!1001 &1341867769
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2005851290}
+    m_Modifications:
+    - target: {fileID: 4384457249748310, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.135
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384457249748310, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.045999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384457249748310, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384457249748310, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384457249748310, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384457249748310, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384457249748310, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384457249748310, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+        type: 2}
+      propertyPath: actMan
+      value: 
+      objectReference: {fileID: 1162515146}
+    - target: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+        type: 2}
+      propertyPath: storedActs
+      value: 
+      objectReference: {fileID: 2005851289}
+    - target: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+        type: 2}
+      propertyPath: menus.Array.data[0]
+      value: 
+      objectReference: {fileID: 862666574}
+    - target: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+        type: 2}
+      propertyPath: menus.Array.data[1]
+      value: 
+      objectReference: {fileID: 301826304}
+    - target: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+        type: 2}
+      propertyPath: pages.Array.data[0]
+      value: 
+      objectReference: {fileID: 1525332782}
+    - target: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+        type: 2}
+      propertyPath: pages.Array.data[1]
+      value: 
+      objectReference: {fileID: 1337192623}
+    - target: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+        type: 2}
+      propertyPath: isReturn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+        type: 2}
+      propertyPath: isPageLeft
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+        type: 2}
+      propertyPath: menus.Array.data[2]
+      value: 
+      objectReference: {fileID: 357496710}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1347245856
 GameObject:
   m_ObjectHideFlags: 0
@@ -2875,6 +3117,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &1525332782 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1364513999975560, guid: 2de61c214f143474eb833d9db2b8f20c,
+    type: 2}
+  m_PrefabInternal: {fileID: 151103424}
+--- !u!4 &1525332787 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4797681234774748, guid: 2de61c214f143474eb833d9db2b8f20c,
+    type: 2}
+  m_PrefabInternal: {fileID: 151103424}
 --- !u!1 &1541420859
 GameObject:
   m_ObjectHideFlags: 0
@@ -3155,11 +3407,17 @@ MonoBehaviour:
   actMan: {fileID: 1162515146}
   connectedAct:
     instructions: []
+  connectedInstruction:
+    indicator: {fileID: 0}
+    visible: 0
   isAdmin: 1
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isCreate: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
   isDelete: 0
   isReturn: 1
   isPageLeft: 0
@@ -3673,9 +3931,44 @@ Prefab:
       propertyPath: menus.Array.data[3]
       value: 
       objectReference: {fileID: 1016069312}
+    - target: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+        type: 2}
+      propertyPath: storedObj2
+      value: 
+      objectReference: {fileID: 2005851289}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5723296ccb8c5754d97c8d75568c576d, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2005851289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2005851290}
+  m_Layer: 0
+  m_Name: Stored Instructions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2005851290
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2005851289}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1525332787}
+  - {fileID: 1337192624}
+  m_Father: {fileID: 1162515148}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2007769284
 GameObject:
   m_ObjectHideFlags: 0
@@ -3726,11 +4019,17 @@ MonoBehaviour:
   actMan: {fileID: 1162515146}
   connectedAct:
     instructions: []
+  connectedInstruction:
+    indicator: {fileID: 0}
+    visible: 0
   isAdmin: 1
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isCreate: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
   isDelete: 1
   isReturn: 0
   isPageLeft: 0

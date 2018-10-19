@@ -49,17 +49,5 @@
       <name>4th One</name>
       <CurrentStep>0</CurrentStep>
     </Activity>
-    <Activity>
-      <Instructions>
-        <Instruction visible="true">
-          <instructionText>Standard instruction step 1</instructionText>
-        </Instruction>
-        <Instruction visible="true">
-          <instructionText>Standard instruction step 2</instructionText>
-        </Instruction>
-      </Instructions>
-      <name>5th One</name>
-      <CurrentStep>0</CurrentStep>
-    </Activity>
   </Activities>
 </AcitivitlistsAndInstructions>

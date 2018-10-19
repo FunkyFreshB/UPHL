@@ -6,12 +6,15 @@ public class ActivityManager : MonoBehaviour {
 
     public ActivityContainer container;
     private Activity foundAct;
+    private Instructions foundInstruction;
     public GameObject buttonBase;
     public GameObject storedObj;
+    public GameObject storedObj2;
     public GameObject[] menus = new GameObject[5];
     public Material[] materials = new Material[2];
     private Vector3[] activityPos = new Vector3[5];
     private GameObject newActivity;
+    private GameObject newInstruction;
     private GameObject storedAct;
     private bool firstTime = true;
     
@@ -19,9 +22,13 @@ public class ActivityManager : MonoBehaviour {
     private int noOfPages;
     public int currentPage = 0;
 
+    public int noOfInstruction;
+    public int noOfPagesInstruction;
+    public int currentPageInstruction = 0;
+
     private GameObject selectedObj = null;
-    private Instructions selectedInstruction = null;
-    private Activity selectedAct;
+    public Instructions selectedInstruction;
+    public Activity selectedAct;
 
     /* ------------------------------------ */
     /* General Functions */
@@ -186,12 +193,50 @@ public class ActivityManager : MonoBehaviour {
             return null;
         }
     }
+
     /** Create a button with an attached instruction. If no instruction exists, create new. Else, set button's name to that of instruction. */
-    public GameObject CreateInstruction(GameObject button)
+    public GameObject CreateInstruction(string text, Instructions instruct)
     {
+        if (instruct != null)
+        {
+            foundInstruction = instruct;
+            text = instruct.instructionText;
+        }
+        else
+        {
+           selectedAct.instructions.Add(new Instructions(text,selectedAct.name));                                       //
+           foundInstruction = selectedAct.instructions.Find(x => x.instructionText == text);     //
+        }
 
+        // setup buttons for each activity
+        newInstruction = Instantiate(buttonBase);
+        newInstruction.GetComponent<ButtonBehaviour>().connectedInstruction = foundInstruction;    //
+        newInstruction.name = text;
+        newInstruction.GetComponent<ButtonBehaviour>().actMan = this.gameObject;
+        newInstruction.GetComponentInChildren<TextMesh>().text = text;
+        newInstruction.transform.position = this.transform.position;
+        newInstruction.transform.rotation = this.transform.rotation;
 
-        return null;
+        // increase noOfActivities and also noOfPages if enough activities
+        if (selectedAct.instructions.Count > noOfInstruction)
+        {
+            if (noOfInstruction % 5 == 0 && noOfInstruction != 0)
+            {
+                noOfPagesInstruction++;
+                UpdatePageAmount();
+            }
+
+            currentPageInstruction = noOfPagesInstruction;
+            ChangePage();
+
+            noOfInstruction++;
+
+            return newInstruction;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     /** Removes an activity and its button. */
@@ -227,6 +272,56 @@ public class ActivityManager : MonoBehaviour {
             return false;
         }
     }
+
+    /** Removes an instruction and its button. */
+    public bool DeleteInstruction(GameObject button)
+    {
+        selectedAct.RemoveInstruction(button);
+
+        if (selectedAct.instructions.Count < noOfInstruction)
+        {
+            Object.Destroy(button);
+
+            noOfInstruction--;
+
+            if (noOfInstruction % 5 == 0 && noOfInstruction != 0)
+            {
+                noOfPagesInstruction--;
+                UpdatePageAmount();
+
+                if (currentPage >= noOfPages)
+                {
+                    currentPage = noOfPages;
+                    ChangePage();
+                }
+            }
+
+           // UpdateActivityPosition();
+
+            return true;
+        }
+        else
+        {
+            Debug.Log("ERR: Nothing removed");
+            return false;
+        }
+    }
+
+    /** Remove all instruction button but not the instruction itself */
+    public void DeleteInstructionButton()
+    {
+        for (int h = 2; h < storedObj2.transform.childCount; h++)
+        {
+            Object.Destroy(storedObj2.transform.GetChild(h).gameObject);
+        }
+
+
+    noOfInstruction = 0;
+    noOfPagesInstruction = 0;
+    currentPageInstruction = 0;
+
+}
+
 
     /** Return amount of activities we have. */
     public int GetActivityAmount()
@@ -289,9 +384,19 @@ public class ActivityManager : MonoBehaviour {
     /** Edit the name of an activity. */
     public void SetName(string newName)
     {
-        foundAct = container.activities.Find(x => x.name == selectedObj.name);
+        foundAct = container.activities.Find(x => x.name == selectedAct.name);
         foundAct.name = selectedObj.name = newName;
         selectedObj.GetComponentInChildren<TextMesh>().text = newName;
+        foundAct.setName(newName);
+        selectedAct = container.activities.Find(x => x.name == newName);
+    }
+
+    /** Edit A Instruction. */
+    public void SetNameInstruction(string newText)
+    {
+        selectedInstruction.setInstructionName(newText, selectedAct.name);
+        selectedObj.name = selectedInstruction.instructionText;
+        selectedObj.GetComponentInChildren<TextMesh>().text = newText;
     }
 
     public Vector3[] GetActivityPos()

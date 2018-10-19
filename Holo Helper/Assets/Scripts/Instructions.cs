@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using HoloToolkit.Unity.SpatialMapping;
-using HoloToolkit.Unity;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -39,7 +38,6 @@ public class Instructions
         //cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
         cube.AddComponent<IndicatorBehaviour>().instruction = this;
         indicator = cube;
-        indicator.transform.SetParent(GameObject.Find("MenuPos").transform);
         indicator.SetActive(false);
         
     }
@@ -47,6 +45,13 @@ public class Instructions
     public void removeIndicator()
     {
         Object.Destroy(indicator);
+    }
+
+    public void setInstructionName(string text, string acitivity)
+    {
+        instructionText = text;
+        indicator.name = acitivity + instructionText;
+        
     }
 
     public void ChangeVisibility()
@@ -66,7 +71,7 @@ public class Instructions
 
     ~Instructions()
     {
-        Debug.Log("The instruction \"" + instructionText + "\" have been destroyed");
+       // Debug.Log("The instruction \"" + instructionText + "\" have been destroyed");
     }
 
 }

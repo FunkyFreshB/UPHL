@@ -81,7 +81,23 @@ public class ActivityManager : MonoBehaviour {
         }
     }
 
-    /** Decide which activities to display. */
+    /** Show the arrow keys if we have more than 1 page. */
+    public void UpdatePageAmountInstruction()
+    {
+        // display arrow keys if we have more than 1 page (more than 5 activities)
+        if (noOfPagesInstruction > 0)
+        {
+            storedObj2.transform.GetChild(0).gameObject.SetActive(true);
+            storedObj2.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            storedObj2.transform.GetChild(0).gameObject.SetActive(false);
+            storedObj2.transform.GetChild(1).gameObject.SetActive(false);
+        }
+    }
+
+    /** Decide which activities to display. Activities */
     public void ChangePage()
     {
         for(int h = 0; h < storedObj.transform.childCount; h++)
@@ -100,6 +116,31 @@ public class ActivityManager : MonoBehaviour {
                     if (storedObj.transform.GetChild(h).gameObject != null)
                     {
                         storedObj.transform.GetChild(h).gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
+    }
+
+    /** Decide which activities to display. Instructions */
+    public void ChangePageInstruction()
+    {
+        for (int h = 0; h < storedObj2.transform.childCount; h++)
+        {
+            if (h >= 2)
+            {
+                if ((h - 2) < (currentPageInstruction * 5) || (h - 2) > (currentPageInstruction * 5 + 4))
+                {
+                    if (storedObj2.transform.GetChild(h).gameObject != null)
+                    {
+                        storedObj2.transform.GetChild(h).gameObject.SetActive(false);
+                    }
+                }
+                else
+                {
+                    if (storedObj2.transform.GetChild(h).gameObject != null)
+                    {
+                        storedObj2.transform.GetChild(h).gameObject.SetActive(true);
                     }
                 }
             }
@@ -136,6 +177,49 @@ public class ActivityManager : MonoBehaviour {
                         if ((h - 3) >= (currentPage * 5) && (h - 3) <= (currentPage * 5 + 4))
                         {
                             storedObj.transform.GetChild(h).gameObject.SetActive(true);
+                        }
+                    }
+
+                    currentButt++;
+                }
+                else
+                {
+                    hasPassedSO = true;
+                }
+            }
+        }
+    }
+
+    /** Update the position of all Instruction */
+    public void UpdateActivityPositionInstruction()
+    {
+        int currentButt = 0;
+        bool hasPassedSO = false;
+
+        for (int h = 0; h < storedObj2.transform.childCount; h++)
+        {
+            if (h >= 2)
+            {
+                //storedObj.transform.GetChild(h).gameObject.SetActive(true);
+
+                if (storedObj2.transform.GetChild(h).gameObject != selectedObj)
+                {
+                    if (!hasPassedSO)
+                    {
+                        storedObj2.transform.GetChild(h).gameObject.transform.localPosition = activityPos[currentButt % 5];
+
+                        if ((h - 2) >= (currentPageInstruction * 5) && (h - 2) <= (currentPageInstruction * 5 + 4))
+                        {
+                            storedObj2.transform.GetChild(h).gameObject.SetActive(true);
+                        }
+                    }
+                    else
+                    {
+                        storedObj2.transform.GetChild(h).gameObject.transform.localPosition = activityPos[currentButt % 5];
+
+                        if ((h - 3) >= (currentPageInstruction * 5) && (h - 3) <= (currentPageInstruction * 5 + 4))
+                        {
+                            storedObj2.transform.GetChild(h).gameObject.SetActive(true);
                         }
                     }
 
@@ -223,11 +307,11 @@ public class ActivityManager : MonoBehaviour {
             if (noOfInstruction % 5 == 0 && noOfInstruction != 0)
             {
                 noOfPagesInstruction++;
-                UpdatePageAmount();
+                UpdatePageAmountInstruction();
             }
 
             currentPageInstruction = noOfPagesInstruction;
-            ChangePage();
+            ChangePageInstruction();
 
             noOfInstruction++;
 
@@ -287,16 +371,16 @@ public class ActivityManager : MonoBehaviour {
             if (noOfInstruction % 5 == 0 && noOfInstruction != 0)
             {
                 noOfPagesInstruction--;
-                UpdatePageAmount();
+                UpdatePageAmountInstruction();
 
-                if (currentPage >= noOfPages)
+                if (currentPageInstruction >= noOfPagesInstruction)
                 {
-                    currentPage = noOfPages;
-                    ChangePage();
+                    currentPageInstruction = noOfPagesInstruction;
+                    ChangePageInstruction();
                 }
             }
 
-           // UpdateActivityPosition();
+           UpdateActivityPositionInstruction();
 
             return true;
         }
@@ -321,7 +405,6 @@ public class ActivityManager : MonoBehaviour {
     currentPageInstruction = 0;
 
 }
-
 
     /** Return amount of activities we have. */
     public int GetActivityAmount()

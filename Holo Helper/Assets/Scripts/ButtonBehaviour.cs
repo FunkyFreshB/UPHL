@@ -86,6 +86,14 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                     InstantiateActivityButton(keyboardText, null);
                 }
 
+                else if (isCreateInstruction){
+                    InstantiateInstructionButton(keyboardText, null);
+                    keyboardText = "";
+                    isKeyboard = false;
+                    menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPageInstruction + 1) + " / " + (ams.noOfPagesInstruction + 1);
+                    //menus[2].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPageInstruction + 1) + " / " + (ams.noOfPagesInstruction + 1);
+                }
+
                 else if(isEditInstruction)
                 {
                     ams.SetNameInstruction(keyboardText);
@@ -175,8 +183,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         else if (menus[3].activeSelf)
         {
             ActivityEditMenu(eventData);
-            storedActs.SetActive(false);
-            storedInstruction.SetActive(true);
+            
         }
 
         // ---------------------------------------------
@@ -270,6 +277,9 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             {
                 InstantiateInstructionButton(i.instructionText, i);
             }
+            ams.UpdatePageAmountInstruction();
+            ams.currentPageInstruction = 0;
+            //ams.ChangePageInstruction();
 
             //menus[1].SetActive(false);
         }
@@ -394,6 +404,12 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
            
         }
 
+        else if (isDelete)
+        {
+            ams.DeleteInstruction(ams.GetSelectedObject());
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPage + 1) + " / " + (ams.noOfPagesInstruction + 1);
+        }
+
         else if(isActivity && isEdit)
         {
             CreateKeyboard(false);
@@ -407,7 +423,38 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             menus[2].SetActive(false);
             menus[3].SetActive(false);
             ams.DeleteInstructionButton();
+            ams.currentPageInstruction = 0;
+            ams.noOfPagesInstruction = 0;
 
+        }
+
+        else if (isPageRight)
+        {
+            if (ams.currentPageInstruction < ams.noOfPagesInstruction)
+            {
+                ams.currentPageInstruction = ams.currentPageInstruction + 1;
+            }
+            else
+            {
+                ams.currentPageInstruction = ams.noOfPagesInstruction;
+            }
+
+            ams.ChangePageInstruction();
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPageInstruction + 1) + " / " + (ams.noOfPagesInstruction + 1);
+        }
+        else if (isPageLeft)
+        {
+            if (ams.currentPageInstruction > 0)
+            {
+                ams.currentPageInstruction = ams.currentPageInstruction - 1;
+            }
+            else
+            {
+                ams.currentPageInstruction = 0;
+            }
+
+            ams.ChangePageInstruction();
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPageInstruction + 1) + " / " + (ams.noOfPagesInstruction + 1);
         }
     }
 

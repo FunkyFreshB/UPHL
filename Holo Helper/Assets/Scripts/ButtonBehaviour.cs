@@ -9,25 +9,25 @@ using System.IO;
 public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     // Other objects
-    public GameObject actMan;
-    private GameObject storedActs;
-    private GameObject storedInstruction;
-    private GameObject[] menus = new GameObject[5];
-    private Material[] materials = new Material[2];
-    private ActivityManager ams;
+    public GameObject actMan;                       // activity manager gameObject
+    private GameObject storedActs;                  // Stored Activities gameObject
+    private GameObject storedInstruction;           // Stored Instructions gameObject
+    private GameObject[] menus = new GameObject[5]; // array containing menus
+    private Material[] materials = new Material[2]; // array containing materials
+    private ActivityManager ams;                    // script of activity manager
 
     // Page info
-    private int visibleActs = 5;
-    private Vector3[] activityPos;
-    private int currentPage = 0;
-    private int activityID = -1;
-    private int pageID = -1;
+    private int visibleActs = 5;                    // number of items per page (basically locked to 5)
+    private Vector3[] activityPos;                  // array of button positions
 
-    private GameObject obj;
-    public Activity connectedAct;
+    private GameObject obj;                         // used when creating buttons
+    private GameObject gazedAtObj;                  // currently gazed at object
+
     public Instructions connectedInstruction;
-    private GameObject gazedAtObj;      // currently gazed at object
+    public Activity connectedAct;
 
+    // bools that set this button's status
+    // determines which actions it can perform depending on current menu
     public bool isAdmin = false;
     public bool isActivity = false;
     public bool isInstruction = false;
@@ -41,10 +41,14 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     public bool isPageLeft = false;
     public bool isPageRight = false;
 
-    bool isCreateKeyboard = false;
-    bool isKeyboard = false;
-    Keyboard keyboard;
-    string keyboardText = "";
+    bool isCreateKeyboard = false;                  // if isCreate is active
+    bool isKeyboard = false;                        // determines if keyboard is active
+    Keyboard keyboard;                              // the keyboard
+    string keyboardText = "";                       // the text of the keyboard
+
+    /* ------------------------------------ */
+    /* General Functions */
+    /* ------------------------------------ */
 
     // Use this for initialization
     void Start ()
@@ -53,8 +57,8 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
         menus = ams.menus;
         materials = ams.materials;
-        storedActs = ams.storedObj;
-        storedInstruction = ams.storedObj2;
+        storedActs = ams.storedAct;
+        storedInstruction = ams.storedIns;
         activityPos = ams.GetActivityPos();
 
         keyboard = Keyboard.Instance;
@@ -90,7 +94,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                     InstantiateInstructionButton(keyboardText, null);
                     keyboardText = "";
                     isKeyboard = false;
-                    menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPageInstruction + 1) + " / " + (ams.noOfPagesInstruction + 1);
+                    menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
                     //menus[2].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPageInstruction + 1) + " / " + (ams.noOfPagesInstruction + 1);
                 }
 
@@ -99,19 +103,19 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                     ams.SetNameInstruction(keyboardText);
                     keyboardText = "";
                     isKeyboard = false;
-                    ams.selectedInstruction.ChangeVisibility();
+                    ams.GetSelectedInstruction().ChangeVisibility();
                 }
 
                 else if (isActivity && isEdit)
                 {
-                    actMan.GetComponent<ActivityManager>().SetName(keyboardText);
+                    actMan.GetComponent<ActivityManager>().SetNameActivity(keyboardText);
                     keyboardText = "";
                     menus[3].transform.GetChild(0).GetComponent<TextMesh>().text = ams.GetSelectedObject().name;
                     isKeyboard = false;
                 }
                 else
                 {
-                    actMan.GetComponent<ActivityManager>().SetName(keyboardText);
+                    actMan.GetComponent<ActivityManager>().SetNameActivity(keyboardText);
                     keyboardText = "";
                     isKeyboard = false;
                 }
@@ -121,35 +125,9 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         }
     }
 
-    /** Create a new button with the correct initialization. */
-    public void InstantiateActivityButton(string name, Activity act)
-    {
-        obj = ams.CreateActivity(name, act);
-        obj.GetComponent<ButtonBehaviour>().storedActs = storedActs;
-        obj.GetComponent<ButtonBehaviour>().menus = menus;
-        obj.GetComponent<ButtonBehaviour>().isActivity = true;
-        obj.transform.localScale = new Vector3(0.23f, 0.0234f, 0.02f);
-        obj.transform.GetChild(0).localScale = new Vector3(0.07f, 0.7f, 1);
-        obj.transform.SetParent(storedActs.transform);
-
-        // position of menu based on amount of activities
-        obj.transform.localPosition = activityPos[(ams.GetActivityAmount() - 1) % visibleActs];
-    }
-
-    /** Create a new button with the correct initialization. */
-    public void InstantiateInstructionButton(string text, Instructions instruct)
-    {
-        obj = ams.CreateInstruction(text, instruct);
-        obj.GetComponent<ButtonBehaviour>().storedInstruction = storedInstruction;
-        obj.GetComponent<ButtonBehaviour>().menus = menus;
-        obj.GetComponent<ButtonBehaviour>().isInstruction = true;
-        obj.transform.localScale = new Vector3(0.23f, 0.0234f, 0.02f);
-        obj.transform.GetChild(0).localScale = new Vector3(0.07f, 0.7f, 1);
-        obj.transform.SetParent(storedInstruction.transform);
-
-        // position of menu based on amount of activities
-        obj.transform.localPosition = activityPos[(ams.noOfInstruction - 1) % visibleActs];
-    }
+    /* ------------------------------------ */
+    /* Hololens Functions */
+    /* ------------------------------------ */
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
@@ -213,6 +191,10 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             this.gameObject.GetComponent<Renderer>().material = materials[0];
         }
     }
+    
+    /* ------------------------------------ */
+    /* Menu Functions */
+    /* ------------------------------------ */
 
     public void MainMenu(InputClickedEventData eventData)
     {
@@ -229,7 +211,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         if (isAdmin)
         {
             ams.SetCurrentPage(0);
-            ams.ChangePage();
+            ams.ChangePage(storedActs);
             menus[1].SetActive(true);
             menus[0].SetActive(false);
             menus[2].SetActive(false);
@@ -238,7 +220,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         else
         {
             ams.SetCurrentPage(0);
-            ams.ChangePage();
+            ams.ChangePage(storedActs);
             menus[2].SetActive(true);
             menus[0].SetActive(false);
             menus[1].SetActive(false);
@@ -270,15 +252,15 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             menus[1].SetActive(false);
             menus[2].SetActive(false);
             menus[3].SetActive(true);
-            ams.selectedAct = ams.container.activities.Find(x => x.name == ams.GetSelectedObject().name); //
+            ams.SetSelectedActivity(ams.container.activities.Find(x => x.name == ams.GetSelectedObject().name)); //
             menus[3].transform.GetChild(0).GetComponent<TextMesh>().text = ams.GetSelectedObject().name;
 
-            foreach (Instructions i in ams.selectedAct.instructions)
+            foreach (Instructions i in ams.GetSelectedActivity().instructions)
             {
                 InstantiateInstructionButton(i.instructionText, i);
             }
-            ams.UpdatePageAmountInstruction();
-            ams.currentPageInstruction = 0;
+            ams.UpdatePageAmount(storedInstruction);
+            ams.SetCurrentPage(0);
             //ams.ChangePageInstruction();
 
             //menus[1].SetActive(false);
@@ -294,7 +276,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             menus[0].SetActive(true);
             menus[1].SetActive(false);
             menus[2].SetActive(false);
-            ams.container.Save(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
+            ams.container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
         }
 
         // Change page
@@ -309,7 +291,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                 ams.SetCurrentPage(ams.GetPageAmount());
             }
 
-            ams.ChangePage();
+            ams.ChangePage(storedActs);
             menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
         else if (isPageLeft)
@@ -323,7 +305,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                 ams.SetCurrentPage(0);
             }
 
-            ams.ChangePage();
+            ams.ChangePage(storedActs);
             menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
     }
@@ -359,7 +341,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                 ams.SetCurrentPage(ams.GetPageAmount());
             }
 
-            ams.ChangePage();
+            ams.ChangePage(storedActs);
             menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
         else if (isPageLeft)
@@ -373,7 +355,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                 ams.SetCurrentPage(0);
             }
 
-            ams.ChangePage();
+            ams.ChangePage(storedActs);
             menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
     }
@@ -397,17 +379,16 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
         else if (isEditInstruction)
         {
-            ams.selectedInstruction = ams.selectedAct.instructions.Find(x => x.instructionText == ams.GetSelectedObject().name);
+            ams.SetSelectedInstruction(ams.GetSelectedActivity().instructions.Find(x => x.instructionText == ams.GetSelectedObject().name));
             CreateKeyboardWithText(false, ams.GetSelectedObject().name);
-            ams.selectedInstruction.ChangeVisibility();
+            ams.GetSelectedInstruction().ChangeVisibility();
             ams.GetSelectedObject().GetComponent<Renderer>().material = materials[0];
-           
         }
 
         else if (isDelete)
         {
             ams.DeleteInstruction(ams.GetSelectedObject());
-            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPage + 1) + " / " + (ams.noOfPagesInstruction + 1);
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
 
         else if(isActivity && isEdit)
@@ -423,40 +404,76 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             menus[2].SetActive(false);
             menus[3].SetActive(false);
             ams.DeleteInstructionButton();
-            ams.currentPageInstruction = 0;
-            ams.noOfPagesInstruction = 0;
-
+            ams.SetCurrentPage(0);
         }
 
         else if (isPageRight)
         {
-            if (ams.currentPageInstruction < ams.noOfPagesInstruction)
+            if (ams.GetCurrentPage() < ams.GetPageAmount())
             {
-                ams.currentPageInstruction = ams.currentPageInstruction + 1;
+                ams.SetCurrentPage(ams.GetCurrentPage() + 1);
             }
             else
             {
-                ams.currentPageInstruction = ams.noOfPagesInstruction;
+                ams.SetCurrentPage(ams.GetPageAmount());
             }
 
-            ams.ChangePageInstruction();
-            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPageInstruction + 1) + " / " + (ams.noOfPagesInstruction + 1);
+            ams.ChangePage(storedInstruction);
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
         else if (isPageLeft)
         {
-            if (ams.currentPageInstruction > 0)
+            if (ams.GetPageAmount() > 0)
             {
-                ams.currentPageInstruction = ams.currentPageInstruction - 1;
+                ams.SetCurrentPage(ams.GetCurrentPage() - 1);
             }
             else
             {
-                ams.currentPageInstruction = 0;
+                ams.SetCurrentPage(0);
             }
 
-            ams.ChangePageInstruction();
-            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPageInstruction + 1) + " / " + (ams.noOfPagesInstruction + 1);
+            ams.ChangePage(storedInstruction);
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
     }
+
+    /* ------------------------------------ */
+    /* Create Functions */
+    /* ------------------------------------ */
+
+    /** Create a new button with the correct initialization. */
+    public void InstantiateActivityButton(string name, Activity act)
+    {
+        obj = ams.CreateActivity(name, act);
+        obj.GetComponent<ButtonBehaviour>().storedActs = storedActs;
+        obj.GetComponent<ButtonBehaviour>().menus = menus;
+        obj.GetComponent<ButtonBehaviour>().isActivity = true;
+        obj.transform.localScale = new Vector3(0.23f, 0.0234f, 0.02f);
+        obj.transform.GetChild(0).localScale = new Vector3(0.07f, 0.7f, 1);
+        obj.transform.SetParent(storedActs.transform);
+
+        // position of menu based on amount of activities
+        obj.transform.localPosition = activityPos[(ams.GetActivityAmount() - 1) % visibleActs];
+    }
+
+    /** Create a new button with the correct initialization. */
+    public void InstantiateInstructionButton(string text, Instructions instruct)
+    {
+        obj = ams.CreateInstruction(text, instruct);
+        obj.GetComponent<ButtonBehaviour>().storedInstruction = storedInstruction;
+        obj.GetComponent<ButtonBehaviour>().menus = menus;
+        obj.GetComponent<ButtonBehaviour>().isInstruction = true;
+        obj.transform.localScale = new Vector3(0.23f, 0.0234f, 0.02f);
+        obj.transform.GetChild(0).localScale = new Vector3(0.07f, 0.7f, 1);
+        obj.transform.SetParent(storedInstruction.transform);
+
+        // position of menu based on amount of activities
+        obj.transform.localPosition = activityPos[(ams.GetInstructionAmount() - 1) % visibleActs];
+    }
+
+    /* ------------------------------------ */
+    /* Keyboard Functions */
+    /* ------------------------------------ */
 
     public void CreateKeyboard(bool iC)
     {
@@ -465,7 +482,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         keyboard.PresentKeyboard(keyboardText, Keyboard.LayoutType.Alpha);
     }
 
-    public void CreateKeyboardWithText(bool iC,string text)
+    public void CreateKeyboardWithText(bool iC, string text)
     {
         isCreateKeyboard = iC;
         isKeyboard = true;

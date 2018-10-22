@@ -4,34 +4,34 @@ using System.IO;
 // kan nog kallas MenuManager istället
 public class ActivityManager : MonoBehaviour {
 
-    public ActivityContainer container;
-    private Activity foundAct;
-    private Instructions foundInstruction;
-    public GameObject buttonBase;
-    public GameObject storedObj;
-    public GameObject storedObj2;
-    public GameObject[] menus = new GameObject[5];
-    public Material[] materials = new Material[2];
-    private Vector3[] activityPos = new Vector3[5];
-    private GameObject newActivity;
-    private GameObject newInstruction;
-    private GameObject storedAct;
-    private bool firstTime = true;
-    
-    private int noOfActivities;
-    private int noOfPages;
-    public int currentPage = 0;
+    private bool firstTime = true;                  // checks if first time setup has been done
 
-    public int noOfInstruction;
-    public int noOfPagesInstruction;
-    public int currentPageInstruction = 0;
+    private GameObject selectedObj;                 // button we have selected by tapping on it
+    private Activity selectedAct;                   // selectedObj's attached activity
+    private Instructions selectedInstruction;       // selectedObj's attached instruction
 
-    private GameObject selectedObj = null;
-    public Instructions selectedInstruction;
-    public Activity selectedAct;
+    public ActivityContainer container;             // container of activities
+    public GameObject buttonBase;                   // prefab for buttons
+    public GameObject storedAct;                    // Stored Activities gameObject
+    public GameObject storedIns;                    // Stored Instructions gameObject
+
+    public GameObject[] menus = new GameObject[5];  // array containing each menu gameObject
+    public Material[] materials = new Material[2];  // array containing each material used for focusing on buttons
+    private Vector3[] activityPos = new Vector3[5]; // array containing positions for placing buttons
+
+    private int noOfActivities;                     // controls the number of activities
+    private int noOfInstructions;                   // controls the number of instructions
+    private int noOfPages;                          // controls the number of pages
+    private int currentPage = 0;                    // checks which page we're on
+
+    private Activity foundAct;                      // activity found on a gameObject
+    private GameObject newActivity;                 // used when creating an activity
+    private Instructions foundInstruction;          // instruction found on a gameobject
+    private GameObject newInstruction;              // used when creating an instruction
 
     /* ------------------------------------ */
     /* General Functions */
+    /* ------------------------------------ */
 
     // Use this for initialization
     void Start ()
@@ -43,7 +43,7 @@ public class ActivityManager : MonoBehaviour {
         activityPos[4] = new Vector3(0, -0.01285f, 0);
 
         container = null;
-        container = ActivityContainer.Load(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
+        container = ActivityContainer.Load(Path.Combine(Application.dataPath, "ActivityList.xml"));
 
         if(container == null)
         {
@@ -55,7 +55,7 @@ public class ActivityManager : MonoBehaviour {
             a.reInitializer();
         }
 
-        UpdatePageAmount();
+        UpdatePageAmount(storedAct);
     }
 	
 	// Update is called once per frame
@@ -64,209 +64,49 @@ public class ActivityManager : MonoBehaviour {
 
     /* ------------------------------------ */
     /* ActivityManager Functions */
-
-    /** Show the arrow keys if we have more than 1 page. */
-    public void UpdatePageAmount()
-    {
-        // display arrow keys if we have more than 1 page (more than 5 activities)
-        if (noOfPages > 0)
-        {
-            storedObj.transform.GetChild(0).gameObject.SetActive(true);
-            storedObj.transform.GetChild(1).gameObject.SetActive(true);
-        }
-        else
-        {
-            storedObj.transform.GetChild(0).gameObject.SetActive(false);
-            storedObj.transform.GetChild(1).gameObject.SetActive(false);
-        }
-    }
-
-    /** Show the arrow keys if we have more than 1 page. */
-    public void UpdatePageAmountInstruction()
-    {
-        // display arrow keys if we have more than 1 page (more than 5 activities)
-        if (noOfPagesInstruction > 0)
-        {
-            storedObj2.transform.GetChild(0).gameObject.SetActive(true);
-            storedObj2.transform.GetChild(1).gameObject.SetActive(true);
-        }
-        else
-        {
-            storedObj2.transform.GetChild(0).gameObject.SetActive(false);
-            storedObj2.transform.GetChild(1).gameObject.SetActive(false);
-        }
-    }
-
-    /** Decide which activities to display. Activities */
-    public void ChangePage()
-    {
-        for(int h = 0; h < storedObj.transform.childCount; h++)
-        {
-            if(h >= 2)
-            {
-                if ((h - 2) < (currentPage * 5) || (h - 2) > (currentPage * 5 + 4))
-                {
-                    if (storedObj.transform.GetChild(h).gameObject != null)
-                    {
-                        storedObj.transform.GetChild(h).gameObject.SetActive(false);
-                    }
-                }
-                else
-                {
-                    if (storedObj.transform.GetChild(h).gameObject != null)
-                    {
-                        storedObj.transform.GetChild(h).gameObject.SetActive(true);
-                    }
-                }
-            }
-        }
-    }
-
-    /** Decide which activities to display. Instructions */
-    public void ChangePageInstruction()
-    {
-        for (int h = 0; h < storedObj2.transform.childCount; h++)
-        {
-            if (h >= 2)
-            {
-                if ((h - 2) < (currentPageInstruction * 5) || (h - 2) > (currentPageInstruction * 5 + 4))
-                {
-                    if (storedObj2.transform.GetChild(h).gameObject != null)
-                    {
-                        storedObj2.transform.GetChild(h).gameObject.SetActive(false);
-                    }
-                }
-                else
-                {
-                    if (storedObj2.transform.GetChild(h).gameObject != null)
-                    {
-                        storedObj2.transform.GetChild(h).gameObject.SetActive(true);
-                    }
-                }
-            }
-        }
-    }
-
-    /** Update the position of all activities */
-    public void UpdateActivityPosition()
-    {
-        int currentButt = 0;
-        bool hasPassedSO = false;
-
-        for (int h = 0; h < storedObj.transform.childCount; h++)
-        {
-            if (h >= 2)
-            {
-                //storedObj.transform.GetChild(h).gameObject.SetActive(true);
-
-                if (storedObj.transform.GetChild(h).gameObject != selectedObj)
-                {
-                    if (!hasPassedSO)
-                    {
-                        storedObj.transform.GetChild(h).gameObject.transform.localPosition = activityPos[currentButt % 5];
-
-                        if ((h - 2) >= (currentPage * 5) && (h - 2) <= (currentPage * 5 + 4))
-                        {
-                            storedObj.transform.GetChild(h).gameObject.SetActive(true);
-                        }
-                    }
-                    else
-                    {
-                        storedObj.transform.GetChild(h).gameObject.transform.localPosition = activityPos[currentButt % 5];
-
-                        if ((h - 3) >= (currentPage * 5) && (h - 3) <= (currentPage * 5 + 4))
-                        {
-                            storedObj.transform.GetChild(h).gameObject.SetActive(true);
-                        }
-                    }
-
-                    currentButt++;
-                }
-                else
-                {
-                    hasPassedSO = true;
-                }
-            }
-        }
-    }
-
-    /** Update the position of all Instruction */
-    public void UpdateActivityPositionInstruction()
-    {
-        int currentButt = 0;
-        bool hasPassedSO = false;
-
-        for (int h = 0; h < storedObj2.transform.childCount; h++)
-        {
-            if (h >= 2)
-            {
-                //storedObj.transform.GetChild(h).gameObject.SetActive(true);
-
-                if (storedObj2.transform.GetChild(h).gameObject != selectedObj)
-                {
-                    if (!hasPassedSO)
-                    {
-                        storedObj2.transform.GetChild(h).gameObject.transform.localPosition = activityPos[currentButt % 5];
-
-                        if ((h - 2) >= (currentPageInstruction * 5) && (h - 2) <= (currentPageInstruction * 5 + 4))
-                        {
-                            storedObj2.transform.GetChild(h).gameObject.SetActive(true);
-                        }
-                    }
-                    else
-                    {
-                        storedObj2.transform.GetChild(h).gameObject.transform.localPosition = activityPos[currentButt % 5];
-
-                        if ((h - 3) >= (currentPageInstruction * 5) && (h - 3) <= (currentPageInstruction * 5 + 4))
-                        {
-                            storedObj2.transform.GetChild(h).gameObject.SetActive(true);
-                        }
-                    }
-
-                    currentButt++;
-                }
-                else
-                {
-                    hasPassedSO = true;
-                }
-            }
-        }
-    }
+    /* ------------------------------------ */
 
     /** Create a button with an attached activity. If no activity exists, create new. Else, set button's name to that of activity. */
     public GameObject CreateActivity(string name, Activity act)
     {
+        // if an activity is sent through, set that to foundAct and get its name
         if (act != null)
         {
             foundAct = act;
             name = act.name;
         }
+        // else, create a new based on the sent through name
         else
         {
-            container.CreateActivity(name);                                         //
-            foundAct = container.activities.Find(x => x.name == name);     //
+            container.CreateActivity(name);
+            foundAct = container.activities.Find(x => x.name == name);
         }
 
         // setup buttons for each activity
+        // create a new instance of a button and set its name
         newActivity = Instantiate(buttonBase);
-        newActivity.GetComponent<ButtonBehaviour>().connectedAct = foundAct;    //
         newActivity.name = name;
-        newActivity.GetComponent<ButtonBehaviour>().actMan = this.gameObject;
         newActivity.GetComponentInChildren<TextMesh>().text = name;
+        // assign variables to the button's script
+        newActivity.GetComponent<ButtonBehaviour>().connectedAct = foundAct;
+        newActivity.GetComponent<ButtonBehaviour>().actMan = this.gameObject;
+        // set the buttons position and rotation to align with MenuPos
         newActivity.transform.position = this.transform.position;
         newActivity.transform.rotation = this.transform.rotation;
 
-        // increase noOfActivities and also noOfPages if enough activities
+        // increase noOfActivities + noOfPages (if enough activities)
         if (container.activities.Count > noOfActivities)
         {
             if (noOfActivities % 5 == 0 && noOfActivities != 0)
             {
                 noOfPages++;
-                UpdatePageAmount();
+                UpdatePageAmount(storedAct);
             }
 
             currentPage = noOfPages;
-            ChangePage();
+
+            // update which page we're on
+            ChangePage(storedAct);
 
             noOfActivities++;
 
@@ -281,39 +121,46 @@ public class ActivityManager : MonoBehaviour {
     /** Create a button with an attached instruction. If no instruction exists, create new. Else, set button's name to that of instruction. */
     public GameObject CreateInstruction(string text, Instructions instruct)
     {
+        // if an instruction is sent through, set that to foundInstruction and get its name
         if (instruct != null)
         {
             foundInstruction = instruct;
             text = instruct.instructionText;
         }
+        // else, create a new based on the sent through name
         else
         {
-           selectedAct.instructions.Add(new Instructions(text,selectedAct.name));                                       //
-           foundInstruction = selectedAct.instructions.Find(x => x.instructionText == text);     //
+           selectedAct.instructions.Add(new Instructions(text,selectedAct.name));
+           foundInstruction = selectedAct.instructions.Find(x => x.instructionText == text);
         }
 
         // setup buttons for each activity
+        // create a new instance of a button and set its name
         newInstruction = Instantiate(buttonBase);
-        newInstruction.GetComponent<ButtonBehaviour>().connectedInstruction = foundInstruction;    //
         newInstruction.name = text;
-        newInstruction.GetComponent<ButtonBehaviour>().actMan = this.gameObject;
         newInstruction.GetComponentInChildren<TextMesh>().text = text;
+        // assign variables to the button's script
+        newInstruction.GetComponent<ButtonBehaviour>().connectedInstruction = foundInstruction;
+        newInstruction.GetComponent<ButtonBehaviour>().actMan = this.gameObject;
+        // set the buttons position and rotation to align with MenuPos
         newInstruction.transform.position = this.transform.position;
         newInstruction.transform.rotation = this.transform.rotation;
 
         // increase noOfActivities and also noOfPages if enough activities
-        if (selectedAct.instructions.Count > noOfInstruction)
+        if (selectedAct.instructions.Count > noOfInstructions)
         {
-            if (noOfInstruction % 5 == 0 && noOfInstruction != 0)
+            if (noOfInstructions % 5 == 0 && noOfInstructions != 0)
             {
-                noOfPagesInstruction++;
-                UpdatePageAmountInstruction();
+                noOfPages++;
+                UpdatePageAmount(storedIns);
             }
 
-            currentPageInstruction = noOfPagesInstruction;
-            ChangePageInstruction();
+            currentPage = noOfPages;
 
-            noOfInstruction++;
+            // update which page we're on
+            ChangePage(storedIns);
+
+            noOfInstructions++;
 
             return newInstruction;
         }
@@ -326,27 +173,36 @@ public class ActivityManager : MonoBehaviour {
     /** Removes an activity and its button. */
     public bool DeleteActivity(GameObject button)
     {
+        // remove from the saved list
         container.RemoveActivity(button);
 
+        // if amount of activities is fewer than we had before (activity deleted)
         if (container.activities.Count < noOfActivities)
         {
+            // destroy this button
             Object.Destroy(button);
 
             noOfActivities--;
 
+            // check if amount of pages has decreased
             if (noOfActivities % 5 == 0 && noOfActivities != 0)
             {
                 noOfPages--;
-                UpdatePageAmount();
+
+                // check if left/right buttons should show
+                UpdatePageAmount(storedAct);
 
                 if (currentPage >= noOfPages)
                 {
                     currentPage = noOfPages;
-                    ChangePage();
+
+                    // update which page we're on
+                    ChangePage(storedAct);
                 }
             }
 
-            UpdateActivityPosition();
+            // update each button's position to remove any gaps
+            UpdateButtonPosition(storedAct);
 
             return true;
         }
@@ -360,27 +216,35 @@ public class ActivityManager : MonoBehaviour {
     /** Removes an instruction and its button. */
     public bool DeleteInstruction(GameObject button)
     {
+        // remove from the saved list
         selectedAct.RemoveInstruction(button);
-
-        if (selectedAct.instructions.Count < noOfInstruction)
+        
+        // if amount of instructions is fewer than we had before (instruction deleted)
+        if (selectedAct.instructions.Count < noOfInstructions)
         {
             Object.Destroy(button);
 
-            noOfInstruction--;
+            noOfInstructions--;
 
-            if (noOfInstruction % 5 == 0 && noOfInstruction != 0)
+            // check if amount of pages has decreased
+            if (noOfInstructions % 5 == 0 && noOfInstructions != 0)
             {
-                noOfPagesInstruction--;
-                UpdatePageAmountInstruction();
+                noOfPages--;
 
-                if (currentPageInstruction >= noOfPagesInstruction)
+                // check if left/right buttons should show
+                UpdatePageAmount(storedIns);
+
+                if (currentPage >= noOfPages)
                 {
-                    currentPageInstruction = noOfPagesInstruction;
-                    ChangePageInstruction();
+                    currentPage = noOfPages;
+
+                    // update which page we're on
+                    ChangePage(storedIns);
                 }
             }
 
-           UpdateActivityPositionInstruction();
+            // update each button's position to remove any gaps
+            UpdateButtonPosition(storedIns);
 
             return true;
         }
@@ -391,45 +255,150 @@ public class ActivityManager : MonoBehaviour {
         }
     }
 
-    /** Remove all instruction button but not the instruction itself */
+    /** Remove all instruction buttons but not the instruction itself. Used when exiting out of an activity. */
     public void DeleteInstructionButton()
     {
-        for (int h = 2; h < storedObj2.transform.childCount; h++)
+        // for every child that's not left/right buttons (for every instruction)
+        for (int h = 2; h < storedIns.transform.childCount; h++)
         {
-            Object.Destroy(storedObj2.transform.GetChild(h).gameObject);
+            // remove the instruction
+            Object.Destroy(storedIns.transform.GetChild(h).gameObject);
         }
 
+        // reset variables
+        noOfInstructions = 0;
+        noOfPages = 0;
+        currentPage = 0;
 
-    noOfInstruction = 0;
-    noOfPagesInstruction = 0;
-    currentPageInstruction = 0;
+        // temporary activity counter
+        int currentActCheck = 0;
 
-}
+        // for each activity, check if we have enough to create a new page
+        for(int i = 0; i < container.activities.Count; i++)
+        {
+            if (currentActCheck % 5 == 0 && currentActCheck != 0)
+            {
+                noOfPages++;
+            }
+            currentActCheck++;
+        }
 
-    /** Return amount of activities we have. */
-    public int GetActivityAmount()
-    {
-        return noOfActivities;
+        // check if we have enough pages to display left/right arrows
+        UpdatePageAmount(storedAct);
     }
-    
-    /** Return amount of pages we have. */
-    public int GetPageAmount()
+    /* ------------------------------------ */
+    /** Decide which activities to display. Activities */
+    public void ChangePage(GameObject storedObj)
     {
-        return noOfPages;
+        for (int h = 0; h < storedObj.transform.childCount; h++)
+        {
+            // if child is not left/right buttons
+            if (h >= 2)
+            {
+                // set inactive if gameobject's position in list isn't within range
+                if ((h - 2) < (currentPage * 5) || (h - 2) > (currentPage * 5 + 4))
+                {
+                    if (storedObj.transform.GetChild(h).gameObject != null)
+                    {
+                        storedObj.transform.GetChild(h).gameObject.SetActive(false);
+                    }
+                }
+                // set active if gameobject's position is within range
+                else
+                {
+                    if (storedObj.transform.GetChild(h).gameObject != null)
+                    {
+                        storedObj.transform.GetChild(h).gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
     }
 
-    /** Get which page we're currently on. */
-    public int GetCurrentPage()
+    /** Show the arrow keys if we have more than 1 page. */
+    public void UpdatePageAmount(GameObject storedObj)
     {
-        return currentPage;
+        // display arrow keys if we have more than 1 page (more than 5 activities)
+        if (noOfPages > 0)
+        {
+            storedObj.transform.GetChild(0).gameObject.SetActive(true);
+            storedObj.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            storedObj.transform.GetChild(0).gameObject.SetActive(false);
+            storedObj.transform.GetChild(1).gameObject.SetActive(false);
+        }
     }
 
-    /** Set which page we're currently on. */
-    public void SetCurrentPage(int cP)
+    /** Update the position of all activities */
+    public void UpdateButtonPosition(GameObject storedObj)
     {
-        currentPage = cP;
+       // int currentButt = 0;
+        // has passed storedobject - used in order to not count it as an object as it isn't deleted before this check for some reason
+        bool hasPassedSo = false;
+
+        for (int h = 0; h < storedObj.transform.childCount; h++)
+        {
+            if (h >= 2)
+            {
+                // if gameObject isn't selectedObject
+                if (storedObj.transform.GetChild(h).gameObject != selectedObj)
+                {
+                    // if it's not passed so
+                    if (!hasPassedSo)
+                    {
+                        // set new position
+                        storedObj.transform.GetChild(h).gameObject.transform.localPosition = activityPos[(h - 2) % 5]; // h-2 = currentButt
+
+                        // if within range of currently visible buttons (h - 2 is equivalent of h if left/right buttons weren't included)
+                        if ((h - 2) >= (currentPage * 5) && (h - 2) <= (currentPage * 5 + 4))
+                        {
+                            // make sure it's visible
+                            storedObj.transform.GetChild(h).gameObject.SetActive(true);
+                        }
+                    }
+                    // if has passed so
+                    else
+                    {
+                        // set new position
+                        storedObj.transform.GetChild(h).gameObject.transform.localPosition = activityPos[(h - 3) % 5]; // h-3 = currentButt
+
+                        // if within range of currently visible buttons (h - 3 is equivalent of h if left/right/selectedObj buttons weren't included)
+                        if ((h - 3) >= (currentPage * 5) && (h - 3) <= (currentPage * 5 + 4))
+                        {
+                            // make sure it's visible
+                            storedObj.transform.GetChild(h).gameObject.SetActive(true);
+                        }
+                    }
+
+                   // currentButt++;
+                }
+                // if gameObject is selectedObject
+                else
+                {
+                    hasPassedSo = true;
+                }
+            }
+        }
     }
 
+    /* ------------------------------------ */
+    /* Get/Set Functions */
+    /* ------------------------------------ */
+
+    /** Get firstTime to see if initialization has been completed. */
+    public bool GetFirstTime()
+    {
+        return firstTime;
+    }
+
+    /** Set firstTime to clarify that initialization is done. */
+    public void SetFirstTime(bool status)
+    {
+        firstTime = status;
+    }
+    /* ------------------------------------ */
     /** Return the currently selected activity. */
     public GameObject GetSelectedObject()
     {
@@ -451,21 +420,65 @@ public class ActivityManager : MonoBehaviour {
             return false;
         }
     }
-
-    /** Get firstTime to see if initialization has been completed. */
-    public bool GetFirstTime()
+    /* ------------------------------------ */
+    /** Get which page we're currently on. */
+    public int GetCurrentPage()
     {
-        return firstTime;
+        return currentPage;
     }
 
-    /** Set firstTime to clarify that initialization is done. */
-    public void SetFirstTime(bool status)
+    /** Set which page we're currently on. */
+    public void SetCurrentPage(int cP)
     {
-        firstTime = status;
+        currentPage = cP;
+    }
+    /* ------------------------------------ */
+    public Activity GetSelectedActivity()
+    {
+        return selectedAct;
     }
 
+    public void SetSelectedActivity(Activity sa)
+    {
+        selectedAct = sa;
+    }
+    /* ------------------------------------ */
+    public Instructions GetSelectedInstruction()
+    {
+        return selectedInstruction;
+    }
+
+    public void SetSelectedInstruction(Instructions si)
+    {
+        selectedInstruction = si;
+    }
+    /* ------------------------------------ */
+    /** Return amount of activities we have. */
+    public int GetActivityAmount()
+    {
+        return noOfActivities;
+    }
+    
+    /** Return amount of instructions we have. */
+    public int GetInstructionAmount()
+    {
+        return noOfInstructions;
+    }
+
+    /** Return amount of pages we have. */
+    public int GetPageAmount()
+    {
+        return noOfPages;
+    }
+
+    /** Return the set positions of buttons for the menus. */
+    public Vector3[] GetActivityPos()
+    {
+        return activityPos;
+    }
+    /* ------------------------------------ */
     /** Edit the name of an activity. */
-    public void SetName(string newName)
+    public void SetNameActivity(string newName)
     {
         foundAct = container.activities.Find(x => x.name == selectedAct.name);
         foundAct.name = selectedObj.name = newName;
@@ -474,16 +487,11 @@ public class ActivityManager : MonoBehaviour {
         selectedAct = container.activities.Find(x => x.name == newName);
     }
 
-    /** Edit A Instruction. */
+    /** Edit an instruction. */
     public void SetNameInstruction(string newText)
     {
         selectedInstruction.setInstructionName(newText, selectedAct.name);
         selectedObj.name = selectedInstruction.instructionText;
         selectedObj.GetComponentInChildren<TextMesh>().text = newText;
-    }
-
-    public Vector3[] GetActivityPos()
-    {
-        return activityPos;
     }
 }

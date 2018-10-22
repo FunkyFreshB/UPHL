@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -200,7 +200,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -267,11 +267,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  connectedAct:
-    instructions: []
   connectedInstruction:
     indicator: {fileID: 0}
     visible: 0
+  connectedAct:
+    instructions: []
   isAdmin: 1
   isActivity: 0
   isInstruction: 0
@@ -937,11 +937,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  connectedAct:
-    instructions: []
   connectedInstruction:
     indicator: {fileID: 0}
     visible: 0
+  connectedAct:
+    instructions: []
   isAdmin: 0
   isActivity: 0
   isInstruction: 0
@@ -1364,11 +1364,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  connectedAct:
-    instructions: []
   connectedInstruction:
     indicator: {fileID: 0}
     visible: 0
+  connectedAct:
+    instructions: []
   isAdmin: 0
   isActivity: 0
   isInstruction: 0
@@ -1752,11 +1752,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  connectedAct:
-    instructions: []
   connectedInstruction:
     indicator: {fileID: 0}
     visible: 0
+  connectedAct:
+    instructions: []
   isAdmin: 0
   isActivity: 0
   isInstruction: 0
@@ -1862,7 +1862,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -1996,7 +1996,7 @@ Transform:
   - {fileID: 1162515148}
   - {fileID: 440230942}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &790941145
 MonoBehaviour:
@@ -2075,11 +2075,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  connectedAct:
-    instructions: []
   connectedInstruction:
     indicator: {fileID: 0}
     visible: 0
+  connectedAct:
+    instructions: []
   isAdmin: 0
   isActivity: 1
   isInstruction: 0
@@ -2243,11 +2243,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  connectedAct:
-    instructions: []
   connectedInstruction:
     indicator: {fileID: 0}
     visible: 0
+  connectedAct:
+    instructions: []
   isAdmin: 0
   isActivity: 0
   isInstruction: 0
@@ -2466,11 +2466,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  connectedAct:
-    instructions: []
   connectedInstruction:
     indicator: {fileID: 0}
     visible: 0
+  connectedAct:
+    instructions: []
   isAdmin: 1
   isActivity: 0
   isInstruction: 0
@@ -2660,8 +2660,8 @@ MonoBehaviour:
   container:
     activities: []
   buttonBase: {fileID: 1689008370354704, guid: 5335dcc025917e248b1ceeef9c58c46c, type: 2}
-  storedObj: {fileID: 454752450}
-  storedObj2: {fileID: 2005851289}
+  storedAct: {fileID: 454752450}
+  storedIns: {fileID: 2005851289}
   menus:
   - {fileID: 862666574}
   - {fileID: 301826304}
@@ -2671,15 +2671,6 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
-  currentPage: 0
-  noOfInstruction: 0
-  noOfPagesInstruction: 0
-  currentPageInstruction: 0
-  selectedInstruction:
-    indicator: {fileID: 0}
-    visible: 0
-  selectedAct:
-    instructions: []
 --- !u!4 &1162515148
 Transform:
   m_ObjectHideFlags: 0
@@ -2747,11 +2738,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  connectedAct:
-    instructions: []
   connectedInstruction:
     indicator: {fileID: 0}
     visible: 0
+  connectedAct:
+    instructions: []
   isAdmin: 0
   isActivity: 0
   isInstruction: 0
@@ -3433,11 +3424,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  connectedAct:
-    instructions: []
   connectedInstruction:
     indicator: {fileID: 0}
     visible: 0
+  connectedAct:
+    instructions: []
   isAdmin: 1
   isActivity: 0
   isInstruction: 0
@@ -3964,6 +3955,16 @@ Prefab:
       propertyPath: storedObj2
       value: 
       objectReference: {fileID: 2005851289}
+    - target: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+        type: 2}
+      propertyPath: storedAct
+      value: 
+      objectReference: {fileID: 454752450}
+    - target: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+        type: 2}
+      propertyPath: storedIns
+      value: 
+      objectReference: {fileID: 2005851289}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5723296ccb8c5754d97c8d75568c576d, type: 2}
   m_IsPrefabParent: 0
@@ -4045,11 +4046,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actMan: {fileID: 1162515146}
-  connectedAct:
-    instructions: []
   connectedInstruction:
     indicator: {fileID: 0}
     visible: 0
+  connectedAct:
+    instructions: []
   isAdmin: 1
   isActivity: 0
   isInstruction: 0

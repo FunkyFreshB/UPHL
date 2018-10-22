@@ -18,6 +18,9 @@
         <Instruction visible="true">
           <instructionText>       kkkmn</instructionText>
         </Instruction>
+        <Instruction visible="true">
+          <instructionText>tttgggggghhhh</instructionText>
+        </Instruction>
       </Instructions>
       <name>First One</name>
       <CurrentStep>0</CurrentStep>
@@ -65,24 +68,6 @@
         </Instruction>
       </Instructions>
       <name> rrrr</name>
-      <CurrentStep>0</CurrentStep>
-    </Activity>
-    <Activity>
-      <Instructions>
-        <Instruction visible="true">
-          <instructionText>Standard instruction step 1</instructionText>
-        </Instruction>
-      </Instructions>
-      <name> ggjn</name>
-      <CurrentStep>0</CurrentStep>
-    </Activity>
-    <Activity>
-      <Instructions>
-        <Instruction visible="true">
-          <instructionText>Standard instruction step 1</instructionText>
-        </Instruction>
-      </Instructions>
-      <name>Egg</name>
       <CurrentStep>0</CurrentStep>
     </Activity>
   </Activities>

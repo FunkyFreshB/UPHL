@@ -32,15 +32,16 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     public bool isActivity = false;
     public bool isInstruction = false;
     public bool isEdit = false;
-    public bool isEditActivity = false;
-    public bool isEditInstruction = false;
-    public bool isCreateActivity = false;
-    public bool isCreateInstruction = false;
+   
     public bool isDelete = false;
     public bool isReturn = false;
     public bool isPageLeft = false;
     public bool isPageRight = false;
 
+    public bool isEditActivity = false;
+    public bool isEditInstruction = false;
+    public bool isCreateActivity = false;
+    public bool isCreateInstruction = false;
     bool isCreateKeyboard = false;                  // if isCreate is active
     bool isKeyboard = false;                        // determines if keyboard is active
     Keyboard keyboard;                              // the keyboard
@@ -104,6 +105,8 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                     keyboardText = "";
                     isKeyboard = false;
                     ams.GetSelectedInstruction().ChangeVisibility();
+                    menus[3].SetActive(false);
+                    storedInstruction.SetActive(false);
                 }
 
                 else if (isActivity && isEdit)
@@ -212,6 +215,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         {
             ams.SetCurrentPage(0);
             ams.ChangePage(storedActs);
+            menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
             menus[1].SetActive(true);
             menus[0].SetActive(false);
             menus[2].SetActive(false);
@@ -232,7 +236,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     {
         if (isCreateActivity)
         {
-            CreateKeyboard(true);
+            CreateKeyboard(true, null);
         }
         else if (isActivity)
         {
@@ -254,13 +258,16 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             menus[3].SetActive(true);
             ams.SetSelectedActivity(ams.container.activities.Find(x => x.name == ams.GetSelectedObject().name)); //
             menus[3].transform.GetChild(0).GetComponent<TextMesh>().text = ams.GetSelectedObject().name;
-
             foreach (Instructions i in ams.GetSelectedActivity().instructions)
             {
                 InstantiateInstructionButton(i.instructionText, i);
             }
+
+           
             ams.UpdatePageAmount(storedInstruction);
             ams.SetCurrentPage(0);
+            ams.ChangePage(storedInstruction);
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
             //ams.ChangePageInstruction();
 
             //menus[1].SetActive(false);
@@ -272,11 +279,20 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         }
         else if (isReturn)
         {
+            if (Application.isEditor)
+            {
+                ams.container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
+            }
+            else
+            {
+                ams.container.Save(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
+            }
+
             storedActs.SetActive(false);
             menus[0].SetActive(true);
             menus[1].SetActive(false);
             menus[2].SetActive(false);
-            ams.container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
+            
         }
 
         // Change page
@@ -364,7 +380,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     {
         if (isCreateInstruction)
         {
-            CreateKeyboard(false);
+            CreateKeyboard(false,null);
         }
 
         else if (isInstruction)
@@ -380,9 +396,10 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         else if (isEditInstruction)
         {
             ams.SetSelectedInstruction(ams.GetSelectedActivity().instructions.Find(x => x.instructionText == ams.GetSelectedObject().name));
-            CreateKeyboardWithText(false, ams.GetSelectedObject().name);
+            CreateKeyboard(false, ams.GetSelectedObject().name);
             ams.GetSelectedInstruction().ChangeVisibility();
             ams.GetSelectedObject().GetComponent<Renderer>().material = materials[0];
+            //storedInstruction.SetActive(false);
         }
 
         else if (isDelete)
@@ -393,7 +410,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
         else if(isActivity && isEdit)
         {
-            CreateKeyboard(false);
+            CreateKeyboard(false, null);
         }
 
         else if (isReturn)
@@ -423,7 +440,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         }
         else if (isPageLeft)
         {
-            if (ams.GetPageAmount() > 0)
+            if (ams.GetCurrentPage() > 0)
             {
                 ams.SetCurrentPage(ams.GetCurrentPage() - 1);
             }
@@ -475,18 +492,19 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     /* Keyboard Functions */
     /* ------------------------------------ */
 
-    public void CreateKeyboard(bool iC)
+    public void CreateKeyboard(bool iC, string text)
     {
         isCreateKeyboard = iC;
         isKeyboard = true;
+        if (text == null)
+        {
+            keyboardText = "";
+        }
+        else
+        {
+            keyboardText = text;
+        }
         keyboard.PresentKeyboard(keyboardText, Keyboard.LayoutType.Alpha);
     }
 
-    public void CreateKeyboardWithText(bool iC, string text)
-    {
-        isCreateKeyboard = iC;
-        isKeyboard = true;
-        keyboardText = text;
-        keyboard.PresentKeyboard(keyboardText, Keyboard.LayoutType.Alpha);
-    }
 }

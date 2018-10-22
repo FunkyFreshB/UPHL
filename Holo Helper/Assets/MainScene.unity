@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -276,14 +276,14 @@ MonoBehaviour:
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isEditActivity: 0
-  isEditInstruction: 0
-  isCreateActivity: 0
-  isCreateInstruction: 0
   isDelete: 0
   isReturn: 1
   isPageLeft: 0
   isPageRight: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
 --- !u!23 &28751615
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -800,6 +800,238 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1001 &174307822
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4685556553255798, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685556553255798, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685556553255798, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685556553255798, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685556553255798, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685556553255798, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685556553255798, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685556553255798, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114479051143480216, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: menus.Array.data[1]
+      value: 
+      objectReference: {fileID: 301826304}
+    - target: {fileID: 114227555401426572, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: actMan
+      value: 
+      objectReference: {fileID: 1162515146}
+    - target: {fileID: 114227555401426572, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: menus.Array.data[1]
+      value: 
+      objectReference: {fileID: 301826304}
+    - target: {fileID: 1877577062822690, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114227555401426572, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: storedActs
+      value: 
+      objectReference: {fileID: 454752450}
+    - target: {fileID: 114479051143480216, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: storedActs
+      value: 
+      objectReference: {fileID: 454752450}
+    - target: {fileID: 114479051143480216, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: actMan
+      value: 
+      objectReference: {fileID: 1162515146}
+    - target: {fileID: 114227555401426572, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: pages.Array.data[0]
+      value: 
+      objectReference: {fileID: 1677602506}
+    - target: {fileID: 114479051143480216, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: pages.Array.data[0]
+      value: 
+      objectReference: {fileID: 1677602506}
+    - target: {fileID: 114227555401426572, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: pages.Array.data[1]
+      value: 
+      objectReference: {fileID: 801693859}
+    - target: {fileID: 114479051143480216, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: pages.Array.data[1]
+      value: 
+      objectReference: {fileID: 801693859}
+    - target: {fileID: 114227555401426572, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: menus.Array.data[2]
+      value: 
+      objectReference: {fileID: 357496710}
+    - target: {fileID: 114479051143480216, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: menus.Array.data[2]
+      value: 
+      objectReference: {fileID: 357496710}
+    - target: {fileID: 1877577062822690, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_Name
+      value: INDICATORPLACEMENTMENU
+      objectReference: {fileID: 0}
+    - target: {fileID: 102510525486068448, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Gaze and tap on the indicator to move it.
+
+        Tap again to place it.
+
+        Ok for confirm or Cancel for the last location.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1839638510753282, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_Name
+      value: OK
+      objectReference: {fileID: 0}
+    - target: {fileID: 102849855226627646, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: m_Text
+      value: OK
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185421108738530, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.12211238
+      objectReference: {fileID: 0}
+    - target: {fileID: 102849855226627646, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: m_CharacterSize
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 102849855226627646, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: m_LineSpacing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 102849855226627646, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: m_OffsetZ
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 102849855226627646, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: m_TabSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4951467187533088, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.25535223
+      objectReference: {fileID: 0}
+    - target: {fileID: 102356065041664494, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: m_Text
+      value: CANCEL
+      objectReference: {fileID: 0}
+    - target: {fileID: 102356065041664494, guid: b7aab077fc155d949a0252efc0ebe694,
+        type: 2}
+      propertyPath: m_CharacterSize
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642843483451478, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.1276352
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260904065842154, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.17350039
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185421108738530, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.1571
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185421108738530, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.027
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642843483451478, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.151
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384764953776620, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.0042
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114227555401426572, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+    - {fileID: 114479051143480216, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: b7aab077fc155d949a0252efc0ebe694, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &174307823 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1184670359502990, guid: b7aab077fc155d949a0252efc0ebe694,
+    type: 2}
+  m_PrefabInternal: {fileID: 174307822}
+--- !u!1 &174307824 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1839638510753282, guid: b7aab077fc155d949a0252efc0ebe694,
+    type: 2}
+  m_PrefabInternal: {fileID: 174307822}
+--- !u!114 &174307825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 174307823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5ad4912cc953047aae19625e158056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  okOrCancel: 0
+  materials:
+  - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
+  - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
+--- !u!114 &174307826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 174307824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5ad4912cc953047aae19625e158056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  okOrCancel: 0
+  materials:
+  - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
+  - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
 --- !u!1 &196068072
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,14 +1178,14 @@ MonoBehaviour:
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isEditActivity: 0
-  isEditInstruction: 0
-  isCreateActivity: 1
-  isCreateInstruction: 0
   isDelete: 0
   isReturn: 0
   isPageLeft: 0
   isPageRight: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 1
+  isCreateInstruction: 0
 --- !u!23 &296266751
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1373,14 +1605,14 @@ MonoBehaviour:
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isEditActivity: 0
-  isEditInstruction: 0
-  isCreateActivity: 0
-  isCreateInstruction: 0
   isDelete: 0
   isReturn: 1
   isPageLeft: 0
   isPageRight: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
 --- !u!23 &592205623
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1761,14 +1993,14 @@ MonoBehaviour:
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isEditActivity: 0
-  isEditInstruction: 1
-  isCreateActivity: 0
-  isCreateInstruction: 0
   isDelete: 0
   isReturn: 0
   isPageLeft: 0
   isPageRight: 0
+  isEditActivity: 0
+  isEditInstruction: 1
+  isCreateActivity: 0
+  isCreateInstruction: 0
 --- !u!23 &744866956
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2084,14 +2316,14 @@ MonoBehaviour:
   isActivity: 1
   isInstruction: 0
   isEdit: 1
-  isEditActivity: 0
-  isEditInstruction: 0
-  isCreateActivity: 0
-  isCreateInstruction: 0
   isDelete: 0
   isReturn: 0
   isPageLeft: 0
   isPageRight: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
 --- !u!23 &911275341
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2252,14 +2484,14 @@ MonoBehaviour:
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isEditActivity: 0
-  isEditInstruction: 0
-  isCreateActivity: 0
-  isCreateInstruction: 0
   isDelete: 1
   isReturn: 0
   isPageLeft: 0
   isPageRight: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
 --- !u!23 &991016187
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2475,14 +2707,14 @@ MonoBehaviour:
   isActivity: 0
   isInstruction: 0
   isEdit: 1
-  isEditActivity: 0
-  isEditInstruction: 0
-  isCreateActivity: 0
-  isCreateInstruction: 0
   isDelete: 0
   isReturn: 0
   isPageLeft: 0
   isPageRight: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
 --- !u!23 &1037739289
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2747,14 +2979,14 @@ MonoBehaviour:
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isEditActivity: 0
-  isEditInstruction: 0
-  isCreateActivity: 0
-  isCreateInstruction: 1
   isDelete: 0
   isReturn: 0
   isPageLeft: 0
   isPageRight: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 1
 --- !u!23 &1202757628
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3433,14 +3665,14 @@ MonoBehaviour:
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isEditActivity: 0
-  isEditInstruction: 0
-  isCreateActivity: 0
-  isCreateInstruction: 0
   isDelete: 0
   isReturn: 1
   isPageLeft: 0
   isPageRight: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
 --- !u!23 &1684982641
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4055,14 +4287,14 @@ MonoBehaviour:
   isActivity: 0
   isInstruction: 0
   isEdit: 0
-  isEditActivity: 0
-  isEditInstruction: 0
-  isCreateActivity: 0
-  isCreateInstruction: 0
   isDelete: 1
   isReturn: 0
   isPageLeft: 0
   isPageRight: 0
+  isEditActivity: 0
+  isEditInstruction: 0
+  isCreateActivity: 0
+  isCreateInstruction: 0
 --- !u!23 &2007769287
 MeshRenderer:
   m_ObjectHideFlags: 0

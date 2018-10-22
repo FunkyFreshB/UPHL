@@ -38,6 +38,7 @@ public class Instructions
         //cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
         cube.AddComponent<IndicatorBehaviour>().instruction = this;
         indicator = cube;
+        indicator.transform.parent = GameObject.Find("Indicators").transform;
         indicator.SetActive(false);
         
     }
@@ -51,6 +52,7 @@ public class Instructions
     {
         instructionText = text;
         indicator.name = acitivity + instructionText;
+        //World anchor ?
         
     }
 

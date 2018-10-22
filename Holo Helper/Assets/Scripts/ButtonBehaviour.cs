@@ -294,7 +294,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             menus[0].SetActive(true);
             menus[1].SetActive(false);
             menus[2].SetActive(false);
-            ams.container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
+            ams.container.Save(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
         }
 
         // Change page

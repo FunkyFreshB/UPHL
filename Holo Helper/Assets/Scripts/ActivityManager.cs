@@ -43,7 +43,7 @@ public class ActivityManager : MonoBehaviour {
         activityPos[4] = new Vector3(0, -0.01285f, 0);
 
         container = null;
-        container = ActivityContainer.Load(Path.Combine(Application.dataPath, "ActivityList.xml"));
+        container = ActivityContainer.Load(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
 
         if(container == null)
         {

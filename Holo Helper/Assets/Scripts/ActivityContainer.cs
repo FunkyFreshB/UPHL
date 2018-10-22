@@ -28,10 +28,16 @@ public class ActivityContainer
 
     public static ActivityContainer Load(string path)
     {
-        var serializer = new XmlSerializer(typeof(ActivityContainer));
-        using (var stream = new FileStream(path, FileMode.Open))
+        if (File.Exists(path)) { 
+            var serializer = new XmlSerializer(typeof(ActivityContainer));
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                return serializer.Deserialize(stream) as ActivityContainer;
+            }
+        }
+        else
         {
-            return serializer.Deserialize(stream) as ActivityContainer;
+            return null;
         }
     }
 

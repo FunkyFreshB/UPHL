@@ -402,6 +402,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             ams.SetSelectedInstruction(ams.GetSelectedActivity().instructions.Find(x => x.instructionText == ams.GetSelectedObject().name));
             CreateKeyboard(false, ams.GetSelectedObject().name);
             ams.GetSelectedObject().GetComponent<Renderer>().material = materials[0];
+            
             //storedInstruction.SetActive(false);
         }
 
@@ -454,6 +455,31 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
             ams.ChangePage(storedInstruction);
             menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
+        }
+    }
+
+    public void ActivityEventMenu(InputClickedEventData eventData)
+    {
+        if(isPageLeft && isPageRight)
+        {
+            ams.GetSelectedActivity().RepeatStep();
+        }
+
+        else if (isPageLeft)
+        {
+            ams.GetSelectedActivity().PreviousStep();
+        }
+
+        else if (isPageRight)
+        {
+            ams.GetSelectedActivity().NextStep();
+        }
+
+        else if (isReturn)
+        {
+            menus[2].SetActive(true);
+            menus[4].SetActive(false);
+            storedActs.SetActive(true);
         }
     }
 

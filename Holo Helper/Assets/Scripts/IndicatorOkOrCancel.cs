@@ -2,7 +2,7 @@
 using HoloToolkit.Unity.InputModule;
 using HoloToolkit.Unity;
 
-public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable {
+public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable{
 
     // Use this for initialization
 
@@ -45,6 +45,7 @@ public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable
         }
         ams.menus[3].SetActive(true);
         storedInstructions.SetActive(true);
+        ams.GetSelectedInstruction().isEditOrUserMode = false;
         ams.GetSelectedInstruction().indicator.SetActive(false);
         this.gameObject.GetComponent<Renderer>().material = materials[0];
 
@@ -57,5 +58,6 @@ public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable
     void OnEnable()
     {
         tempPos = ams.GetSelectedInstruction().indicator.transform.position;
+        ams.GetSelectedInstruction().isEditOrUserMode = true;
     }
 }

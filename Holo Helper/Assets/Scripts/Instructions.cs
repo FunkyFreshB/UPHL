@@ -16,11 +16,15 @@ public class Instructions
     [XmlAttribute("visible")]
     public bool visible;
 
+    [XmlIgnore]
+    public bool isEditOrUserMode;
+
     // TODO What script do we need or should we implement our own?
     public Instructions(string text,string activityName)
     {
         instructionText = text;
         visible = true;
+        isEditOrUserMode = false;
         this.reInitializer(activityName);
     }
 
@@ -32,9 +36,11 @@ public class Instructions
     public void reInitializer(string activityName)
     {
         GameObject cube;
-        cube = Object.Instantiate(Resources.Load("Arrow") as GameObject);
+        //cube = Object.Instantiate(Resources.Load("Arrow") as GameObject);
+        cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         cube.name = activityName + this.instructionText;
-        cube.AddComponent<TapToPlace>();
+        //cube.AddComponent<TapToPlace>();
         //cube.AddComponent<SolverSurfaceMagnetism>().MagneticSurface = GameObject.Find("SpatialMapping").layer;
         //cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
         cube.AddComponent<IndicatorBehaviour>().instruction = this;

@@ -2,6 +2,7 @@
 using HoloToolkit.Unity.SpatialMapping;
 using System.Xml;
 using System.Xml.Serialization;
+using HoloToolkit.Unity;
 
 [System.Serializable]
 public class Instructions
@@ -46,30 +47,20 @@ public class Instructions
     public void removeIndicator()
     {
         Object.Destroy(indicator);
+        if(WorldAnchorManager.Instance != null)
+        {
+            WorldAnchorManager.Instance.RemoveAnchor(indicator); 
+        }
     }
 
     public void setInstructionName(string text, string acitivity)
     {
+        WorldAnchorManager.Instance.RemoveAnchor(indicator);
         instructionText = text;
         indicator.name = acitivity + instructionText;
-        //World anchor ?
-        
-    }
+        WorldAnchorManager.Instance.AttachAnchor(indicator);
 
-    public void ChangeVisibility()
-    {
-        if (visible)
-        {
-            indicator.SetActive(false);
-            visible = !visible;
-        }
-        else
-        {
-            indicator.SetActive(true);
-            visible = !visible;
-        }
     }
-
 
     ~Instructions()
     {

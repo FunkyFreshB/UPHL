@@ -68,6 +68,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 	// Update is called once per frame
 	void Update ()
     {
+        //Är denna kod rad nödvändig? Vi har ju redan OnFocus på allt annat
         if(this.gameObject == ams.GetSelectedObject())
         {
             ams.GetSelectedObject().GetComponent<Renderer>().material = materials[1];
@@ -104,9 +105,12 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
                     ams.SetNameInstruction(keyboardText);
                     keyboardText = "";
                     isKeyboard = false;
-                    ams.GetSelectedInstruction().ChangeVisibility();
+                    ams.GetSelectedInstruction().indicator.SetActive(true);
                     menus[3].SetActive(false);
                     storedInstruction.SetActive(false);
+                    GameObject.Find("INDICATORPLACEMENTMENU").transform.GetChild(0).gameObject.SetActive(true);
+                    GameObject.Find("INDICATORPLACEMENTMENU").transform.GetChild(1).gameObject.SetActive(true);
+                    GameObject.Find("INDICATORPLACEMENTMENU").transform.GetChild(2).gameObject.SetActive(true);
                 }
 
                 else if (isActivity && isEdit)
@@ -397,7 +401,6 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         {
             ams.SetSelectedInstruction(ams.GetSelectedActivity().instructions.Find(x => x.instructionText == ams.GetSelectedObject().name));
             CreateKeyboard(false, ams.GetSelectedObject().name);
-            ams.GetSelectedInstruction().ChangeVisibility();
             ams.GetSelectedObject().GetComponent<Renderer>().material = materials[0];
             //storedInstruction.SetActive(false);
         }

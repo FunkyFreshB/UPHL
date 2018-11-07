@@ -31,18 +31,18 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     public bool isAdmin = false;
     public bool isActivity = false;
     public bool isInstruction = false;
+    public bool isCreate = false;
     public bool isEdit = false;
-   
+    public bool isChangeActivityName = false;
     public bool isDelete = false;
     public bool isReturn = false;
     public bool isPageLeft = false;
     public bool isPageRight = false;
 
-    public bool isEditActivity = false;
-    public bool isEditInstruction = false;
-    public bool isCreateActivity = false;
-    public bool isCreateInstruction = false;
-    bool isCreateKeyboard = false;                  // if isCreate is active
+    bool isEditActivity = false;
+    bool isEditInstruction = false;
+
+    int keyboardCase = -1;                          // variable for switch/case
     bool isKeyboard = false;                        // determines if keyboard is active
     Keyboard keyboard;                              // the keyboard
     string keyboardText = "";                       // the text of the keyboard
@@ -68,7 +68,6 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 	// Update is called once per frame
 	void Update ()
     {
-        //Är denna kod rad nödvändig? Vi har ju redan OnFocus på allt annat
         if(this.gameObject == ams.GetSelectedObject())
         {
             ams.GetSelectedObject().GetComponent<Renderer>().material = materials[1];
@@ -78,54 +77,63 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         {
             if (!keyboard.isActiveAndEnabled)
             {
-                if (isCreateKeyboard)
+                switch (keyboardCase)
                 {
-                    InstantiateActivityButton(keyboardText, null);
-                    keyboardText = "";
-                    isKeyboard = false;
-                    menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
-                    menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
+                    case 1: // when creating activity
+                        InstantiateActivityButton(keyboardText, null);
+                        menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
+                        menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
+                        break;
+
+                    case 2: // when creating instruction
+                        InstantiateInstructionButton(keyboardText, null);
+                        menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
+                        //menus[2].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPageInstruction + 1) + " / " + (ams.noOfPagesInstruction + 1);
+                        break;
+
+                    case 3: // when editing instructions
+                        ams.SetNameInstruction(keyboardText);
+                        ams.GetSelectedInstruction().indicator.SetActive(true);
+                        menus[3].SetActive(false);
+                        storedInstruction.SetActive(false);
+                        GameObject.Find("INDICATORPLACEMENTMENU").transform.GetChild(0).gameObject.SetActive(true);
+                        GameObject.Find("INDICATORPLACEMENTMENU").transform.GetChild(1).gameObject.SetActive(true);
+                        GameObject.Find("INDICATORPLACEMENTMENU").transform.GetChild(2).gameObject.SetActive(true);
+                        break;
+
+                    case 4: // when change activity name
+                       // ams.SetSelectedObject(null);
+                        actMan.GetComponent<ActivityManager>().SetNameActivity(keyboardText);
+                        menus[3].transform.GetChild(0).GetComponent<TextMesh>().text = keyboardText;
+                        for(int i = 2; i < storedActs.transform.childCount; i++)
+                        {
+                            if(storedActs.transform.GetChild(i).GetComponent<ButtonBehaviour>().connectedAct.name == keyboardText)
+                            {
+
+                                storedActs.transform.GetChild(i).name = keyboardText;
+
+                                if (keyboardText.Length > 20)
+                                {
+                                    storedActs.transform.GetChild(i).GetChild(0).GetComponent<TextMesh>().text = keyboardText.Remove(20) + "...";
+                                }
+                                else
+                                {
+                                    storedActs.transform.GetChild(i).GetChild(0).GetComponent<TextMesh>().text = keyboardText;
+                                }
+                                break;
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
                 }
 
-                else if (isCreateActivity)
-                {
-                    InstantiateActivityButton(keyboardText, null);
-                }
-
-                else if (isCreateInstruction){
-                    InstantiateInstructionButton(keyboardText, null);
-                    keyboardText = "";
-                    isKeyboard = false;
-                    menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
-                    //menus[2].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.currentPageInstruction + 1) + " / " + (ams.noOfPagesInstruction + 1);
-                }
-
-                else if(isEditInstruction)
-                {
-                    ams.SetNameInstruction(keyboardText);
-                    keyboardText = "";
-                    isKeyboard = false;
-                    ams.GetSelectedInstruction().indicator.SetActive(true);
-                    menus[3].SetActive(false);
-                    storedInstruction.SetActive(false);
-                    GameObject.Find("INDICATORPLACEMENTMENU").transform.GetChild(0).gameObject.SetActive(true);
-                    GameObject.Find("INDICATORPLACEMENTMENU").transform.GetChild(1).gameObject.SetActive(true);
-                    GameObject.Find("INDICATORPLACEMENTMENU").transform.GetChild(2).gameObject.SetActive(true);
-                }
-
-                else if (isActivity && isEdit)
-                {
-                    actMan.GetComponent<ActivityManager>().SetNameActivity(keyboardText);
-                    keyboardText = "";
-                    menus[3].transform.GetChild(0).GetComponent<TextMesh>().text = ams.GetSelectedObject().name;
-                    isKeyboard = false;
-                }
-                else
-                {
-                    actMan.GetComponent<ActivityManager>().SetNameActivity(keyboardText);
-                    keyboardText = "";
-                    isKeyboard = false;
-                }
+                // prevent potential misfire of switch/case
+                keyboardCase = -1;
+                
+                keyboardText = "";
+                isKeyboard = false;
             }
 
             keyboardText = keyboard.InputField.text;
@@ -174,9 +182,9 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         // ---------------------------------------------
 
         // 4: Activity Menu
-        else if (menus[3].activeSelf)
+        else if (menus[4].activeSelf)
         {
-
+            ActivityEventMenu(eventData);
         }
     }
 
@@ -238,9 +246,9 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     public void AdminMenu(InputClickedEventData eventData)
     {
-        if (isCreateActivity)
+        if (isCreate)
         {
-            CreateKeyboard(true, null);
+            CreateKeyboard(1, null);
         }
         else if (isActivity)
         {
@@ -334,12 +342,18 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     {
         if (isActivity)
         {
-            if (ams.GetSelectedObject() != null)
+            /*if (ams.GetSelectedObject() != null)
             {
                 ams.GetSelectedObject().GetComponent<Renderer>().material = materials[0];
             }
 
-            ams.SetSelectedObject(gazedAtObj);
+            ams.SetSelectedObject(gazedAtObj);*/
+            ams.SetSelectedActivity(gazedAtObj.GetComponent<ButtonBehaviour>().connectedAct);
+            menus[4].transform.GetChild(1).GetComponent<TextMesh>().text = ams.GetSelectedActivity().name;
+            ams.GetSelectedActivity().instructions[0].indicator.SetActive(true);
+            storedActs.SetActive(false);
+            menus[4].SetActive(true);
+            menus[2].SetActive(false);
         }
         else if (isReturn)
         {
@@ -382,9 +396,9 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
     public void ActivityEditMenu(InputClickedEventData eventData)
     {
-        if (isCreateInstruction)
+        if (isCreate)
         {
-            CreateKeyboard(false,null);
+            CreateKeyboard(2, null);
         }
 
         else if (isInstruction)
@@ -397,10 +411,10 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
         }
 
-        else if (isEditInstruction)
+        else if (isEdit)
         {
             ams.SetSelectedInstruction(ams.GetSelectedActivity().instructions.Find(x => x.instructionText == ams.GetSelectedObject().name));
-            CreateKeyboard(false, ams.GetSelectedObject().name);
+            CreateKeyboard(3, ams.GetSelectedObject().name);
             ams.GetSelectedObject().GetComponent<Renderer>().material = materials[0];
             
             //storedInstruction.SetActive(false);
@@ -412,9 +426,9 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetPageAmount() + 1);
         }
 
-        else if(isActivity && isEdit)
+        else if(isChangeActivityName)
         {
-            CreateKeyboard(false, null);
+            CreateKeyboard(4, null);
         }
 
         else if (isReturn)
@@ -521,10 +535,12 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     /* Keyboard Functions */
     /* ------------------------------------ */
 
-    public void CreateKeyboard(bool iC, string text)
+    /** Instantiates a keyboard, its function determined by kCase */
+    public void CreateKeyboard(int kCase, string text)
     {
-        isCreateKeyboard = iC;
+        keyboardCase = kCase;
         isKeyboard = true;
+
         if (text == null)
         {
             keyboardText = "";
@@ -533,6 +549,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
         {
             keyboardText = text;
         }
+
         keyboard.PresentKeyboard(keyboardText, Keyboard.LayoutType.Alpha);
     }
 

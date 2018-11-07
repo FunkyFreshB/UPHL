@@ -86,7 +86,14 @@ public class ActivityManager : MonoBehaviour {
         // create a new instance of a button and set its name
         newActivity = Instantiate(buttonBase);
         newActivity.name = name;
-        newActivity.GetComponentInChildren<TextMesh>().text = name;
+        if (name.Length > 20)
+        {
+            newActivity.GetComponentInChildren<TextMesh>().text = name.Remove(20) + "...";
+        }
+        else
+        {
+            newActivity.GetComponentInChildren<TextMesh>().text = name;
+        }
         // assign variables to the button's script
         newActivity.GetComponent<ButtonBehaviour>().connectedAct = foundAct;
         newActivity.GetComponent<ButtonBehaviour>().actMan = this.gameObject;
@@ -138,7 +145,14 @@ public class ActivityManager : MonoBehaviour {
         // create a new instance of a button and set its name
         newInstruction = Instantiate(buttonBase);
         newInstruction.name = text;
-        newInstruction.GetComponentInChildren<TextMesh>().text = text;
+        if (text.Length > 20)
+        {
+            newInstruction.GetComponentInChildren<TextMesh>().text = text.Remove(20) + "...";
+        }
+        else
+        {
+            newInstruction.GetComponentInChildren<TextMesh>().text = text;
+        }
         // assign variables to the button's script
         newInstruction.GetComponent<ButtonBehaviour>().connectedInstruction = foundInstruction;
         newInstruction.GetComponent<ButtonBehaviour>().actMan = this.gameObject;
@@ -481,8 +495,6 @@ public class ActivityManager : MonoBehaviour {
     public void SetNameActivity(string newName)
     {
         foundAct = container.activities.Find(x => x.name == selectedAct.name);
-        foundAct.name = selectedObj.name = newName;
-        selectedObj.GetComponentInChildren<TextMesh>().text = newName;
         foundAct.setName(newName);
         selectedAct = container.activities.Find(x => x.name == newName);
     }

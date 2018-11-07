@@ -21,7 +21,7 @@ public class Activity{
         this.name = name;
         currentStep = 0;
         instructions = new List<Instructions>();
-        instructions.Add(new Instructions("Standard instruction step 1",this.name));
+        instructions.Add(new Instructions("Standard instruction step 1", this.name));
     }
 
     public Activity()
@@ -77,8 +77,8 @@ public class Activity{
         if(currentStep != instructions.Count - 1)
         {
             currentStep++;
-            GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().
-            StartSpeaking("Step " + currentStep + " " + instructions[currentStep].instructionText);
+            //GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().
+            //StartSpeaking("Step " + currentStep + " " + instructions[currentStep].instructionText);
         }
     }
 
@@ -87,15 +87,15 @@ public class Activity{
         if(currentStep != 0)
         {
             currentStep--;
-            GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().
-            StartSpeaking("Step " + currentStep + " " + instructions[currentStep].instructionText);
+            //GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().
+            //StartSpeaking("Step " + currentStep + " " + instructions[currentStep].instructionText);
         }
     }
 
     public void RepeatStep()
     {
-        GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().
-            StartSpeaking("Step " + currentStep + " " + instructions[currentStep].instructionText);
+       // GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().
+            //StartSpeaking("Step " + currentStep + " " + instructions[currentStep].instructionText);
     }
 
     public void PrintIns()

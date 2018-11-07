@@ -3543,6 +3543,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1406634705}
   - component: {fileID: 1406634706}
+  - component: {fileID: 1406634707}
   m_Layer: 0
   m_Name: walls and floor
   m_TagString: Untagged
@@ -3590,6 +3591,18 @@ MonoBehaviour:
   PositionLerpSpeed: 0.2
   RotationLerpSpeed: 0.2
   IsDraggingEnabled: 1
+--- !u!114 &1406634707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1406634704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee693a1d843dc704abe61fb3620977ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: {fileID: 0}
 --- !u!1 &1452087538
 GameObject:
   m_ObjectHideFlags: 0

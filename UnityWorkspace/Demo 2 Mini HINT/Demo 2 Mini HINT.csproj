@@ -936,8 +936,8 @@
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\TextureThemeWidget.cs" />
     <Compile Include="Assets\LampBehaviour.cs" />
     <Compile Include="Assets\LampButtonClick.cs" />
+    <Compile Include="Assets\Menu.cs" />
     <Compile Include="Assets\Model\LampButtonZoom.cs" />
-    <Compile Include="Assets\Move_Rotate_Scale.cs" />
     <Compile Include="Assets\SensorClick.cs" />
     <Compile Include="Assets\SensorInput.cs" />
   </ItemGroup>

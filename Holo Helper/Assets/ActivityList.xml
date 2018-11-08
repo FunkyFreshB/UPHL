@@ -13,7 +13,7 @@
           <instructionText>rfghhj</instructionText>
         </Instruction>
         <Instruction visible="true">
-          <instructionText> gvhjj</instructionText>
+          <instructionText>4vhjj</instructionText>
         </Instruction>
         <Instruction visible="true">
           <instructionText>       kkkmn</instructionText>
@@ -23,19 +23,19 @@
         </Instruction>
       </Instructions>
       <name>First One</name>
-      <CurrentStep>0</CurrentStep>
+      <CurrentStep>3</CurrentStep>
     </Activity>
     <Activity>
       <Instructions>
         <Instruction visible="true">
-          <instructionText>Standard instruction step 1</instructionText>
+          <instructionText>steppet</instructionText>
         </Instruction>
         <Instruction visible="true">
-          <instructionText>Standard instruction step 2</instructionText>
+          <instructionText>EatStanstruction step 2</instructionText>
         </Instruction>
       </Instructions>
-      <name>ttttu'j</name>
-      <CurrentStep>0</CurrentStep>
+      <name>Brt</name>
+      <CurrentStep>1</CurrentStep>
     </Activity>
     <Activity>
       <Instructions>
@@ -47,7 +47,7 @@
         </Instruction>
       </Instructions>
       <name>Three One</name>
-      <CurrentStep>0</CurrentStep>
+      <CurrentStep>1</CurrentStep>
     </Activity>
     <Activity>
       <Instructions>
@@ -73,7 +73,7 @@
           <instructionText>Standard instruction step 1</instructionText>
         </Instruction>
       </Instructions>
-      <name>uj</name>
+      <name>jjjjj</name>
       <CurrentStep>0</CurrentStep>
     </Activity>
   </Activities>

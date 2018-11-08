@@ -5,6 +5,7 @@ using HoloToolkit.Unity.InputModule;
 using UnityEngine.XR.WSA.Input;
 using HoloToolkit.UI.Keyboard;
 using System.IO;
+using TMPro;
 
 public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
@@ -15,6 +16,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     private GameObject[] menus = new GameObject[5]; // array containing menus
     private Material[] materials = new Material[2]; // array containing materials
     private ActivityManager ams;                    // script of activity manager
+    private GameObject menuBg;
 
     // Page info
     private int visibleActs = 5;                    // number of items per page (basically locked to 5)
@@ -56,6 +58,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
     {
         ams = actMan.GetComponent<ActivityManager>();
 
+        menuBg = ams.menuBg;
         menus = ams.menus;
         materials = ams.materials;
         storedActs = ams.storedAct;
@@ -350,6 +353,9 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
             ams.SetSelectedObject(gazedAtObj);*/
             ams.SetSelectedActivity(gazedAtObj.GetComponent<ButtonBehaviour>().connectedAct);
             menus[4].transform.GetChild(1).GetComponent<TextMesh>().text = ams.GetSelectedActivity().name;
+            menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = ams.GetSelectedActivity().instructions[ams.GetSelectedActivity().currentStep].instructionText;
+            // String wrappedText = WrapText(ams.GetSelectedActivity().instructions[0].instructionText);
+            // menus[4].transform.GetChild(2).GetComponent<TextMesh>().text = wrappedText;
             ams.GetSelectedActivity().instructions[0].indicator.SetActive(true);
             storedActs.SetActive(false);
             menus[4].SetActive(true);
@@ -481,16 +487,17 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable {
 
         else if (isPageLeft)
         {
-            ams.GetSelectedActivity().PreviousStep();
+            menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = ams.GetSelectedActivity().PreviousStep();
         }
 
         else if (isPageRight)
         {
-            ams.GetSelectedActivity().NextStep();
+            menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = ams.GetSelectedActivity().NextStep();
         }
 
         else if (isReturn)
         {
+            ams.GetSelectedActivity().instructions[ams.GetSelectedActivity().currentStep].indicator.SetActive(false);
             menus[2].SetActive(true);
             menus[4].SetActive(false);
             storedActs.SetActive(true);

@@ -14,6 +14,7 @@ public class ActivityManager : MonoBehaviour {
     public GameObject buttonBase;                   // prefab for buttons
     public GameObject storedAct;                    // Stored Activities gameObject
     public GameObject storedIns;                    // Stored Instructions gameObject
+    public GameObject menuBg;                       // background plane of menus
 
     public GameObject[] menus = new GameObject[5];  // array containing each menu gameObject
     public Material[] materials = new Material[2];  // array containing each material used for focusing on buttons

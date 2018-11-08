@@ -21,7 +21,7 @@ public class Activity{
         this.name = name;
         currentStep = 0;
         instructions = new List<Instructions>();
-        instructions.Add(new Instructions("Standard instruction step 1", this.name));
+        instructions.Add(new Instructions("Insert description", this.name));
     }
 
     public Activity()
@@ -72,30 +72,35 @@ public class Activity{
         }
     }
 
-    public void NextStep()
+    public string NextStep()
     {
         if(currentStep != instructions.Count - 1)
         {
-            currentStep++;
-            //GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().
-            //StartSpeaking("Step " + currentStep + " " + instructions[currentStep].instructionText);
+            ++currentStep;
+            GameObject.Find("ACT_MANAGER").GetComponent<TextToSpeech>().StartSpeaking("Step " + (currentStep + 1) + ". " + instructions[currentStep].instructionText);
+            instructions[currentStep - 1].indicator.SetActive(false);
+            instructions[currentStep].indicator.SetActive(true);
         }
+
+        return instructions[currentStep].instructionText;
     }
 
-    public void PreviousStep()
+    public string PreviousStep()
     {
         if(currentStep != 0)
         {
             currentStep--;
-            //GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().
-            //StartSpeaking("Step " + currentStep + " " + instructions[currentStep].instructionText);
+            GameObject.Find("ACT_MANAGER").GetComponent<TextToSpeech>().StartSpeaking("Step " + (currentStep + 1) + ". " + instructions[currentStep].instructionText);
+            instructions[currentStep + 1].indicator.SetActive(false);
+            instructions[currentStep].indicator.SetActive(true);
         }
+
+        return instructions[currentStep].instructionText;
     }
 
     public void RepeatStep()
     {
-       // GameObject.Find("SoundSourceHandler").GetComponent<TextToSpeech>().
-            //StartSpeaking("Step " + currentStep + " " + instructions[currentStep].instructionText);
+        GameObject.Find("ACT_MANAGER").GetComponent<TextToSpeech>().StartSpeaking("Step " + (currentStep + 1) + ". " + instructions[currentStep].instructionText);
     }
 
     public void PrintIns()

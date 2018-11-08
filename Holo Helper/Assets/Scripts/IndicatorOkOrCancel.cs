@@ -49,9 +49,9 @@ public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable
         ams.GetSelectedInstruction().indicator.SetActive(false);
         this.gameObject.GetComponent<Renderer>().material = materials[0];
 
-        this.gameObject.GetParentRoot().transform.GetChild(0).gameObject.SetActive(false);
-        this.gameObject.GetParentRoot().transform.GetChild(1).gameObject.SetActive(false);
-        this.gameObject.GetParentRoot().transform.GetChild(2).gameObject.SetActive(false);
+        this.gameObject.transform.parent.GetChild(0).gameObject.SetActive(false);
+        this.gameObject.transform.parent.GetChild(1).gameObject.SetActive(false);
+        this.gameObject.transform.parent.GetChild(2).gameObject.SetActive(false);
 
     }
 

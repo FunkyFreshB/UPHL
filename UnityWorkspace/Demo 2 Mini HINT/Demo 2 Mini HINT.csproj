@@ -218,6 +218,9 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Npgsql">
+      <HintPath>Assets/Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="GLTFSerialization">
       <HintPath>Assets/HoloToolkit/Utilities/Scripts/GLTF/Plugins/GLTFSerialization/GLTFSerialization.dll</HintPath>
     </Reference>
@@ -235,6 +238,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DatabaseConnect.cs" />
+    <Compile Include="Assets\HanddraggableHH.cs" />
     <Compile Include="Assets\HoloToolkit\Boundary\Scripts\BoundaryManager.cs" />
     <Compile Include="Assets\HoloToolkit\Boundary\Scripts\Edge.cs" />
     <Compile Include="Assets\HoloToolkit\Boundary\Scripts\EdgeHelpers.cs" />
@@ -934,12 +939,14 @@
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\ScaleThemeWidget.cs" />
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\TextMeshColorThemeWidget.cs" />
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\TextureThemeWidget.cs" />
+    <Compile Include="Assets\InteractionMenuButtonBehaviour.cs" />
     <Compile Include="Assets\LampBehaviour.cs" />
     <Compile Include="Assets\LampButtonClick.cs" />
     <Compile Include="Assets\Menu.cs" />
     <Compile Include="Assets\Model\LampButtonZoom.cs" />
     <Compile Include="Assets\SensorClick.cs" />
     <Compile Include="Assets\SensorInput.cs" />
+    <Compile Include="Assets\StartInteractionMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\HoloToolkit-Examples\Medical\Shaders\PlaneCut.cginc" />

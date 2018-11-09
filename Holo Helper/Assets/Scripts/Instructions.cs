@@ -44,10 +44,31 @@ public class Instructions
         //cube.AddComponent<SolverSurfaceMagnetism>().MagneticSurface = GameObject.Find("SpatialMapping").layer;
         //cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
         cube.AddComponent<IndicatorBehaviour>().instruction = this;
+
+        cube.AddComponent<AudioSource>();
+        cube.GetComponent<AudioSource>().playOnAwake = false;
+        cube.GetComponent<AudioSource>().clip = Resources.Load("sfx_pop") as AudioClip;
+        cube.GetComponent<AudioSource>().spatialize = true;
+        cube.GetComponent<AudioSource>().spatialBlend = 1;
+        cube.GetComponent<AudioSource>().rolloffMode = AudioRolloffMode.Custom;
+
         indicator = cube;
         indicator.transform.parent = GameObject.Find("Indicators").transform;
         indicator.SetActive(false);
-        
+
+        Vector3 positionPlacement;
+        Vector3 headPos, gazeDirection;
+        Quaternion qtot;
+        float DefaultGazeDistance = 1.0f;
+        headPos = CameraCache.Main.transform.position;
+        gazeDirection = CameraCache.Main.transform.forward;
+        positionPlacement = headPos + (gazeDirection * DefaultGazeDistance);
+        qtot = CameraCache.Main.transform.localRotation;
+        qtot.x = 0;
+        qtot.z = 0;
+        cube.transform.rotation = qtot;
+        cube.transform.position = positionPlacement;
+
     }
 
     public void removeIndicator()

@@ -31,10 +31,10 @@
           <instructionText>steppet</instructionText>
         </Instruction>
         <Instruction visible="true">
-          <instructionText>EatStanstruction step 2</instructionText>
+          <instructionText>wahooEatStanstruction step 2</instructionText>
         </Instruction>
       </Instructions>
-      <name>Brt</name>
+      <name>Brap</name>
       <CurrentStep>1</CurrentStep>
     </Activity>
     <Activity>

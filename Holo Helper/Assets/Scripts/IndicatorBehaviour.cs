@@ -5,6 +5,7 @@ using HoloToolkit.Unity;
 public class IndicatorBehaviour : MonoBehaviour,IInputClickHandler{
     public Instructions instruction { get; set; }
     private bool isMoving = false;
+    private int countTilPop = 0;
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
@@ -16,12 +17,6 @@ public class IndicatorBehaviour : MonoBehaviour,IInputClickHandler{
         
     public void Update()
     {
-        if(Vector3.Distance(this.gameObject.transform.position, CameraCache.Main.transform.position) < 1)
-        {
-            //Debug.Log("Within one meter");
-        }
-
-
         if (!isMoving) { return; }
         Vector3 positionPlacement;
         Vector3 headPos, gazeDirection;
@@ -37,4 +32,14 @@ public class IndicatorBehaviour : MonoBehaviour,IInputClickHandler{
         this.gameObject.transform.position = positionPlacement;
     }
 
+    public void FixedUpdate()
+    {
+        countTilPop++;
+        if (countTilPop >= 150 && Vector3.Distance(this.gameObject.transform.position, CameraCache.Main.transform.position) < 5)
+        {
+            this.GetComponent<AudioSource>().Play();
+            Debug.Log("pop");
+            countTilPop = 0;
+        }
+    }
 }

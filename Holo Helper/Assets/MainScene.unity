@@ -1474,7 +1474,6 @@ GameObject:
   m_Component:
   - component: {fileID: 413901932}
   - component: {fileID: 413901935}
-  - component: {fileID: 413901934}
   - component: {fileID: 413901933}
   m_Layer: 0
   m_Name: DescBG
@@ -1530,20 +1529,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &413901934
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 413901931}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &413901935
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1739,7 +1724,7 @@ Transform:
   m_Children:
   - {fileID: 1059934664}
   m_Father: {fileID: 521491705}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &502159822
 MonoBehaviour:
@@ -1857,8 +1842,8 @@ Transform:
   - {fileID: 2083221557}
   - {fileID: 1808792990}
   - {fileID: 1156764206}
-  - {fileID: 2127240153}
   - {fileID: 502159821}
+  - {fileID: 2127240153}
   - {fileID: 426820593}
   - {fileID: 413901932}
   m_Father: {fileID: 1162515148}
@@ -2635,7 +2620,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.171
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 22458684, guid: c4e389e44d96da64ea974ab237ce1a9a, type: 2}
       propertyPath: m_SizeDelta.x
@@ -3270,6 +3255,7 @@ GameObject:
   - component: {fileID: 1032300990}
   - component: {fileID: 1032300991}
   - component: {fileID: 1032300992}
+  - component: {fileID: 1032300993}
   m_Layer: 0
   m_Name: SoundSourceInput
   m_TagString: Untagged
@@ -3310,6 +3296,8 @@ MonoBehaviour:
     KeyCode: 0
   - Keyword: Repeat
     KeyCode: 0
+  - Keyword: Select
+    KeyCode: 0
   recognitionConfidenceLevel: 1
 --- !u!114 &1032300992
 MonoBehaviour:
@@ -3322,6 +3310,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae8f3c88e9704a4393cb8d904b62372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1032300993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1032300989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d6513c2cdf97f409654a2a4114d9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Keywords:
+  - Keyword: Repeat
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2127240154}
+          m_MethodName: AEM_Repeat
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  IsGlobalListener: 0
+  PersistentKeywords: 0
 --- !u!1 &1037739286
 GameObject:
   m_ObjectHideFlags: 0
@@ -3786,6 +3805,7 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: 30132a0c4e061094592f6a5237745077, type: 2}
   - {fileID: 2100000, guid: 65b728f84e4f389429f7c030e27e651a, type: 2}
+  - {fileID: 2100000, guid: dd368e2aea58bec4388ae3b9ca0aa317, type: 2}
 --- !u!4 &1162515148
 Transform:
   m_ObjectHideFlags: 0
@@ -3887,7 +3907,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -4582,7 +4602,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1595345151}
   - component: {fileID: 1595345154}
-  - component: {fileID: 1595345153}
   - component: {fileID: 1595345152}
   m_Layer: 0
   m_Name: MenuBG
@@ -4638,20 +4657,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1595345153
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1595345150}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &1595345154
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5530,6 +5535,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 790941144}
     m_Modifications:
+    - target: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+        type: 2}
+      propertyPath: materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4756162777457932, guid: 5723296ccb8c5754d97c8d75568c576d, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5645,6 +5655,11 @@ Prefab:
       propertyPath: menuBg
       value: 
       objectReference: {fileID: 1595345150}
+    - target: {fileID: 114664173511510070, guid: 5723296ccb8c5754d97c8d75568c576d,
+        type: 2}
+      propertyPath: materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: dd368e2aea58bec4388ae3b9ca0aa317, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5723296ccb8c5754d97c8d75568c576d, type: 2}
   m_IsPrefabParent: 0
@@ -5920,7 +5935,7 @@ Transform:
   m_Children:
   - {fileID: 1639660381}
   m_Father: {fileID: 521491705}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2127240154
 MonoBehaviour:

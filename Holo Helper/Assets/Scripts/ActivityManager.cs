@@ -17,12 +17,13 @@ public class ActivityManager : MonoBehaviour {
     public GameObject menuBg;                       // background plane of menus
 
     public GameObject[] menus = new GameObject[5];  // array containing each menu gameObject
-    public Material[] materials = new Material[2];  // array containing each material used for focusing on buttons
+    public Material[] materials = new Material[3];  // array containing each material used for focusing on buttons
     private Vector3[] activityPos = new Vector3[5]; // array containing positions for placing buttons
 
     private int noOfActivities;                     // controls the number of activities
     private int noOfInstructions;                   // controls the number of instructions
-    private int noOfPages;                          // controls the number of pages
+    private int noOfPagesActivities;                // controls the number of pages
+    private int noOfPagesInstructions;              // controls the number of pages
     private int currentPage = 0;                    // checks which page we're on
 
     private Activity foundAct;                      // activity found on a gameObject
@@ -44,7 +45,15 @@ public class ActivityManager : MonoBehaviour {
         activityPos[4] = new Vector3(0, -0.01285f, 0);
 
         container = null;
-        container = ActivityContainer.Load(Path.Combine(Application.dataPath, "ActivityList.xml"));
+
+        if (Application.isEditor)
+        {
+            container = ActivityContainer.Load(Path.Combine(Application.dataPath, "ActivityList.xml"));
+        }
+        else
+        {
+            container = ActivityContainer.Load(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
+        }
 
         if(container == null)
         {
@@ -107,11 +116,11 @@ public class ActivityManager : MonoBehaviour {
         {
             if (noOfActivities % 5 == 0 && noOfActivities != 0)
             {
-                noOfPages++;
+                noOfPagesActivities++;
                 UpdatePageAmount(storedAct);
             }
 
-            currentPage = noOfPages;
+            currentPage = noOfPagesActivities;
 
             // update which page we're on
             ChangePage(storedAct);
@@ -166,11 +175,11 @@ public class ActivityManager : MonoBehaviour {
         {
             if (noOfInstructions % 5 == 0 && noOfInstructions != 0)
             {
-                noOfPages++;
+                noOfPagesInstructions++;
                 UpdatePageAmount(storedIns);
             }
 
-            currentPage = noOfPages;
+            currentPage = noOfPagesInstructions;
 
             // update which page we're on
             ChangePage(storedIns);
@@ -202,14 +211,14 @@ public class ActivityManager : MonoBehaviour {
             // check if amount of pages has decreased
             if (noOfActivities % 5 == 0 && noOfActivities != 0)
             {
-                noOfPages--;
+                noOfPagesActivities--;
 
                 // check if left/right buttons should show
                 UpdatePageAmount(storedAct);
 
-                if (currentPage >= noOfPages)
+                if (currentPage >= noOfPagesActivities)
                 {
-                    currentPage = noOfPages;
+                    currentPage = noOfPagesActivities;
 
                     // update which page we're on
                     ChangePage(storedAct);
@@ -244,14 +253,14 @@ public class ActivityManager : MonoBehaviour {
             // check if amount of pages has decreased
             if (noOfInstructions % 5 == 0 && noOfInstructions != 0)
             {
-                noOfPages--;
+                noOfPagesInstructions--;
 
                 // check if left/right buttons should show
                 UpdatePageAmount(storedIns);
 
-                if (currentPage >= noOfPages)
+                if (currentPage >= noOfPagesInstructions)
                 {
-                    currentPage = noOfPages;
+                    currentPage = noOfPagesInstructions;
 
                     // update which page we're on
                     ChangePage(storedIns);
@@ -282,21 +291,8 @@ public class ActivityManager : MonoBehaviour {
 
         // reset variables
         noOfInstructions = 0;
-        noOfPages = 0;
+        noOfPagesInstructions = 0;
         currentPage = 0;
-
-        // temporary activity counter
-        int currentActCheck = 0;
-
-        // for each activity, check if we have enough to create a new page
-        for(int i = 0; i < container.activities.Count; i++)
-        {
-            if (currentActCheck % 5 == 0 && currentActCheck != 0)
-            {
-                noOfPages++;
-            }
-            currentActCheck++;
-        }
 
         // check if we have enough pages to display left/right arrows
         UpdatePageAmount(storedAct);
@@ -333,6 +329,17 @@ public class ActivityManager : MonoBehaviour {
     /** Show the arrow keys if we have more than 1 page. */
     public void UpdatePageAmount(GameObject storedObj)
     {
+        int noOfPages = 0;
+
+        if (storedObj.name == storedAct.name)
+        {
+            noOfPages = noOfPagesActivities;
+        }
+        else if (storedObj.name == storedIns.name)
+        {
+            noOfPages = noOfPagesInstructions;
+        }
+
         // display arrow keys if we have more than 1 page (more than 5 activities)
         if (noOfPages > 0)
         {
@@ -481,9 +488,14 @@ public class ActivityManager : MonoBehaviour {
     }
 
     /** Return amount of pages we have. */
-    public int GetPageAmount()
+    public int GetActivityPageAmount()
     {
-        return noOfPages;
+        return noOfPagesActivities;
+    }   
+    /** Return amount of pages we have. */
+    public int GetInstructionPageAmount()
+    {
+        return noOfPagesInstructions;
     }
 
     /** Return the set positions of buttons for the menus. */

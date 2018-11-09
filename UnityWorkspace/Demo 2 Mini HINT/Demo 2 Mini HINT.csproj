@@ -218,6 +218,9 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>Assets/Mono.Security.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql">
       <HintPath>Assets/Npgsql.dll</HintPath>
     </Reference>
@@ -236,8 +239,12 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/hololens/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data">
+      <HintPath>Assets/System.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Database.cs" />
     <Compile Include="Assets\DatabaseConnect.cs" />
     <Compile Include="Assets\HanddraggableHH.cs" />
     <Compile Include="Assets\HoloToolkit\Boundary\Scripts\BoundaryManager.cs" />

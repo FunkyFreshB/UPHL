@@ -14,25 +14,33 @@ public class InteractionMenuButtonBehaviour : MonoBehaviour, IFocusable, IInputC
     public GameObject buttonResize;
     public GameObject buttonWalls;
 
+    public GameObject lastFocusObject;
+    public GameObject activeButton;
+    public bool isButtonActive = false;
+
     public bool modeActive = true;
 
     // Use this for initialization
     void Start () {
-        activeMaterial = new Material(GetComponent<Renderer>().material.shader);
+        activeMaterial = new Material(Shader.Find("Specular"));
         activeMaterial.color = Color.blue;
-        cachedMaterial = GetComponent<Renderer>().material;
+        cachedMaterial = buttonMove.GetComponent<Renderer>().material;
     }
 	
     public void activate() {
-        GazeManager.Instance.HitObject.GetComponent<Renderer>().material = activeMaterial;
+        if(activeButton != lastFocusObject)
+            lastFocusObject.GetComponent<Renderer>().material = activeMaterial;
     }
 
     public void deactivate() {
-        GazeManager.Instance.HitObject.GetComponent<Renderer>().material = cachedMaterial;
+        if (activeButton != lastFocusObject)
+            lastFocusObject.GetComponent<Renderer>().material = cachedMaterial;
+
         
     }
 
     public void OnFocusEnter() {
+        lastFocusObject = GazeManager.Instance.HitObject;
         this.activate();
     }
 
@@ -43,16 +51,62 @@ public class InteractionMenuButtonBehaviour : MonoBehaviour, IFocusable, IInputC
     public void OnInputClicked(InputClickedEventData eventData) {
         GameObject focusedObject = GazeManager.Instance.HitObject;
         if(focusedObject == buttonMove) {
-            model.GetComponent<HanddraggableHH>().changeStatus();
+            if (buttonMove == activeButton) {
+                activeButton = null;
+                isButtonActive = false;
+                buttonMove.GetComponent<Renderer>().material = cachedMaterial;
+                model.GetComponent<HanddraggableHH>().changeStatus();
+            }
+            else{
+                if(activeButton!=null)
+                    activeButton.GetComponent<Renderer>().material = cachedMaterial;
+                activeButton = focusedObject;
+                isButtonActive = true;
+                buttonMove.GetComponent<Renderer>().material = activeMaterial;
+                model.GetComponent<HanddraggableHH>().changeStatus();
+            }
         } 
         else if(focusedObject == buttonRotate) {
-
+            if (buttonRotate == activeButton) {
+                activeButton = null;
+                isButtonActive = false;
+                model.GetComponent<HanddraggableHH>().changeStatus();
+            }
+            else {
+                if (activeButton != null)
+                    activeButton.GetComponent<Renderer>().material = cachedMaterial;
+                activeButton = focusedObject;
+                isButtonActive = true;
+                model.GetComponent<HanddraggableHH>().changeStatus();
+            }
         }
         else if(focusedObject == buttonResize) {
-
+            if (buttonResize == activeButton) {
+                activeButton = null;
+                isButtonActive = false;
+                model.GetComponent<HanddraggableHH>().changeStatus();
+            }
+            else {
+                if (activeButton != null)
+                    activeButton.GetComponent<Renderer>().material = cachedMaterial;
+                activeButton = focusedObject;
+                isButtonActive = true;
+                model.GetComponent<HanddraggableHH>().changeStatus();
+            }
         }
         else if((focusedObject == buttonWalls)) {
-
+            if (buttonWalls == activeButton) {
+                activeButton = null;
+                isButtonActive = false;
+                model.GetComponent<HanddraggableHH>().changeStatus();
+            }
+            else {
+                if (activeButton != null)
+                    activeButton.GetComponent<Renderer>().material = cachedMaterial;
+                activeButton = focusedObject;
+                isButtonActive = true;
+                model.GetComponent<HanddraggableHH>().changeStatus();
+            }
         }
         
     }

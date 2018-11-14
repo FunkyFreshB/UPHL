@@ -47,7 +47,6 @@ public class Instructions
 
         cube.AddComponent<AudioSource>();
         cube.GetComponent<AudioSource>().playOnAwake = false;
-        cube.GetComponent<AudioSource>().clip = Resources.Load("sfx_pop") as AudioClip;
         cube.GetComponent<AudioSource>().spatialize = true;
         cube.GetComponent<AudioSource>().spatialBlend = 1;
         cube.GetComponent<AudioSource>().rolloffMode = AudioRolloffMode.Custom;
@@ -73,10 +72,10 @@ public class Instructions
 
     public void removeIndicator()
     {
-        Object.Destroy(indicator);
         if(WorldAnchorManager.Instance != null)
         {
             WorldAnchorManager.Instance.RemoveAnchor(indicator); 
+            Object.Destroy(indicator);
         }
     }
 

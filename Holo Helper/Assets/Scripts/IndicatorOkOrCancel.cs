@@ -60,4 +60,14 @@ public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable
         tempPos = ams.GetSelectedInstruction().indicator.transform.position;
         ams.GetSelectedInstruction().isEditOrUserMode = true;
     }
+
+    public void OnSpeechKeywordRecognized(SpeechEventData eventData)
+    {
+        GameObject temp = GazeManager.Instance.HitObject.gameObject;
+        if (temp.GetComponent<ButtonBehaviour>() != null && eventData.RecognizedText.ToLower() == "select")
+        {
+            temp.GetComponent<ButtonBehaviour>().OnInputClicked(null);
+        }
+
+    }
 }

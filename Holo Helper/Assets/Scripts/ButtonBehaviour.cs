@@ -297,50 +297,17 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable, IS
         }
         else if (isReturn)
         {
-            if (Application.isEditor)
-            {
-                ams.container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
-            }
-            else
-            {
-                ams.container.Save(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
-            }
-
-            storedActs.SetActive(false);
-            menus[0].SetActive(true);
-            menus[1].SetActive(false);
-            menus[2].SetActive(false);
-            
+            Voice_Return();
         }
 
         // Change page
         else if (isPageRight)
         {
-            if (ams.GetCurrentPage() < ams.GetActivityPageAmount())
-            {
-                ams.SetCurrentPage(ams.GetCurrentPage() + 1);
-            }
-            else
-            {
-                ams.SetCurrentPage(ams.GetActivityPageAmount());
-            }
-
-            ams.ChangePage(storedActs);
-            menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetActivityPageAmount() + 1);
+            Voice_Next();
         }
         else if (isPageLeft)
         {
-            if (ams.GetCurrentPage() > 0)
-            {
-                ams.SetCurrentPage(ams.GetCurrentPage() - 1);
-            }
-            else
-            {
-                ams.SetCurrentPage(0);
-            }
-
-            ams.ChangePage(storedActs);
-            menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetActivityPageAmount() + 1);
+            Voice_Previous();
         }
     }
 
@@ -381,40 +348,17 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable, IS
         }
         else if (isReturn)
         {
-            storedActs.SetActive(false);
-            menus[0].SetActive(true);
-            menus[1].SetActive(false);
-            menus[2].SetActive(false);
+            Voice_Return();
         }
 
         // Change page
         else if (isPageRight)
         {
-            if (ams.GetCurrentPage() < ams.GetActivityPageAmount())
-            {
-                ams.SetCurrentPage(ams.GetCurrentPage() + 1);
-            }
-            else
-            {
-                ams.SetCurrentPage(ams.GetActivityPageAmount());
-            }
-
-            ams.ChangePage(storedActs);
-            menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetActivityPageAmount() + 1);
+            Voice_Next();
         }
         else if (isPageLeft)
         {
-            if (ams.GetCurrentPage() > 0)
-            {
-                ams.SetCurrentPage(ams.GetCurrentPage() - 1);
-            }
-            else
-            {
-                ams.SetCurrentPage(0);
-            }
-
-            ams.ChangePage(storedActs);
-            menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetActivityPageAmount() + 1);
+            Voice_Previous();
         }
     }
 
@@ -457,42 +401,16 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable, IS
 
         else if (isReturn)
         {
-            storedActs.SetActive(true);
-            storedInstruction.SetActive(false);
-            menus[1].SetActive(true);
-            menus[2].SetActive(false);
-            menus[3].SetActive(false);
-            ams.DeleteInstructionButton();
-            ams.SetCurrentPage(0);
+            Voice_Return();
         }
 
         else if (isPageRight)
         {
-            if (ams.GetCurrentPage() < ams.GetInstructionPageAmount())
-            {
-                ams.SetCurrentPage(ams.GetCurrentPage() + 1);
-            }
-            else
-            {
-                ams.SetCurrentPage(ams.GetInstructionPageAmount());
-            }
-
-            ams.ChangePage(storedInstruction);
-            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetInstructionPageAmount() + 1);
+            Voice_Next();
         }
         else if (isPageLeft)
         {
-            if (ams.GetCurrentPage() > 0)
-            {
-                ams.SetCurrentPage(ams.GetCurrentPage() - 1);
-            }
-            else
-            {
-                ams.SetCurrentPage(0);
-            }
-
-            ams.ChangePage(storedInstruction);
-            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetInstructionPageAmount() + 1);
+            Voice_Previous();
         }
     }
 
@@ -500,29 +418,22 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable, IS
     {
         if (isPageLeft && isPageRight)
         {
-            AEM_Repeat();
+            Voice_Repeat();
         }
 
         else if (isPageLeft)
         {
-            menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = ams.GetSelectedActivity().PreviousStep();
-
-            menus[4].transform.GetChild(0).GetComponent<TextMesh>().text = "Instruction " + (ams.GetSelectedActivity().currentStep + 1) + " / " + ams.GetSelectedActivity().instructions.Count;
+            Voice_Previous();
         }
 
         else if (isPageRight)
         {
-            menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = ams.GetSelectedActivity().NextStep();
-
-            menus[4].transform.GetChild(0).GetComponent<TextMesh>().text = "Instruction " + (ams.GetSelectedActivity().currentStep + 1) + " / " + ams.GetSelectedActivity().instructions.Count;
+            Voice_Next();
         }
 
         else if (isReturn)
         {
-            ams.GetSelectedActivity().instructions[ams.GetSelectedActivity().currentStep].indicator.SetActive(false);
-            menus[2].SetActive(true);
-            menus[4].SetActive(false);
-            storedActs.SetActive(true);
+            Voice_Return();
         }
 
         if (ams.GetSelectedActivity().instructions.Count == 1)
@@ -610,19 +521,195 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable, IS
      * 
     
     */
-    public void AEM_Repeat()
+    public void Voice_Repeat()
     {
         ams.GetSelectedActivity().RepeatStep();
     }
 
+    public void Voice_Next()
+    {
+        if (menus[1].activeSelf)
+        {
+            if (ams.GetCurrentPage() < ams.GetActivityPageAmount())
+            {
+                ams.SetCurrentPage(ams.GetCurrentPage() + 1);
+            }
+            else
+            {
+                ams.SetCurrentPage(ams.GetActivityPageAmount());
+            }
+
+            ams.ChangePage(storedActs);
+            menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetActivityPageAmount() + 1);
+        }
+        else if (menus[2].activeSelf)
+        {
+            if (ams.GetCurrentPage() < ams.GetActivityPageAmount())
+            {
+                ams.SetCurrentPage(ams.GetCurrentPage() + 1);
+            }
+            else
+            {
+                ams.SetCurrentPage(ams.GetActivityPageAmount());
+            }
+
+            ams.ChangePage(storedActs);
+            menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetActivityPageAmount() + 1);
+        }
+        else if (menus[3].activeSelf)
+        {
+            if (ams.GetCurrentPage() < ams.GetInstructionPageAmount())
+            {
+                ams.SetCurrentPage(ams.GetCurrentPage() + 1);
+            }
+            else
+            {
+                ams.SetCurrentPage(ams.GetInstructionPageAmount());
+            }
+
+            ams.ChangePage(storedInstruction);
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetInstructionPageAmount() + 1);
+        }
+        else if (menus[4].activeSelf)
+        {
+            menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = ams.GetSelectedActivity().NextStep();
+
+            menus[4].transform.GetChild(0).GetComponent<TextMesh>().text = "Instruction " + (ams.GetSelectedActivity().currentStep + 1) + " / " + ams.GetSelectedActivity().instructions.Count;
+        }
+    }
+
+    public void Voice_Previous()
+    {
+        if (menus[1].activeSelf)
+        {
+            if (ams.GetCurrentPage() > 0)
+            {
+                ams.SetCurrentPage(ams.GetCurrentPage() - 1);
+            }
+            else
+            {
+                ams.SetCurrentPage(0);
+            }
+
+            ams.ChangePage(storedActs);
+            menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetActivityPageAmount() + 1);
+        }
+        else if (menus[2].activeSelf)
+        {
+            if (ams.GetCurrentPage() > 0)
+            {
+                ams.SetCurrentPage(ams.GetCurrentPage() - 1);
+            }
+            else
+            {
+                ams.SetCurrentPage(0);
+            }
+
+            ams.ChangePage(storedActs);
+            menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetActivityPageAmount() + 1);
+        }
+        else if (menus[3].activeSelf)
+        {
+            if (ams.GetCurrentPage() > 0)
+            {
+                ams.SetCurrentPage(ams.GetCurrentPage() - 1);
+            }
+            else
+            {
+                ams.SetCurrentPage(0);
+            }
+
+            ams.ChangePage(storedInstruction);
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetInstructionPageAmount() + 1);
+        }
+        else if (menus[4].activeSelf)
+        {
+            menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = ams.GetSelectedActivity().PreviousStep();
+
+            menus[4].transform.GetChild(0).GetComponent<TextMesh>().text = "Instruction " + (ams.GetSelectedActivity().currentStep + 1) + " / " + ams.GetSelectedActivity().instructions.Count;
+        }
+    }
+
+    public void Voice_Return()
+    {
+        // admin
+        if (menus[1].activeSelf)
+        {
+            storedActs.SetActive(false);
+            menus[0].SetActive(true);
+            menus[1].SetActive(false);
+            menus[2].SetActive(false);
+        }
+        // user
+        else if (menus[2].activeSelf)
+        {
+            storedActs.SetActive(false);
+            menus[0].SetActive(true);
+            menus[1].SetActive(false);
+            menus[2].SetActive(false);
+        }
+        // edit
+        else if (menus[3].activeSelf)
+        {
+            Save();
+
+            storedActs.SetActive(true);
+            storedInstruction.SetActive(false);
+            menus[1].SetActive(true);
+            menus[2].SetActive(false);
+            menus[3].SetActive(false);
+            ams.DeleteInstructionButton();
+            ams.SetCurrentPage(0);
+        }
+        // activity
+        else if (menus[4].activeSelf)
+        {
+            Save();
+
+            ams.GetSelectedActivity().instructions[ams.GetSelectedActivity().currentStep].indicator.SetActive(false);
+            menus[2].SetActive(true);
+            menus[4].SetActive(false);
+            storedActs.SetActive(true);
+        }
+    }
+
+    public void Save()
+    {
+        if (Application.isEditor)
+        {
+            ams.container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
+        }
+        else
+        {
+            ams.container.Save(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
+        }
+    }
+
     public void OnSpeechKeywordRecognized(SpeechEventData eventData)
     {
-        //throw new System.NotImplementedException();
-
         GameObject temp = GazeManager.Instance.HitObject.gameObject;
-        if(temp.GetComponent<ButtonBehaviour>() != null && eventData.RecognizedText.ToLower() == "select")
+        if(temp.GetComponent<ButtonBehaviour>() != null)
         {
-            temp.GetComponent<ButtonBehaviour>().OnInputClicked(null);
+            if (eventData.RecognizedText.ToLower() == "select")
+            {
+                temp.GetComponent<ButtonBehaviour>().OnInputClicked(null);
+            }
+            if (eventData.RecognizedText.ToLower() == "return")
+            {
+                temp.GetComponent<ButtonBehaviour>().Voice_Return();
+            }
+            if (eventData.RecognizedText.ToLower() == "next")
+            {
+                temp.GetComponent<ButtonBehaviour>().Voice_Next();
+            }
+            if (eventData.RecognizedText.ToLower() == "previous")
+            {
+                temp.GetComponent<ButtonBehaviour>().Voice_Previous();
+            }
+            if (eventData.RecognizedText.ToLower() == "repeat")
+            {
+                temp.GetComponent<ButtonBehaviour>().Voice_Repeat();
+            }
         }
         
     }

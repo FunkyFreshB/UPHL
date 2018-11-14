@@ -651,6 +651,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &151103425 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+    type: 2}
+  m_PrefabInternal: {fileID: 151103424}
+  m_Script: {fileID: 11500000, guid: 42b456a6e9000d7439b8c6c1b407d1ac, type: 3}
 --- !u!1 &166716289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,6 +1438,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2de61c214f143474eb833d9db2b8f20c, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &306419688 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114671857784160920, guid: 2de61c214f143474eb833d9db2b8f20c,
+    type: 2}
+  m_PrefabInternal: {fileID: 306419687}
+  m_Script: {fileID: 11500000, guid: 42b456a6e9000d7439b8c6c1b407d1ac, type: 3}
 --- !u!1 &357496710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,6 +1991,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &570381739 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+    type: 2}
+  m_PrefabInternal: {fileID: 570381738}
+  m_Script: {fileID: 11500000, guid: 42b456a6e9000d7439b8c6c1b407d1ac, type: 3}
 --- !u!1 &592205620
 GameObject:
   m_ObjectHideFlags: 0
@@ -2713,7 +2731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456eda422e1dc4c4cb4fd6c25cbc2fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SphereRadius: 0.5
+  SphereRadius: 0.4
   MoveSpeed: 4
   useUnscaledTime: 1
   hideOnStart: 0
@@ -3291,13 +3309,15 @@ MonoBehaviour:
   RecognizerStart: 0
   Keywords:
   - Keyword: Next
-    KeyCode: 0
+    KeyCode: 104
   - Keyword: Previous
-    KeyCode: 0
+    KeyCode: 107
   - Keyword: Repeat
-    KeyCode: 0
+    KeyCode: 106
   - Keyword: Select
-    KeyCode: 0
+    KeyCode: 99
+  - Keyword: Return
+    KeyCode: 114
   recognitionConfidenceLevel: 1
 --- !u!114 &1032300992
 MonoBehaviour:
@@ -3327,7 +3347,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 2127240154}
-          m_MethodName: AEM_Repeat
+          m_MethodName: Voice_Repeat
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3339,7 +3359,135 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  IsGlobalListener: 0
+  - Keyword: Next
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 502159822}
+          m_MethodName: Voice_Next
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 306419688}
+          m_MethodName: Voice_Next
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 151103425}
+          m_MethodName: Voice_Next
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - Keyword: Previous
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1156764207}
+          m_MethodName: Voice_Previous
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 570381739}
+          m_MethodName: Voice_Previous
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1341867770}
+          m_MethodName: Voice_Previous
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - Keyword: Return
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 426820594}
+          m_MethodName: Voice_Return
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 592205622}
+          m_MethodName: Voice_Return
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1684982640}
+          m_MethodName: Voice_Return
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 28751614}
+          m_MethodName: Voice_Return
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  IsGlobalListener: 1
   PersistentKeywords: 0
 --- !u!1 &1037739286
 GameObject:
@@ -4137,6 +4285,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75f9bd06041dc8b42ad2d14a51f596a2, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1341867770 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114620684416413802, guid: 75f9bd06041dc8b42ad2d14a51f596a2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1341867769}
+  m_Script: {fileID: 11500000, guid: 42b456a6e9000d7439b8c6c1b407d1ac, type: 3}
 --- !u!1 &1347245856
 GameObject:
   m_ObjectHideFlags: 0

@@ -65,7 +65,7 @@ public class ActivityManager : MonoBehaviour {
         {
             a.reInitializer();
         }
-
+        GameObject.Find("Indicators").AddComponent<WorldAnchorManager>().PersistentAnchors = true ;
         UpdatePageAmount(storedAct);
     }
 	

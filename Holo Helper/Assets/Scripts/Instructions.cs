@@ -30,7 +30,6 @@ public class Instructions
 
     public Instructions()
     {
-
     }
 
     public void reInitializer(string activityName)
@@ -40,7 +39,7 @@ public class Instructions
         cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         cube.name = activityName + this.instructionText;
-        //cube.AddComponent<TapToPlace>();
+        cube.AddComponent<TapToPlace>();
         //cube.AddComponent<SolverSurfaceMagnetism>().MagneticSurface = GameObject.Find("SpatialMapping").layer;
         //cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
         cube.AddComponent<IndicatorBehaviour>().instruction = this;
@@ -53,7 +52,7 @@ public class Instructions
 
         indicator = cube;
         indicator.transform.parent = GameObject.Find("Indicators").transform;
-        indicator.SetActive(true);
+        indicator.SetActive(false);
 
         /*if(WorldAnchorManager.Instance.)
         Vector3 positionPlacement;
@@ -82,10 +81,8 @@ public class Instructions
 
     public void setInstructionName(string text, string acitivity)
     {
-        WorldAnchorManager.Instance.RemoveAnchor(indicator.name);
         instructionText = text;
         indicator.name = acitivity + instructionText;
-        WorldAnchorManager.Instance.AttachAnchor(indicator);
 
     }
 

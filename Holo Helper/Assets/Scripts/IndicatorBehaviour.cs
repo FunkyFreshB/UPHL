@@ -14,7 +14,7 @@ public class IndicatorBehaviour : MonoBehaviour,IInputClickHandler{
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
-        if (instruction.isEditOrUserMode)
+      /*  if (instruction.isEditOrUserMode)
         {
             isMoving = !isMoving;
 
@@ -31,12 +31,12 @@ public class IndicatorBehaviour : MonoBehaviour,IInputClickHandler{
             }
 
             this.GetComponent<AudioSource>().Play();
-        }
+        }*/
     }
         
     public void Update()
     {
-        if (isMoving)
+      /*  if (isMoving)
         {
             headPos = CameraCache.Main.transform.position;
             gazeDirection = CameraCache.Main.transform.forward;
@@ -46,7 +46,7 @@ public class IndicatorBehaviour : MonoBehaviour,IInputClickHandler{
             qtot.z = 0;
             this.gameObject.transform.rotation = qtot;
             this.gameObject.transform.position = positionPlacement;
-        }
+        }*/
     }
 
     public void FixedUpdate()

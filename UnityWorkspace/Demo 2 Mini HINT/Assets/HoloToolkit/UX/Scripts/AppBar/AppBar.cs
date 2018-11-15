@@ -172,6 +172,9 @@ namespace HoloToolkit.Unity.UX
         private int numHiddenButtons;
         private BoundingBoxHelper helper;
 
+        private GameObject walls;
+        private bool wallsState;
+
         public void Reset()
         {
             State = AppBarStateEnum.Default;
@@ -182,6 +185,8 @@ namespace HoloToolkit.Unity.UX
         public void Start()
         {
             State = AppBarStateEnum.Default;
+            walls = GameObject.Find("Walls");
+            wallsState = false;
 
             if (interactables.Count == 0)
             {
@@ -213,6 +218,14 @@ namespace HoloToolkit.Unity.UX
 
             switch (obj.name)
             {
+                case "WallsButton":
+                    if (walls != null) {
+                       walls.SetActive(wallsState);
+                       wallsState = !wallsState;
+                    }
+                      
+                        //walls.SetActive(wallsState=!wallsState);
+                    break;
                 case "Remove":
                     // Destroy the target object, Bounding Box, Bounding Box Rig and App Bar
                     boundingBox.Target.GetComponent<BoundingBoxRig>().Deactivate();

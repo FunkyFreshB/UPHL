@@ -53,8 +53,9 @@ public class Instructions
 
         indicator = cube;
         indicator.transform.parent = GameObject.Find("Indicators").transform;
-        indicator.SetActive(false);
+        indicator.SetActive(true);
 
+        /*if(WorldAnchorManager.Instance.)
         Vector3 positionPlacement;
         Vector3 headPos, gazeDirection;
         Quaternion qtot;
@@ -66,7 +67,7 @@ public class Instructions
         qtot.x = 0;
         qtot.z = 0;
         cube.transform.rotation = qtot;
-        cube.transform.position = positionPlacement;
+        cube.transform.position = positionPlacement;*/
 
     }
 
@@ -74,23 +75,18 @@ public class Instructions
     {
         if(WorldAnchorManager.Instance != null)
         {
-            WorldAnchorManager.Instance.RemoveAnchor(indicator); 
+            WorldAnchorManager.Instance.RemoveAnchor(indicator.name); 
             Object.Destroy(indicator);
         }
     }
 
     public void setInstructionName(string text, string acitivity)
     {
-        WorldAnchorManager.Instance.RemoveAnchor(indicator);
+        WorldAnchorManager.Instance.RemoveAnchor(indicator.name);
         instructionText = text;
         indicator.name = acitivity + instructionText;
         WorldAnchorManager.Instance.AttachAnchor(indicator);
 
-    }
-
-    ~Instructions()
-    {
-       // Debug.Log("The instruction \"" + instructionText + "\" have been destroyed");
     }
 
 }

@@ -31,19 +31,14 @@ public class Activity{
         //instructions.Add(new Instructions("Standard instruction step 1",stepCounter));
     }
 
-    ~Activity()
-    {
-       // Debug.Log("Activity" + name + " have been removed");
-    }
-
     public void setName(string newName)
     {
-        this.name = newName;
-
         foreach(Instructions i in instructions)
         {
-            i.setInstructionName(i.instructionText, this.name);
+            i.setInstructionName(i.instructionText, newName);
         }
+
+        this.name = newName;
     }
 
     public void reInitializer()

@@ -32,7 +32,7 @@ public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable
     {
         if (okOrCancel)
         {
-            if (WorldAnchorManager.Instance == null)
+            if (WorldAnchorManager.Instance != null)
             {
                 WorldAnchorManager.Instance.RemoveAnchor(ams.GetSelectedInstruction().indicator);
                 WorldAnchorManager.Instance.AttachAnchor(ams.GetSelectedInstruction().indicator);

@@ -6,6 +6,7 @@ using UnityEngine.XR.WSA.Input;
 using HoloToolkit.UI.Keyboard;
 using System.IO;
 using TMPro;
+using HoloToolkit.Unity;
 
 public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable, ISpeechHandler {
 
@@ -16,7 +17,6 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable, IS
     private GameObject[] menus = new GameObject[5]; // array containing menus
     private Material[] materials = new Material[3]; // array containing materials
     private ActivityManager ams;                    // script of activity manager
-    private GameObject menuBg;
 
     // Page info
     private int visibleActs = 5;                    // number of items per page (basically locked to 5)
@@ -41,9 +41,6 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable, IS
     public bool isPageLeft = false;
     public bool isPageRight = false;
 
-    bool isEditActivity = false;
-    bool isEditInstruction = false;
-
     int keyboardCase = -1;                          // variable for switch/case
     bool isKeyboard = false;                        // determines if keyboard is active
     Keyboard keyboard;                              // the keyboard
@@ -57,8 +54,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable, IS
     void Start ()
     {
         ams = actMan.GetComponent<ActivityManager>();
-
-        menuBg = ams.menuBg;
+        
         menus = ams.menus;
         materials = ams.materials;
         storedActs = ams.storedAct;
@@ -682,34 +678,51 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable, IS
         else
         {
             ams.container.Save(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
+            /*
+            WorldAnchorManager.Instance.RemoveAllAnchors();
+
+            foreach (Activity a in ams.container.activities)
+            {
+                foreach(Instructions i in a.instructions)
+                {
+                    WorldAnchorManager.Instance.AttachAnchor(i.indicator);
+                }
+            }*/
         }
     }
 
     public void OnSpeechKeywordRecognized(SpeechEventData eventData)
     {
         GameObject temp = GazeManager.Instance.HitObject.gameObject;
+        string voiceText = eventData.RecognizedText.ToLower();
+
         if(temp.GetComponent<ButtonBehaviour>() != null)
         {
-            if (eventData.RecognizedText.ToLower() == "select")
+            if (voiceText == "select")
             {
                 temp.GetComponent<ButtonBehaviour>().OnInputClicked(null);
+                actMan.GetComponent<TextToSpeech>().StartSpeaking("select");
             }
-            if (eventData.RecognizedText.ToLower() == "return")
-            {
-                temp.GetComponent<ButtonBehaviour>().Voice_Return();
-            }
-            if (eventData.RecognizedText.ToLower() == "next")
-            {
-                temp.GetComponent<ButtonBehaviour>().Voice_Next();
-            }
-            if (eventData.RecognizedText.ToLower() == "previous")
-            {
-                temp.GetComponent<ButtonBehaviour>().Voice_Previous();
-            }
-            if (eventData.RecognizedText.ToLower() == "repeat")
-            {
-                temp.GetComponent<ButtonBehaviour>().Voice_Repeat();
-            }
+        }
+        if (voiceText.Equals("return"))
+        {
+            Voice_Return();
+            actMan.GetComponent<TextToSpeech>().StartSpeaking("return");
+        }
+        if (voiceText == "next")
+        {
+            Voice_Next();
+            actMan.GetComponent<TextToSpeech>().StartSpeaking("next");
+        }
+        if (eventData.RecognizedText.ToLower() == "previous")
+        {
+            Voice_Previous();
+            actMan.GetComponent<TextToSpeech>().StartSpeaking("previous");
+        }
+        if (eventData.RecognizedText.ToLower() == "repeat")
+        {
+            Voice_Repeat();
+            actMan.GetComponent<TextToSpeech>().StartSpeaking("repeat");
         }
         
     }

@@ -7,6 +7,9 @@ using System;
 
 public class Database : MonoBehaviour {
 
+    static void NotificationHandler(object sender, NpgsqlNoticeEventArgs e) {
+
+    }
     // Use this for initialization
     void Start() {
         string connectionString = "Server=192.168.1.198;" +
@@ -16,6 +19,7 @@ public class Database : MonoBehaviour {
 
         NpgsqlConnection dbcon;
         dbcon = new NpgsqlConnection(connectionString);
+        //dbcon.Notification += new NotificationEventHandler(NotificationHandler);
         dbcon.Open();
 
         NpgsqlCommand dbcmd = dbcon.CreateCommand();

@@ -223,8 +223,6 @@ namespace HoloToolkit.Unity.UX
                        walls.SetActive(wallsState);
                        wallsState = !wallsState;
                     }
-                      
-                        //walls.SetActive(wallsState=!wallsState);
                     break;
                 case "Remove":
                     // Destroy the target object, Bounding Box, Bounding Box Rig and App Bar

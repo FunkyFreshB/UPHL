@@ -296,6 +296,9 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/hololens/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Data.Tds">
+      <HintPath>Assets/Mono.Data.Tds.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Demo 2 Mini HINT.csproj">

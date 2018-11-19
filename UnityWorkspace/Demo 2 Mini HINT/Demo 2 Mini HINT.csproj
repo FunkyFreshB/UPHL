@@ -242,10 +242,12 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/hololens/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Data.Tds">
+      <HintPath>Assets/Mono.Data.Tds.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Database.cs" />
-    <Compile Include="Assets\DatabaseConnect.cs" />
     <Compile Include="Assets\HanddraggableHH.cs" />
     <Compile Include="Assets\HideWallsButtonAppBar.cs" />
     <Compile Include="Assets\HoloToolkit\Boundary\Scripts\BoundaryManager.cs" />
@@ -949,8 +951,6 @@
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\TextureThemeWidget.cs" />
     <Compile Include="Assets\InteractionMenuButtonBehaviour.cs" />
     <Compile Include="Assets\LampBehaviour.cs" />
-    <Compile Include="Assets\LampButtonClick.cs" />
-    <Compile Include="Assets\Menu.cs" />
     <Compile Include="Assets\SensorClick.cs" />
     <Compile Include="Assets\SensorInput.cs" />
     <Compile Include="Assets\StartInteractionMenu.cs" />

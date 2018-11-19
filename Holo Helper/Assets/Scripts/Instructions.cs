@@ -17,14 +17,14 @@ public class Instructions
     public bool visible;
 
     [XmlIgnore]
-    public bool isEditOrUserMode;
+    public bool isEditMode;
 
     // TODO What script do we need or should we implement our own?
     public Instructions(string text,string activityName)
     {
         instructionText = text;
         visible = true;
-        isEditOrUserMode = false;
+        isEditMode = false;
         this.reInitializer(activityName);
     }
 
@@ -39,7 +39,7 @@ public class Instructions
         cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         cube.name = activityName + this.instructionText;
-        cube.AddComponent<TapToPlace>();
+        cube.AddComponent<TapToPlace>().enabled = false;
         //cube.AddComponent<SolverSurfaceMagnetism>().MagneticSurface = GameObject.Find("SpatialMapping").layer;
         //cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
         cube.AddComponent<IndicatorBehaviour>().instruction = this;

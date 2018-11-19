@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.IO;
 using HoloToolkit.Unity;
+using HoloToolkit.Unity.InputModule;
+using UnityEngine.Windows.Speech;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 
 // kan nog kallas MenuManager istället
 public class ActivityManager : MonoBehaviour {
@@ -31,6 +36,9 @@ public class ActivityManager : MonoBehaviour {
     private GameObject newActivity;                 // used when creating an activity
     private Instructions foundInstruction;          // instruction found on a gameobject
     private GameObject newInstruction;              // used when creating an instruction
+
+    KeywordRecognizer keywordRecognizer;
+    Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
 
     /* ------------------------------------ */
     /* General Functions */
@@ -67,10 +75,41 @@ public class ActivityManager : MonoBehaviour {
         }
         GameObject.Find("Indicators").AddComponent<WorldAnchorManager>().PersistentAnchors = true ;
         UpdatePageAmount(storedAct);
+
+        keywords.Add("return", () =>
+        {
+            Voice_Return();
+        });
+        keywords.Add("previous", () =>
+        {
+            Voice_Previous();
+        });
+        keywords.Add("next", () =>
+        {
+            Voice_Next();
+        });
+        keywords.Add("repeat", () =>
+        {
+            Voice_Repeat();
+        });
+
+        keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
+        keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
+        keywordRecognizer.Start();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
+    {
+        System.Action keywordAction;
+        // if the keyword recognized is in our dictionary, call that Action.
+        if (keywords.TryGetValue(args.text, out keywordAction))
+        {
+            keywordAction.Invoke();
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
     }
 
     /* ------------------------------------ */
@@ -520,4 +559,173 @@ public class ActivityManager : MonoBehaviour {
         selectedObj.name = selectedInstruction.instructionText;
         selectedObj.GetComponentInChildren<TextMesh>().text = newText;
     }
+
+    /* ------------------------------- */
+
+    public void Voice_Repeat()
+    {
+        if (menus[4].activeSelf)
+        {
+            GetSelectedActivity().RepeatStep();
+        }
+    }
+
+    public void Voice_Next()
+    {
+        if (menus[1].activeSelf)
+        {
+            if (GetCurrentPage() < GetActivityPageAmount())
+            {
+                SetCurrentPage(GetCurrentPage() + 1);
+            }
+            else
+            {
+                SetCurrentPage(GetActivityPageAmount());
+            }
+
+            ChangePage(storedAct);
+            menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetActivityPageAmount() + 1);
+        }
+        else if (menus[2].activeSelf)
+        {
+            if (GetCurrentPage() < GetActivityPageAmount())
+            {
+                SetCurrentPage(GetCurrentPage() + 1);
+            }
+            else
+            {
+                SetCurrentPage(GetActivityPageAmount());
+            }
+
+            ChangePage(storedAct);
+            menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetActivityPageAmount() + 1);
+        }
+        else if (menus[3].activeSelf)
+        {
+            if (GetCurrentPage() < GetInstructionPageAmount())
+            {
+                SetCurrentPage(GetCurrentPage() + 1);
+            }
+            else
+            {
+                SetCurrentPage(GetInstructionPageAmount());
+            }
+
+            ChangePage(storedIns);
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetInstructionPageAmount() + 1);
+        }
+        else if (menus[4].activeSelf)
+        {
+            menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = GetSelectedActivity().NextStep();
+
+            menus[4].transform.GetChild(0).GetComponent<TextMesh>().text = "Instruction " + (GetSelectedActivity().currentStep + 1) + " / " + GetSelectedActivity().instructions.Count;
+        }
+    }
+
+    public void Voice_Previous()
+    {
+        if (menus[1].activeSelf)
+        {
+            if (GetCurrentPage() > 0)
+            {
+                SetCurrentPage(GetCurrentPage() - 1);
+            }
+            else
+            {
+                SetCurrentPage(0);
+            }
+
+            ChangePage(storedAct);
+            menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetActivityPageAmount() + 1);
+        }
+        else if (menus[2].activeSelf)
+        {
+            if (GetCurrentPage() > 0)
+            {
+                SetCurrentPage(GetCurrentPage() - 1);
+            }
+            else
+            {
+                SetCurrentPage(0);
+            }
+
+            ChangePage(storedAct);
+            menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetActivityPageAmount() + 1);
+        }
+        else if (menus[3].activeSelf)
+        {
+            if (GetCurrentPage() > 0)
+            {
+                SetCurrentPage(GetCurrentPage() - 1);
+            }
+            else
+            {
+                SetCurrentPage(0);
+            }
+
+            ChangePage(storedIns);
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetInstructionPageAmount() + 1);
+        }
+        else if (menus[4].activeSelf)
+        {
+            menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = GetSelectedActivity().PreviousStep();
+
+            menus[4].transform.GetChild(0).GetComponent<TextMesh>().text = "Instruction " + (GetSelectedActivity().currentStep + 1) + " / " + GetSelectedActivity().instructions.Count;
+        }
+    }
+
+    public void Voice_Return()
+    {
+        // admin
+        if (menus[1].activeSelf)
+        {
+            storedAct.SetActive(false);
+            menus[0].SetActive(true);
+            menus[1].SetActive(false);
+            menus[2].SetActive(false);
+        }
+        // user
+        else if (menus[2].activeSelf)
+        {
+            storedAct.SetActive(false);
+            menus[0].SetActive(true);
+            menus[1].SetActive(false);
+            menus[2].SetActive(false);
+        }
+        // edit
+        else if (menus[3].activeSelf)
+        {
+            Save();
+
+            storedAct.SetActive(true);
+            storedIns.SetActive(false);
+            menus[1].SetActive(true);
+            menus[2].SetActive(false);
+            menus[3].SetActive(false);
+            DeleteInstructionButton();
+            SetCurrentPage(0);
+        }
+        // activity
+        else if (menus[4].activeSelf)
+        {
+            Save();
+
+            GetSelectedActivity().instructions[GetSelectedActivity().currentStep].indicator.SetActive(false);
+            menus[2].SetActive(true);
+            menus[4].SetActive(false);
+            storedAct.SetActive(true);
+        }
+    }
+    public void Save()
+    {
+        if (Application.isEditor)
+        {
+            container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
+        }
+        else
+        {
+            container.Save(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
+        }
+    }
+
 }

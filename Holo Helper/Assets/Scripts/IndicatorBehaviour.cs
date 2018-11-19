@@ -51,26 +51,30 @@ public class IndicatorBehaviour : MonoBehaviour,IInputClickHandler{
 
     public void FixedUpdate()
     {
-        float dist = Vector3.Distance(this.gameObject.transform.position, CameraCache.Main.transform.position);
-
-        if (dist >= 1 && dist < 6)
+        if (!instruction.isEditMode)
         {
-            this.GetComponent<AudioSource>().volume = (dist - 1) / 5;
-        }
-        else if (dist >= 6)
-        {
-            this.GetComponent<AudioSource>().volume = 1;
-        }
 
-        countTilPop++;
+            float dist = Vector3.Distance(this.gameObject.transform.position, CameraCache.Main.transform.position);
 
-        if (countTilPop >= 300 && !isMoving)
-        {
-            this.GetComponent<AudioSource>().clip = Resources.Load("sfx_ping") as AudioClip;
-            this.GetComponent<AudioSource>().pitch = 0.3f;
+            if (dist >= 1 && dist < 6)
+            {
+                this.GetComponent<AudioSource>().volume = (dist - 1) / 5;
+            }
+            else if (dist >= 6)
+            {
+                this.GetComponent<AudioSource>().volume = 1;
+            }
 
-            this.GetComponent<AudioSource>().Play();
-            countTilPop = 0;
+            countTilPop++;
+
+            if (countTilPop >= 300 && !isMoving)
+            {
+                this.GetComponent<AudioSource>().clip = Resources.Load("sfx_ping") as AudioClip;
+                this.GetComponent<AudioSource>().pitch = 0.3f;
+
+                this.GetComponent<AudioSource>().Play();
+                countTilPop = 0;
+            }
         }
     }
 }

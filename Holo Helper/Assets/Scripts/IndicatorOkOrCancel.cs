@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 using HoloToolkit.Unity;
+using HoloToolkit.Unity.SpatialMapping;
 
 public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable{
 
@@ -38,14 +39,17 @@ public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable
                 WorldAnchorManager.Instance.AttachAnchor(ams.GetSelectedInstruction().indicator);
             }
         }
-
         else
         {
+            WorldAnchorManager.Instance.RemoveAnchor(ams.GetSelectedInstruction().indicator);
             ams.GetSelectedInstruction().indicator.transform.position = tempPos;
+            WorldAnchorManager.Instance.AttachAnchor(ams.GetSelectedInstruction().indicator);
         }
+
+        ams.GetSelectedInstruction().indicator.GetComponent<TapToPlace>().enabled = false;
         ams.menus[3].SetActive(true);
         storedInstructions.SetActive(true);
-        ams.GetSelectedInstruction().isEditOrUserMode = false;
+        ams.GetSelectedInstruction().isEditMode = false;
         ams.GetSelectedInstruction().indicator.SetActive(false);
         this.gameObject.GetComponent<Renderer>().material = materials[0];
 
@@ -58,16 +62,6 @@ public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable
     void OnEnable()
     {
         tempPos = ams.GetSelectedInstruction().indicator.transform.position;
-        ams.GetSelectedInstruction().isEditOrUserMode = true;
-    }
-
-    public void OnSpeechKeywordRecognized(SpeechEventData eventData)
-    {
-        GameObject temp = GazeManager.Instance.HitObject.gameObject;
-        if (temp.GetComponent<ButtonBehaviour>() != null && eventData.RecognizedText.ToLower() == "select")
-        {
-            temp.GetComponent<ButtonBehaviour>().OnInputClicked(null);
-        }
-
+        ams.GetSelectedInstruction().isEditMode = true;
     }
 }

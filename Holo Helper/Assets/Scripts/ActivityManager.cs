@@ -12,7 +12,7 @@ public class ActivityManager : MonoBehaviour {
 
     private bool firstTime = true;                  // checks if first time setup has been done
 
-    private GameObject selectedObj;                 // button we have selected by tapping on it
+    public GameObject selectedObj;                 // button we have selected by tapping on it
     private Activity selectedAct;                   // selectedObj's attached activity
     private Instructions selectedInstruction;       // selectedObj's attached instruction
 
@@ -73,7 +73,7 @@ public class ActivityManager : MonoBehaviour {
         {
             a.reInitializer();
         }
-        GameObject.Find("Indicators").AddComponent<WorldAnchorManager>().PersistentAnchors = true ;
+//        GameObject.Find("Indicators").AddComponent<WorldAnchorManager>().PersistentAnchors = true ;
         UpdatePageAmount(storedAct);
 
         keywords.Add("return", () =>
@@ -157,13 +157,12 @@ public class ActivityManager : MonoBehaviour {
             if (noOfActivities % 5 == 0 && noOfActivities != 0)
             {
                 noOfPagesActivities++;
-                UpdatePageAmount(storedAct);
             }
 
             currentPage = noOfPagesActivities;
 
-            // update which page we're on
-            ChangePage(storedAct);
+            // update which page we're onv
+            UpdatePageAmount(storedAct);
 
             noOfActivities++;
 
@@ -216,13 +215,12 @@ public class ActivityManager : MonoBehaviour {
             if (noOfInstructions % 5 == 0 && noOfInstructions != 0)
             {
                 noOfPagesInstructions++;
-                UpdatePageAmount(storedIns);
             }
 
             currentPage = noOfPagesInstructions;
 
             // update which page we're on
-            ChangePage(storedIns);
+            UpdatePageAmount(storedIns);
 
             noOfInstructions++;
 
@@ -255,14 +253,6 @@ public class ActivityManager : MonoBehaviour {
 
                 // check if left/right buttons should show
                 UpdatePageAmount(storedAct);
-
-                if (currentPage >= noOfPagesActivities)
-                {
-                    currentPage = noOfPagesActivities;
-
-                    // update which page we're on
-                    ChangePage(storedAct);
-                }
             }
 
             // update each button's position to remove any gaps
@@ -297,14 +287,6 @@ public class ActivityManager : MonoBehaviour {
 
                 // check if left/right buttons should show
                 UpdatePageAmount(storedIns);
-
-                if (currentPage >= noOfPagesInstructions)
-                {
-                    currentPage = noOfPagesInstructions;
-
-                    // update which page we're on
-                    ChangePage(storedIns);
-                }
             }
 
             // update each button's position to remove any gaps
@@ -338,34 +320,6 @@ public class ActivityManager : MonoBehaviour {
         UpdatePageAmount(storedAct);
     }
     /* ------------------------------------ */
-    /** Decide which activities to display. Activities */
-    public void ChangePage(GameObject storedObj)
-    {
-        for (int h = 0; h < storedObj.transform.childCount; h++)
-        {
-            // if child is not left/right buttons
-            if (h >= 2)
-            {
-                // set inactive if gameobject's position in list isn't within range
-                if ((h - 2) < (currentPage * 5) || (h - 2) > (currentPage * 5 + 4))
-                {
-                    if (storedObj.transform.GetChild(h).gameObject != null)
-                    {
-                        storedObj.transform.GetChild(h).gameObject.SetActive(false);
-                    }
-                }
-                // set active if gameobject's position is within range
-                else
-                {
-                    if (storedObj.transform.GetChild(h).gameObject != null)
-                    {
-                        storedObj.transform.GetChild(h).gameObject.SetActive(true);
-                    }
-                }
-            }
-        }
-    }
-
     /** Show the arrow keys if we have more than 1 page. */
     public void UpdatePageAmount(GameObject storedObj)
     {
@@ -383,8 +337,48 @@ public class ActivityManager : MonoBehaviour {
         // display arrow keys if we have more than 1 page (more than 5 activities)
         if (noOfPages > 0)
         {
-            storedObj.transform.GetChild(0).gameObject.SetActive(true);
-            storedObj.transform.GetChild(1).gameObject.SetActive(true);
+            int childrenB4 = 2;
+
+            for (int h = childrenB4; h < storedObj.transform.childCount; h++)
+            {
+                // set inactive if gameobject's position in list isn't within range
+                if ((h - childrenB4) < (currentPage * 5) || (h - 2) > (currentPage * 5 + 4))
+                {
+                    if (storedObj.transform.GetChild(h).gameObject != null)
+                    {
+                        storedObj.transform.GetChild(h).gameObject.SetActive(false);
+                    }
+                }
+                // set active if gameobject's position is within range
+                else
+                {
+                    if (storedObj.transform.GetChild(h).gameObject != null)
+                    {
+                        storedObj.transform.GetChild(h).gameObject.SetActive(true);
+                    }
+                }
+            }
+
+            if(currentPage > noOfPages)
+            {
+                currentPage = noOfPages;
+            }
+
+            if (currentPage == 0)
+            {
+                storedObj.transform.GetChild(0).gameObject.SetActive(true);
+                storedObj.transform.GetChild(1).gameObject.SetActive(false);
+            }
+            else if (currentPage == noOfPages)
+            {
+                storedObj.transform.GetChild(0).gameObject.SetActive(false);
+                storedObj.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else
+            {
+                storedObj.transform.GetChild(0).gameObject.SetActive(true);
+                storedObj.transform.GetChild(1).gameObject.SetActive(true);
+            }
         }
         else
         {
@@ -478,7 +472,6 @@ public class ActivityManager : MonoBehaviour {
         }
         else
         {
-            Debug.Log("NULL OBJ");
             return false;
         }
     }
@@ -567,6 +560,8 @@ public class ActivityManager : MonoBehaviour {
         if (menus[4].activeSelf)
         {
             GetSelectedActivity().RepeatStep();
+
+            menus[4].transform.GetChild(5).GetComponent<Renderer>().material = materials[1];
         }
     }
 
@@ -583,7 +578,7 @@ public class ActivityManager : MonoBehaviour {
                 SetCurrentPage(GetActivityPageAmount());
             }
 
-            ChangePage(storedAct);
+            UpdatePageAmount(storedAct);
             menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetActivityPageAmount() + 1);
         }
         else if (menus[2].activeSelf)
@@ -597,7 +592,7 @@ public class ActivityManager : MonoBehaviour {
                 SetCurrentPage(GetActivityPageAmount());
             }
 
-            ChangePage(storedAct);
+            UpdatePageAmount(storedAct);
             menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetActivityPageAmount() + 1);
         }
         else if (menus[3].activeSelf)
@@ -611,12 +606,21 @@ public class ActivityManager : MonoBehaviour {
                 SetCurrentPage(GetInstructionPageAmount());
             }
 
-            ChangePage(storedIns);
+            UpdatePageAmount(storedIns);
             menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetInstructionPageAmount() + 1);
         }
         else if (menus[4].activeSelf)
         {
             menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = GetSelectedActivity().NextStep();
+
+            if (GetSelectedActivity().currentStep != (GetSelectedActivity().instructions.Count - 1))
+            {
+                menus[4].transform.GetChild(4).GetComponent<Renderer>().material = materials[1];
+            }
+            else
+            {
+                menus[4].transform.GetChild(4).GetComponent<Renderer>().material = materials[0];
+            }
 
             menus[4].transform.GetChild(0).GetComponent<TextMesh>().text = "Instruction " + (GetSelectedActivity().currentStep + 1) + " / " + GetSelectedActivity().instructions.Count;
         }
@@ -635,7 +639,7 @@ public class ActivityManager : MonoBehaviour {
                 SetCurrentPage(0);
             }
 
-            ChangePage(storedAct);
+            UpdatePageAmount(storedAct);
             menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetActivityPageAmount() + 1);
         }
         else if (menus[2].activeSelf)
@@ -649,7 +653,7 @@ public class ActivityManager : MonoBehaviour {
                 SetCurrentPage(0);
             }
 
-            ChangePage(storedAct);
+            UpdatePageAmount(storedAct);
             menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetActivityPageAmount() + 1);
         }
         else if (menus[3].activeSelf)
@@ -663,12 +667,21 @@ public class ActivityManager : MonoBehaviour {
                 SetCurrentPage(0);
             }
 
-            ChangePage(storedIns);
+            UpdatePageAmount(storedIns);
             menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (GetCurrentPage() + 1) + " / " + (GetInstructionPageAmount() + 1);
         }
         else if (menus[4].activeSelf)
         {
             menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = GetSelectedActivity().PreviousStep();
+
+            if(GetSelectedActivity().currentStep != 0)
+            {
+                menus[4].transform.GetChild(3).GetComponent<Renderer>().material = materials[1];
+            }
+            else
+            {
+                menus[4].transform.GetChild(3).GetComponent<Renderer>().material = materials[0];
+            }
 
             menus[4].transform.GetChild(0).GetComponent<TextMesh>().text = "Instruction " + (GetSelectedActivity().currentStep + 1) + " / " + GetSelectedActivity().instructions.Count;
         }
@@ -683,6 +696,7 @@ public class ActivityManager : MonoBehaviour {
             menus[0].SetActive(true);
             menus[1].SetActive(false);
             menus[2].SetActive(false);
+            SetSelectedObject(null);
         }
         // user
         else if (menus[2].activeSelf)
@@ -691,6 +705,7 @@ public class ActivityManager : MonoBehaviour {
             menus[0].SetActive(true);
             menus[1].SetActive(false);
             menus[2].SetActive(false);
+            SetSelectedObject(null);
         }
         // edit
         else if (menus[3].activeSelf)
@@ -703,6 +718,7 @@ public class ActivityManager : MonoBehaviour {
             menus[2].SetActive(false);
             menus[3].SetActive(false);
             DeleteInstructionButton();
+            SetSelectedObject(null);
             SetCurrentPage(0);
         }
         // activity
@@ -714,8 +730,10 @@ public class ActivityManager : MonoBehaviour {
             menus[2].SetActive(true);
             menus[4].SetActive(false);
             storedAct.SetActive(true);
+            SetSelectedObject(null);
         }
     }
+
     public void Save()
     {
         if (Application.isEditor)

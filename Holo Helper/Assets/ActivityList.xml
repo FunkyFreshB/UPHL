@@ -4,10 +4,10 @@
     <Activity>
       <Instructions>
         <Instruction visible="true">
-          <instructionText>Standard instruction step 1</instructionText>
+          <instructionText>kkkkkStandard instruction step 1</instructionText>
         </Instruction>
         <Instruction visible="true">
-          <instructionText>Standard instruction step 2</instructionText>
+          <instructionText>kklStandard instruction step 2</instructionText>
         </Instruction>
         <Instruction visible="true">
           <instructionText>rfghhj</instructionText>
@@ -23,12 +23,12 @@
         </Instruction>
       </Instructions>
       <name>First One</name>
-      <CurrentStep>0</CurrentStep>
+      <CurrentStep>3</CurrentStep>
     </Activity>
     <Activity>
       <Instructions>
         <Instruction visible="true">
-          <instructionText>steppet</instructionText>
+          <instructionText>eggsteppet</instructionText>
         </Instruction>
         <Instruction visible="true">
           <instructionText>wahooEatStanstruction step 2</instructionText>

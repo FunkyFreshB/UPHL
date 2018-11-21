@@ -19,6 +19,8 @@ public class Instructions
     [XmlIgnore]
     public bool isEditMode;
 
+    public Instructions() { }
+
     // TODO What script do we need or should we implement our own?
     public Instructions(string text,string activityName)
     {
@@ -26,10 +28,6 @@ public class Instructions
         visible = true;
         isEditMode = false;
         this.reInitializer(activityName);
-    }
-
-    public Instructions()
-    {
     }
 
     public void reInitializer(string activityName)
@@ -40,6 +38,7 @@ public class Instructions
         cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         cube.name = activityName + this.instructionText;
         cube.AddComponent<TapToPlace>().enabled = false;
+        cube.AddComponent<TapToPlace>().DefaultGazeDistance = 1.0f;
         //cube.AddComponent<SolverSurfaceMagnetism>().MagneticSurface = GameObject.Find("SpatialMapping").layer;
         //cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
         cube.AddComponent<IndicatorBehaviour>().instruction = this;
@@ -53,21 +52,6 @@ public class Instructions
         indicator = cube;
         indicator.transform.parent = GameObject.Find("Indicators").transform;
         indicator.SetActive(false);
-
-        /*if(WorldAnchorManager.Instance.)
-        Vector3 positionPlacement;
-        Vector3 headPos, gazeDirection;
-        Quaternion qtot;
-        float DefaultGazeDistance = 1.0f;
-        headPos = CameraCache.Main.transform.position;
-        gazeDirection = CameraCache.Main.transform.forward;
-        positionPlacement = headPos + (gazeDirection * DefaultGazeDistance);
-        qtot = CameraCache.Main.transform.localRotation;
-        qtot.x = 0;
-        qtot.z = 0;
-        cube.transform.rotation = qtot;
-        cube.transform.position = positionPlacement;*/
-
     }
 
     public void removeIndicator()
@@ -85,5 +69,4 @@ public class Instructions
         indicator.name = acitivity + instructionText;
 
     }
-
 }

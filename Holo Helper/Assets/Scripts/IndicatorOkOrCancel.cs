@@ -46,6 +46,7 @@ public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable
             WorldAnchorManager.Instance.AttachAnchor(ams.GetSelectedInstruction().indicator);
         }
 
+        ams.GetSelectedInstruction().indicator.GetComponent<TapToPlace>().IsBeingPlaced = false;
         ams.GetSelectedInstruction().indicator.GetComponent<TapToPlace>().enabled = false;
         ams.menus[3].SetActive(true);
         storedInstructions.SetActive(true);

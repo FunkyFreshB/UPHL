@@ -11,7 +11,7 @@ using TMPro;
 public class ActivityManager : MonoBehaviour {
 
     private bool firstTime = true;                  // checks if first time setup has been done
-
+    
     public GameObject selectedObj;                 // button we have selected by tapping on it
     private Activity selectedAct;                   // selectedObj's attached activity
     private Instructions selectedInstruction;       // selectedObj's attached instruction
@@ -31,6 +31,8 @@ public class ActivityManager : MonoBehaviour {
     private int noOfPagesActivities;                // controls the number of pages
     private int noOfPagesInstructions;              // controls the number of pages
     private int currentPage = 0;                    // checks which page we're on
+
+    private bool isVoice = false;
 
     private Activity foundAct;                      // activity found on a gameObject
     private GameObject newActivity;                 // used when creating an activity
@@ -82,10 +84,12 @@ public class ActivityManager : MonoBehaviour {
         });
         keywords.Add("previous", () =>
         {
+            isVoice = true;
             Voice_Previous();
         });
         keywords.Add("next", () =>
         {
+            isVoice = true;
             Voice_Next();
         });
         keywords.Add("repeat", () =>
@@ -109,8 +113,7 @@ public class ActivityManager : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
-    }
+    void Update () { }
 
     /* ------------------------------------ */
     /* ActivityManager Functions */
@@ -613,7 +616,7 @@ public class ActivityManager : MonoBehaviour {
         {
             menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = GetSelectedActivity().NextStep();
 
-            if (GetSelectedActivity().currentStep != (GetSelectedActivity().instructions.Count - 1))
+            if (GetSelectedActivity().currentStep != (GetSelectedActivity().instructions.Count - 1) && !isVoice)
             {
                 menus[4].transform.GetChild(4).GetComponent<Renderer>().material = materials[1];
             }
@@ -623,7 +626,11 @@ public class ActivityManager : MonoBehaviour {
             }
 
             menus[4].transform.GetChild(0).GetComponent<TextMesh>().text = "Instruction " + (GetSelectedActivity().currentStep + 1) + " / " + GetSelectedActivity().instructions.Count;
+
+            UpdatePageButtonsActivity();
         }
+
+        isVoice = false;
     }
 
     public void Voice_Previous()
@@ -674,7 +681,7 @@ public class ActivityManager : MonoBehaviour {
         {
             menus[4].transform.GetChild(2).GetComponent<TextMeshPro>().text = GetSelectedActivity().PreviousStep();
 
-            if(GetSelectedActivity().currentStep != 0)
+            if(GetSelectedActivity().currentStep != 0 && !isVoice)
             {
                 menus[4].transform.GetChild(3).GetComponent<Renderer>().material = materials[1];
             }
@@ -684,7 +691,11 @@ public class ActivityManager : MonoBehaviour {
             }
 
             menus[4].transform.GetChild(0).GetComponent<TextMesh>().text = "Instruction " + (GetSelectedActivity().currentStep + 1) + " / " + GetSelectedActivity().instructions.Count;
+
+            UpdatePageButtonsActivity();
         }
+
+        isVoice = false;
     }
 
     public void Voice_Return()
@@ -692,6 +703,8 @@ public class ActivityManager : MonoBehaviour {
         // admin
         if (menus[1].activeSelf)
         {
+            Save();
+
             storedAct.SetActive(false);
             menus[0].SetActive(true);
             menus[1].SetActive(false);
@@ -710,8 +723,6 @@ public class ActivityManager : MonoBehaviour {
         // edit
         else if (menus[3].activeSelf)
         {
-            Save();
-
             storedAct.SetActive(true);
             storedIns.SetActive(false);
             menus[1].SetActive(true);
@@ -731,6 +742,30 @@ public class ActivityManager : MonoBehaviour {
             menus[4].SetActive(false);
             storedAct.SetActive(true);
             SetSelectedObject(null);
+        }
+    }
+
+    public void UpdatePageButtonsActivity()
+    {
+        if (GetSelectedActivity().instructions.Count == 1)
+        {
+            menus[4].transform.GetChild(3).gameObject.SetActive(false);
+            menus[4].transform.GetChild(4).gameObject.SetActive(false);
+        }
+        else if (GetSelectedActivity().currentStep == 0)
+        {
+            menus[4].transform.GetChild(3).gameObject.SetActive(false);
+            menus[4].transform.GetChild(4).gameObject.SetActive(true);
+        }
+        else if (GetSelectedActivity().currentStep == (GetSelectedActivity().instructions.Count - 1))
+        {
+            menus[4].transform.GetChild(3).gameObject.SetActive(true);
+            menus[4].transform.GetChild(4).gameObject.SetActive(false);
+        }
+        else
+        {
+            menus[4].transform.GetChild(3).gameObject.SetActive(true);
+            menus[4].transform.GetChild(4).gameObject.SetActive(true);
         }
     }
 

@@ -37,10 +37,10 @@ public class Instructions
         cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         cube.name = activityName + this.instructionText;
-        cube.AddComponent<TapToPlace>().enabled = false;
-        cube.AddComponent<TapToPlace>().DefaultGazeDistance = 1.0f;
-        //cube.AddComponent<SolverSurfaceMagnetism>().MagneticSurface = GameObject.Find("SpatialMapping").layer;
-        //cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
+        cube.AddComponent<TapToPlace>().enabled = true;
+        cube.GetComponent<TapToPlace>().DefaultGazeDistance = 1.0f;
+        cube.AddComponent<SolverSurfaceMagnetism>().MagneticSurface = GameObject.Find("SpatialMapping").layer;
+        cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
         cube.AddComponent<IndicatorBehaviour>().instruction = this;
 
         cube.AddComponent<AudioSource>();

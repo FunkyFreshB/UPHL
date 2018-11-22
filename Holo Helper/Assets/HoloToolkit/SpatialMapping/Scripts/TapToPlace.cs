@@ -131,10 +131,12 @@ namespace HoloToolkit.Unity.SpatialMapping
 
         public virtual void OnInputClicked(InputClickedEventData eventData)
         {
-            // On each tap gesture, toggle whether the user is in placing mode.
-            IsBeingPlaced = !IsBeingPlaced;
-            HandlePlacement();
-            eventData.Use();
+            // On each tap gesture, toggle whether the user is in placing mode.&& 
+            if (this.GetComponent<IndicatorBehaviour>().instruction.isEditMode) {
+                IsBeingPlaced = !IsBeingPlaced;
+                HandlePlacement();
+                eventData.Use();
+            }
         }
 
         private void HandlePlacement()

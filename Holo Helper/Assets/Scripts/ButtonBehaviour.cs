@@ -313,9 +313,6 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
             menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetInstructionPageAmount() + 1);
 
             ams.SetSelectedObject(null);
-            //ams.ChangePageInstruction();
-
-            //menus[1].SetActive(false);
         }
         else if (isDelete)
         {
@@ -371,7 +368,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
             }
 
             ams.GetSelectedActivity().RepeatStep();
-            ams.GetSelectedActivity().instructions[0].indicator.SetActive(true);
+            ams.GetSelectedActivity().instructions[ams.GetSelectedActivity().currentStep].indicator.SetActive(true);
             storedActs.SetActive(false);
             menus[4].SetActive(true);
             menus[2].SetActive(false);
@@ -458,27 +455,6 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
         else if (isReturn)
         {
             ams.Voice_Return();
-        }
-
-        if (ams.GetSelectedActivity().instructions.Count == 1)
-        {
-            menus[4].transform.GetChild(3).gameObject.SetActive(false);
-            menus[4].transform.GetChild(4).gameObject.SetActive(false);
-        }
-        else if (ams.GetSelectedActivity().currentStep == 0)
-        {
-            menus[4].transform.GetChild(3).gameObject.SetActive(false);
-            menus[4].transform.GetChild(4).gameObject.SetActive(true);
-        }
-        else if (ams.GetSelectedActivity().currentStep == (ams.GetSelectedActivity().instructions.Count - 1))
-        {
-            menus[4].transform.GetChild(3).gameObject.SetActive(true);
-            menus[4].transform.GetChild(4).gameObject.SetActive(false);
-        }
-        else
-        {
-            menus[4].transform.GetChild(3).gameObject.SetActive(true);
-            menus[4].transform.GetChild(4).gameObject.SetActive(true);
         }
     }
 

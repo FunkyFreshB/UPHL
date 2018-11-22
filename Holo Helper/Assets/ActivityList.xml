@@ -7,7 +7,7 @@
           <instructionText>kkkkkStandard instruction step 1</instructionText>
         </Instruction>
         <Instruction visible="true">
-          <instructionText>kklStandard instruction step 2</instructionText>
+          <instructionText>'kklStandard instruction step 2</instructionText>
         </Instruction>
         <Instruction visible="true">
           <instructionText>rfghhj</instructionText>
@@ -47,7 +47,7 @@
         </Instruction>
       </Instructions>
       <name>Three One</name>
-      <CurrentStep>1</CurrentStep>
+      <CurrentStep>0</CurrentStep>
     </Activity>
     <Activity>
       <Instructions>

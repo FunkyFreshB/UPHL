@@ -39,6 +39,8 @@ public class ActivityManager : MonoBehaviour {
     private Instructions foundInstruction;          // instruction found on a gameobject
     private GameObject newInstruction;              // used when creating an instruction
 
+    public AudioClip tap;
+
     KeywordRecognizer keywordRecognizer;
     Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
 
@@ -75,20 +77,23 @@ public class ActivityManager : MonoBehaviour {
         {
             a.reInitializer();
         }
-//        GameObject.Find("Indicators").AddComponent<WorldAnchorManager>().PersistentAnchors = true ;
+
         UpdatePageAmount(storedAct);
 
         keywords.Add("return", () =>
         {
+            this.GetComponent<AudioSource>().PlayOneShot(tap);
             Voice_Return();
         });
         keywords.Add("previous", () =>
         {
+            this.GetComponent<AudioSource>().PlayOneShot(tap);
             isVoice = true;
             Voice_Previous();
         });
         keywords.Add("next", () =>
         {
+            this.GetComponent<AudioSource>().PlayOneShot(tap);
             isVoice = true;
             Voice_Next();
         });

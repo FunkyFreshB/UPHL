@@ -21,9 +21,12 @@
         <Instruction visible="true">
           <instructionText>tttgggggghhhh</instructionText>
         </Instruction>
+        <Instruction visible="true">
+          <instructionText>bb</instructionText>
+        </Instruction>
       </Instructions>
       <name>First One</name>
-      <CurrentStep>3</CurrentStep>
+      <CurrentStep>4</CurrentStep>
     </Activity>
     <Activity>
       <Instructions>
@@ -55,15 +58,6 @@
           <instructionText>Standard instruction step 1</instructionText>
         </Instruction>
       </Instructions>
-      <name>yyhhhhhkl</name>
-      <CurrentStep>0</CurrentStep>
-    </Activity>
-    <Activity>
-      <Instructions>
-        <Instruction visible="true">
-          <instructionText>Standard instruction step 1</instructionText>
-        </Instruction>
-      </Instructions>
       <name> jjh</name>
       <CurrentStep>0</CurrentStep>
     </Activity>
@@ -74,6 +68,15 @@
         </Instruction>
       </Instructions>
       <name>jjjjj</name>
+      <CurrentStep>0</CurrentStep>
+    </Activity>
+    <Activity>
+      <Instructions>
+        <Instruction visible="true">
+          <instructionText>....Insert description</instructionText>
+        </Instruction>
+      </Instructions>
+      <name>ggggg</name>
       <CurrentStep>0</CurrentStep>
     </Activity>
   </Activities>

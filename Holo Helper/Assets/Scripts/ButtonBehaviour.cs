@@ -22,6 +22,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
     // Page info
     private int visibleActs = 5;                    // number of items per page (basically locked to 5)
     private Vector3[] activityPos;                  // array of button positions
+    private Vector3 buttonSize = new Vector3(0.3f, 0.03f, 0.03f);
 
     private GameObject obj;                         // used when creating buttons
     private GameObject gazedAtObj;                  // currently gazed at object
@@ -160,6 +161,8 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
         // Unhighlight the highlighted button
         this.gameObject.GetComponent<Renderer>().material = materials[0];
 
+        actMan.GetComponent<AudioSource>().PlayOneShot(ams.tap);
+
         // 0: Main Menu
         if (menus[0].activeSelf)
         {
@@ -211,11 +214,22 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
             menus[3].transform.GetChild(5).gameObject.SetActive(false);
         }
 
+        if (isReturn || isDelete || isActivity && menus[4].activeSelf)
+        {
+            this.gameObject.transform.localScale /= 1.1f;
+        }
+
     }
 
     public void OnFocusEnter()
     {
         gazedAtObj = this.gameObject;
+
+        if (gazedAtObj.GetComponent<ButtonBehaviour>().isPageLeft || gazedAtObj.GetComponent<ButtonBehaviour>().isPageRight)        {        }
+        else
+        {
+            this.gameObject.transform.localScale *= 1.1f;
+        }
 
         // Highlight looked at object
         if (ams.GetSelectedObject() == null || this.gameObject != ams.GetSelectedObject())
@@ -226,8 +240,14 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
 
     public void OnFocusExit()
     {
-        gazedAtObj = null;
+        if (gazedAtObj.GetComponent<ButtonBehaviour>().isPageLeft || gazedAtObj.GetComponent<ButtonBehaviour>().isPageRight)        {        }
+        else
+        {
+            this.gameObject.transform.localScale /= 1.1f;
+        }
 
+        gazedAtObj = null;
+        
         // Unhighlight looked at object, so long as it's not the selected object
         if (this.gameObject != ams.GetSelectedObject())
         {
@@ -272,6 +292,8 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
             }
 
             menus[0].SetActive(false);
+
+            this.gameObject.transform.localScale /= 1.1f;
         }
     }
 
@@ -312,13 +334,14 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
             ams.UpdatePageAmount(storedInstruction);
             menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetInstructionPageAmount() + 1);
 
+            this.gameObject.transform.localScale /= 1.1f;
             ams.SetSelectedObject(null);
         }
         else if (isDelete)
         {
             ams.DeleteActivity(ams.GetSelectedObject());
             menus[1].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetActivityPageAmount() + 1);
-
+            
             ams.SetSelectedObject(null);
         }
         else if (isReturn)
@@ -469,7 +492,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
         obj.GetComponent<ButtonBehaviour>().storedActs = storedActs;
         obj.GetComponent<ButtonBehaviour>().menus = menus;
         obj.GetComponent<ButtonBehaviour>().isActivity = true;
-        obj.transform.localScale = new Vector3(0.23f, 0.0234f, 0.02f);
+        obj.transform.localScale = buttonSize;  //new Vector3(0.3f, 0.03f, 0.03f);//0.7f, 0.07f, 0.02f);//0.23f, 0.0234f, 0.02f);
         obj.transform.GetChild(0).localScale = new Vector3(0.07f, 0.7f, 1);
         obj.transform.SetParent(storedActs.transform);
 
@@ -484,7 +507,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
         obj.GetComponent<ButtonBehaviour>().storedInstruction = storedInstruction;
         obj.GetComponent<ButtonBehaviour>().menus = menus;
         obj.GetComponent<ButtonBehaviour>().isInstruction = true;
-        obj.transform.localScale = new Vector3(0.23f, 0.0234f, 0.02f);
+        obj.transform.localScale = buttonSize;
         obj.transform.GetChild(0).localScale = new Vector3(0.07f, 0.7f, 1);
         obj.transform.SetParent(storedInstruction.transform);
 

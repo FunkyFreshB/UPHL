@@ -24,12 +24,7 @@ public class Activity{
         instructions.Add(new Instructions("Insert description", this.name));
     }
 
-    public Activity()
-    {
-       // this.name = "Standard Activity";
-        //instructions = new List<Instructions>();
-        //instructions.Add(new Instructions("Standard instruction step 1",stepCounter));
-    }
+    public Activity()    {}
 
     public void setName(string newName)
     {
@@ -97,16 +92,4 @@ public class Activity{
     {
         GameObject.Find("ACT_MANAGER").GetComponent<TextToSpeech>().StartSpeaking("Step " + (currentStep + 1) + ". " + instructions[currentStep].instructionText);
     }
-
-    public void PrintIns()
-    {
-        /*
-        foreach(Instructions element in instructions)
-        {
-            Debug.Log(element.getInstructionText());
-        }
-        */
-        
-    }
-
 }

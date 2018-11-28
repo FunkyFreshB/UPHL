@@ -16,7 +16,7 @@ public class ActivityManager : MonoBehaviour {
     private Activity selectedAct;                   // selectedObj's attached activity
     private Instructions selectedInstruction;       // selectedObj's attached instruction
 
-    public ActivityContainer container;             // container of activities
+    public ActivityContainer container = null;      // container of activities
     public GameObject buttonBase;                   // prefab for buttons
     public GameObject storedAct;                    // Stored Activities gameObject
     public GameObject storedIns;                    // Stored Instructions gameObject
@@ -57,8 +57,7 @@ public class ActivityManager : MonoBehaviour {
         activityPos[3] = new Vector3(0, 0.0164f, 0);
         activityPos[4] = new Vector3(0, -0.01285f, 0);
 
-        container = null;
-
+        // load
         if (Application.isEditor)
         {
             container = ActivityContainer.Load(Path.Combine(Application.dataPath, "ActivityList.xml"));
@@ -155,6 +154,7 @@ public class ActivityManager : MonoBehaviour {
         // assign variables to the button's script
         newActivity.GetComponent<ButtonBehaviour>().connectedAct = foundAct;
         newActivity.GetComponent<ButtonBehaviour>().actMan = this.gameObject;
+
         // set the buttons position and rotation to align with MenuPos
         newActivity.transform.position = this.transform.position;
         newActivity.transform.rotation = this.transform.rotation;
@@ -713,17 +713,13 @@ public class ActivityManager : MonoBehaviour {
             storedAct.SetActive(false);
             menus[0].SetActive(true);
             menus[1].SetActive(false);
-            menus[2].SetActive(false);
-            SetSelectedObject(null);
         }
         // user
         else if (menus[2].activeSelf)
         {
             storedAct.SetActive(false);
             menus[0].SetActive(true);
-            menus[1].SetActive(false);
             menus[2].SetActive(false);
-            SetSelectedObject(null);
         }
         // edit
         else if (menus[3].activeSelf)
@@ -731,10 +727,8 @@ public class ActivityManager : MonoBehaviour {
             storedAct.SetActive(true);
             storedIns.SetActive(false);
             menus[1].SetActive(true);
-            menus[2].SetActive(false);
             menus[3].SetActive(false);
             DeleteInstructionButton();
-            SetSelectedObject(null);
             SetCurrentPage(0);
         }
         // activity
@@ -742,12 +736,12 @@ public class ActivityManager : MonoBehaviour {
         {
             Save();
 
-            GetSelectedActivity().instructions[GetSelectedActivity().currentStep].indicator.SetActive(false);
+            storedAct.SetActive(true);
             menus[2].SetActive(true);
             menus[4].SetActive(false);
-            storedAct.SetActive(true);
-            SetSelectedObject(null);
+            GetSelectedActivity().instructions[GetSelectedActivity().currentStep].indicator.SetActive(false);
         }
+        SetSelectedObject(null);
     }
 
     public void UpdatePageButtonsActivity()

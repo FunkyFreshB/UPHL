@@ -16,17 +16,14 @@
           <instructionText>4vhjj</instructionText>
         </Instruction>
         <Instruction visible="true">
-          <instructionText>       kkkmn</instructionText>
-        </Instruction>
-        <Instruction visible="true">
-          <instructionText>tttgggggghhhh</instructionText>
-        </Instruction>
-        <Instruction visible="true">
           <instructionText>bb</instructionText>
+        </Instruction>
+        <Instruction visible="true">
+          <instructionText>ggggggg</instructionText>
         </Instruction>
       </Instructions>
       <name>First One</name>
-      <CurrentStep>4</CurrentStep>
+      <CurrentStep>5</CurrentStep>
     </Activity>
     <Activity>
       <Instructions>
@@ -43,13 +40,10 @@
     <Activity>
       <Instructions>
         <Instruction visible="true">
-          <instructionText>Standard instruction step 1</instructionText>
-        </Instruction>
-        <Instruction visible="true">
-          <instructionText>Standard instruction step 2</instructionText>
+          <instructionText>hhhStandard instruction step 1</instructionText>
         </Instruction>
       </Instructions>
-      <name>Three One</name>
+      <name>t</name>
       <CurrentStep>0</CurrentStep>
     </Activity>
     <Activity>

@@ -159,6 +159,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             layerCacheTarget.SetLayerRecursively(IgnoreRaycastLayer, out layerCache);
             InputManager.Instance.PushModalInputHandler(gameObject);
 
+            SpatialMappingManager.Instance.StartObserver();
             ToggleSpatialMesh();
             RemoveWorldAnchor();
         }
@@ -169,6 +170,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             layerCacheTarget.ApplyLayerCacheRecursively(layerCache);
             InputManager.Instance.PopModalInputHandler();
 
+            SpatialMappingManager.Instance.CleanupObserver();
             ToggleSpatialMesh();
             AttachWorldAnchor();
         }

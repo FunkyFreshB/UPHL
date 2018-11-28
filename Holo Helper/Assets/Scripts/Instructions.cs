@@ -32,15 +32,15 @@ public class Instructions
 
     public void reInitializer(string activityName)
     {
-        GameObject cube;
-        //cube = Object.Instantiate(Resources.Load("Arrow") as GameObject);
-        cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         cube.name = activityName + this.instructionText;
         cube.AddComponent<TapToPlace>().enabled = true;
         cube.GetComponent<TapToPlace>().DefaultGazeDistance = 1.0f;
-        cube.AddComponent<SolverSurfaceMagnetism>().MagneticSurface = (1 << 31);
-        cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
+     //   cube.AddComponent<SolverSurfaceMagnetism>().MagneticSurface = (1 << 31);
+     //   cube.GetComponent<SolverSurfaceMagnetism>().MaxDistance = 0.5f;
+
+        cube.GetComponent<Renderer>().material = (Material)Resources.Load("IndicatorMat");
 
         cube.AddComponent<IndicatorBehaviour>().instruction = this;
 

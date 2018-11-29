@@ -3,34 +3,34 @@
   <Activities>
     <Activity>
       <Instructions>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>kkkkkStandard instruction step 1</instructionText>
         </Instruction>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>'kklStandard instruction step 2</instructionText>
         </Instruction>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>rfghhj</instructionText>
         </Instruction>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>4vhjj</instructionText>
         </Instruction>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>bb</instructionText>
         </Instruction>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>ggggggg</instructionText>
         </Instruction>
       </Instructions>
       <name>First One</name>
-      <CurrentStep>5</CurrentStep>
+      <CurrentStep>3</CurrentStep>
     </Activity>
     <Activity>
       <Instructions>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>eggsteppet</instructionText>
         </Instruction>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>wahooEatStanstruction step 2</instructionText>
         </Instruction>
       </Instructions>
@@ -39,7 +39,7 @@
     </Activity>
     <Activity>
       <Instructions>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>hhhStandard instruction step 1</instructionText>
         </Instruction>
       </Instructions>
@@ -48,7 +48,7 @@
     </Activity>
     <Activity>
       <Instructions>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>Standard instruction step 1</instructionText>
         </Instruction>
       </Instructions>
@@ -57,7 +57,7 @@
     </Activity>
     <Activity>
       <Instructions>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>Standard instruction step 1</instructionText>
         </Instruction>
       </Instructions>
@@ -66,7 +66,7 @@
     </Activity>
     <Activity>
       <Instructions>
-        <Instruction visible="true">
+        <Instruction>
           <instructionText>....Insert description</instructionText>
         </Instruction>
       </Instructions>

@@ -12,10 +12,7 @@ public class Instructions
 
     [XmlIgnore]
     public GameObject indicator;
-
-    [XmlAttribute("visible")]
-    public bool visible;
-
+    
     [XmlIgnore]
     public bool isEditMode;
 
@@ -25,7 +22,6 @@ public class Instructions
     public Instructions(string text,string activityName)
     {
         instructionText = text;
-        visible = true;
         isEditMode = false;
         this.reInitializer(activityName);
     }

@@ -155,24 +155,12 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
         if (menus[0].activeSelf)
         {
             MainMenu(eventData);
-            storedActs.SetActive(true);
         }
 
         // 1: Administrator Menu
         else if (menus[1].activeSelf)
         {
             AdminMenu(eventData);
-
-            if (ams.GetSelectedObject() != null)
-            {
-                menus[1].transform.GetChild(3).gameObject.SetActive(true);
-                menus[1].transform.GetChild(4).gameObject.SetActive(true);
-            }
-            else
-            {
-                menus[1].transform.GetChild(3).gameObject.SetActive(false);
-                menus[1].transform.GetChild(4).gameObject.SetActive(false);
-            }
         }
 
         // 2: User Menu
@@ -185,32 +173,6 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
         else if (menus[3].activeSelf)
         {
             ActivityEditMenu(eventData);
-
-            if (ams.GetSelectedObject() != null)
-            {
-                menus[3].transform.GetChild(3).gameObject.SetActive(true);
-                menus[3].transform.GetChild(5).gameObject.SetActive(true);
-
-                if (ams.GetSelectedActivity().instructions.Count > 1)
-                {
-                    menus[3].transform.GetChild(4).gameObject.SetActive(true);
-                }
-                else
-                {
-                    if (menus[3].transform.GetChild(4).gameObject.activeSelf)
-                    {
-                        menus[3].transform.GetChild(4).gameObject.SetActive(false);
-                        menus[3].transform.GetChild(4).gameObject.transform.localScale /= 1.1f;
-                    }
-                }
-            }
-            else
-            {
-                menus[3].transform.GetChild(3).gameObject.SetActive(false);
-                menus[3].transform.GetChild(4).gameObject.SetActive(false);
-                menus[3].transform.GetChild(5).gameObject.SetActive(false);
-            }
-
         }
 
         // 4: Activity Menu
@@ -220,6 +182,38 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
         }
 
         // ---------------------------------------------
+
+
+        if (ams.GetSelectedObject() != null)
+        {
+            menus[1].transform.GetChild(3).gameObject.SetActive(true);
+            menus[1].transform.GetChild(4).gameObject.SetActive(true);
+
+            menus[3].transform.GetChild(3).gameObject.SetActive(true);
+            menus[3].transform.GetChild(5).gameObject.SetActive(true);
+
+            if (ams.GetSelectedActivity().instructions.Count > 1)
+            {
+                menus[3].transform.GetChild(4).gameObject.SetActive(true);
+            }
+            else
+            {
+                if (menus[3].transform.GetChild(4).gameObject.activeSelf)
+                {
+                    menus[3].transform.GetChild(4).gameObject.SetActive(false);
+                    menus[3].transform.GetChild(4).gameObject.transform.localScale /= 1.1f;
+                }
+            }
+        }
+        else
+        {
+            menus[1].transform.GetChild(3).gameObject.SetActive(false);
+            menus[1].transform.GetChild(4).gameObject.SetActive(false);
+
+            menus[3].transform.GetChild(3).gameObject.SetActive(false);
+            menus[3].transform.GetChild(4).gameObject.SetActive(false);
+            menus[3].transform.GetChild(5).gameObject.SetActive(false);
+        }
 
         if (isReturn || isDelete && menus[1].activeSelf || isActivity && menus[4].activeSelf)
         {
@@ -269,6 +263,9 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
     {
         if (isExit)
         {
+            ams.menuBg.SetActive(false);
+            menus[0].SetActive(false);
+            
             Application.Quit();
         }
         else
@@ -298,6 +295,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
             }
 
             menus[0].SetActive(false);
+            storedActs.SetActive(true);
 
             this.gameObject.transform.localScale /= 1.1f;
         }

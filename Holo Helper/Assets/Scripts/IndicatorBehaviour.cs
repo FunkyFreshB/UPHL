@@ -6,7 +6,6 @@ using HoloToolkit.Unity.SpatialMapping;
 public class IndicatorBehaviour : MonoBehaviour {
 
     public Instructions instruction { get; set; }
-    private bool isMoving = false;
 
     public void Update(){ }
 
@@ -20,6 +19,7 @@ public class IndicatorBehaviour : MonoBehaviour {
             this.GetComponent<AudioSource>().playOnAwake = true;
             this.GetComponent<AudioSource>().loop = true;
             this.GetComponent<AudioSource>().Play();
+
         }
     }
 

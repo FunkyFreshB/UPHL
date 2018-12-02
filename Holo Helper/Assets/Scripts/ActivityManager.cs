@@ -734,8 +734,6 @@ public class ActivityManager : MonoBehaviour {
         // activity
         else if (menus[4].activeSelf)
         {
-            Save();
-
             storedAct.SetActive(true);
             menus[2].SetActive(true);
             menus[4].SetActive(false);

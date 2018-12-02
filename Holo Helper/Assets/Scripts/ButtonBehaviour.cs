@@ -38,6 +38,7 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
     public bool isPageLeft = false;
     public bool isPageRight = false;
     public bool isExit = false;
+    public bool isSave = false;
 
     int keyboardCase = -1;                          // variable for switch/case
     bool isKeyboard = false;                        // determines if keyboard is active
@@ -488,7 +489,12 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
         {
             ams.Voice_Next();
         }
-        else if (isReturn)
+        else if (isReturn && isSave)
+        {
+            ams.Save();
+            ams.Voice_Return();
+        }
+        else if (isReturn && !isSave)
         {
             ams.Voice_Return();
         }

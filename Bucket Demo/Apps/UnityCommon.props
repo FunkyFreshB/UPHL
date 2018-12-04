@@ -1,9 +1,0 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <PropertyGroup>
-        <UnityWSASolutionName>Bucket Demo</UnityWSASolutionName>
-        <UnityWSASolutionDir>C:\Users\sebas\Documents\GitHub\UPHL\Bucket Demo\Apps\</UnityWSASolutionDir>
-        <UnityProjectDir>C:\Users\sebas\Documents\GitHub\UPHL\Bucket Demo\</UnityProjectDir>
-        <UnityWSAPlayerDir>C:\Program Files\Unity LTS\Editor\Data\PlaybackEngines\MetroSupport\</UnityWSAPlayerDir>
-        <UnityWSAToolsDir>$(UnityWSASolutionDir)Unity\Tools\</UnityWSAToolsDir>
-    </PropertyGroup>
-</Project>

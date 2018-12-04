@@ -64,7 +64,6 @@ namespace HoloToolkit.Unity.InputModule
         private IInputSource currentInputSource;
         private uint currentInputSourceId;
         private Rigidbody hostRigidbody;
-        private bool hostRigidbodyWasKinematic;
 
         private void Start()
         {
@@ -119,11 +118,6 @@ namespace HoloToolkit.Unity.InputModule
             InputManager.Instance.PushModalInputHandler(gameObject);
 
             isDragging = true;
-            if (hostRigidbody != null)
-            {
-                hostRigidbodyWasKinematic = hostRigidbody.isKinematic;
-                hostRigidbody.isKinematic = true;
-            }
 
             Transform cameraTransform = CameraCache.Main.transform;
 
@@ -254,6 +248,8 @@ namespace HoloToolkit.Unity.InputModule
                 draggingRotation = Quaternion.LookRotation(objForward, objUp);
             }
 
+            //-----------------------------------------------------------------------
+
             Vector3 newPosition = Vector3.Lerp(HostTransform.position, draggingPosition + cameraTransform.TransformDirection(objRefGrabPoint), PositionLerpSpeed);
             // Apply Final Position
             if (hostRigidbody == null)
@@ -264,6 +260,8 @@ namespace HoloToolkit.Unity.InputModule
             {
                 hostRigidbody.MovePosition(newPosition);
             }
+
+            //-----------------------------------------------------------------------
 
             // Apply Final Rotation
             Quaternion newRotation = Quaternion.Lerp(HostTransform.rotation, draggingRotation, RotationLerpSpeed);
@@ -299,10 +297,6 @@ namespace HoloToolkit.Unity.InputModule
             isDragging = false;
             currentInputSource = null;
             currentInputSourceId = 0;
-            if (hostRigidbody != null)
-            {
-                hostRigidbody.isKinematic = hostRigidbodyWasKinematic;
-            }
             StoppedDragging.RaiseEvent();
         }
 
@@ -399,6 +393,28 @@ namespace HoloToolkit.Unity.InputModule
             {
                 StopDragging();
             }
+        }
+
+        // ----------------------------------
+
+            // RIGIDBODY NEEDS TO BE KINEMATIC & NOT USE GRAVITY
+
+        // when colliding with wall
+        public void OnCollisionEnter(Collision collision)
+        {
+            // option 1: stop dragging
+            //StopDragging();
+
+            // option 2: freeze position while colliding
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
+
+        // when stop colliding (only used with option 2)
+        public void OnCollisionExit(Collision collision)
+        {
+            // option 2: unfreeze position
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 }

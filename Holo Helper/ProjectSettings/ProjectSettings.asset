@@ -552,7 +552,8 @@ PlayerSettings:
   webGLUseEmbeddedResources: 0
   webGLUseWasm: 0
   webGLCompressionFormat: 1
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    14: 
   platformArchitecture: {}
   scriptingBackend:
     Metro: 2
@@ -563,12 +564,12 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: Holo Helper
-  metroPackageVersion: 
-  metroCertificatePath: 
+  metroPackageVersion: 1.0.7.0
+  metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 00f5e3e1a086d501
   metroApplicationDescription: Holo Helper
   wsaImages: {}
   metroTileShortName: 
@@ -588,8 +589,10 @@ PlayerSettings:
       HumanInterfaceDevice: False
       InternetClient: False
       InternetClientServer: False
+      Microphone: True
       PrivateNetworkClientServer: False
       SpatialPerception: True
+      WebCam: False
   metroFTAName: 
   metroFTAFileTypes: []
   metroProtocolName: 

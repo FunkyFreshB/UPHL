@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<AcitivitlistsAndInstructions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Activities>
+    <Activity>
+      <Instructions>
+        <Instruction>
+          <instructionText>kkkkkStandard instruction step 1</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>'kklStandard instruction step 2</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>rfghhj</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>4vhjj</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>bb</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>ggggggg</instructionText>
+        </Instruction>
+      </Instructions>
+      <name>First One</name>
+      <CurrentStep>3</CurrentStep>
+    </Activity>
+    <Activity>
+      <Instructions>
+        <Instruction>
+          <instructionText>eggsteppet</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>wahooEatStanstruction step 2</instructionText>
+        </Instruction>
+      </Instructions>
+      <name>Brap</name>
+      <CurrentStep>1</CurrentStep>
+    </Activity>
+    <Activity>
+      <Instructions>
+        <Instruction>
+          <instructionText>hhhStandard instruction step 1</instructionText>
+        </Instruction>
+      </Instructions>
+      <name>t</name>
+      <CurrentStep>0</CurrentStep>
+    </Activity>
+    <Activity>
+      <Instructions>
+        <Instruction>
+          <instructionText>Standard instruction step 1</instructionText>
+        </Instruction>
+      </Instructions>
+      <name> jjh</name>
+      <CurrentStep>0</CurrentStep>
+    </Activity>
+    <Activity>
+      <Instructions>
+        <Instruction>
+          <instructionText>Standard instruction step 1</instructionText>
+        </Instruction>
+      </Instructions>
+      <name>jjjjj</name>
+      <CurrentStep>0</CurrentStep>
+    </Activity>
+    <Activity>
+      <Instructions>
+        <Instruction>
+          <instructionText>....Insert description</instructionText>
+        </Instruction>
+      </Instructions>
+      <name>ggggg</name>
+      <CurrentStep>0</CurrentStep>
+    </Activity>
+  </Activities>
+</AcitivitlistsAndInstructions>

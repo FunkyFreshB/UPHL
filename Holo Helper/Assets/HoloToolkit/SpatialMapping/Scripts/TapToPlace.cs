@@ -7,6 +7,7 @@ using HoloToolkit.Unity.InputModule;
 
 namespace HoloToolkit.Unity.SpatialMapping
 {
+
     /// <summary>
     /// The TapToPlace class is a basic way to enable users to move objects 
     /// and place them on real world surfaces.
@@ -18,6 +19,8 @@ namespace HoloToolkit.Unity.SpatialMapping
     [RequireComponent(typeof(Interpolator))]
     public class TapToPlace : MonoBehaviour, IInputClickHandler
     {
+        public static bool hitSomething = false;
+
         [Tooltip("Distance from camera to keep the object while placing it.")]
         public float DefaultGazeDistance = 2.0f;
 
@@ -131,10 +134,12 @@ namespace HoloToolkit.Unity.SpatialMapping
 
         public virtual void OnInputClicked(InputClickedEventData eventData)
         {
-            // On each tap gesture, toggle whether the user is in placing mode.
-            IsBeingPlaced = !IsBeingPlaced;
-            HandlePlacement();
-            eventData.Use();
+            // On each tap gesture, toggle whether the user is in placing mode.&& 
+            if (this.GetComponent<IndicatorBehaviour>().instruction.isEditMode) {
+                IsBeingPlaced = !IsBeingPlaced;
+                HandlePlacement();
+                eventData.Use();
+            }
         }
 
         private void HandlePlacement()
@@ -154,6 +159,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             layerCacheTarget.SetLayerRecursively(IgnoreRaycastLayer, out layerCache);
             InputManager.Instance.PushModalInputHandler(gameObject);
 
+            SpatialMappingManager.Instance.StartObserver();
             ToggleSpatialMesh();
             RemoveWorldAnchor();
         }
@@ -164,6 +170,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             layerCacheTarget.ApplyLayerCacheRecursively(layerCache);
             InputManager.Instance.PopModalInputHandler();
 
+            SpatialMappingManager.Instance.CleanupObserver();
             ToggleSpatialMesh();
             AttachWorldAnchor();
         }
@@ -203,6 +210,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// <returns>Placement position in front of the user</returns>
         private static Vector3 GetPlacementPosition(Vector3 headPosition, Vector3 gazeDirection, float defaultGazeDistance)
         {
+
             RaycastHit hitInfo;
             if (SpatialMappingRaycast(headPosition, gazeDirection, out hitInfo))
             {
@@ -223,7 +231,9 @@ namespace HoloToolkit.Unity.SpatialMapping
             if (SpatialMappingManager.Instance != null)
             {
                 RaycastHit hitInfo;
-                if (Physics.Raycast(origin, direction, out hitInfo, 30.0f, SpatialMappingManager.Instance.LayerMask))
+                
+
+                if (Physics.Raycast(origin, direction, out hitInfo, 1, SpatialMappingManager.Instance.LayerMask))
                 {
                     spatialMapHit = hitInfo;
                     return true;
@@ -242,10 +252,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// <returns>Placement position in front of the user</returns>
         private static Vector3 GetGazePlacementPosition(Vector3 headPosition, Vector3 gazeDirection, float defaultGazeDistance)
         {
-            if (GazeManager.Instance.HitObject != null)
-            {
-                return GazeManager.Instance.HitPosition;
-            }
+        //    if (GazeManager.Instance.HitObject != null)       { return GazeManager.Instance.HitPosition;         }
             return headPosition + gazeDirection * defaultGazeDistance;
         }
     }

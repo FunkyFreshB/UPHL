@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 //using SimpleJSON;
 //using JsonUtility;
 using UnityEngine;
@@ -7,70 +9,121 @@ using UnityEngine;
 
 public class WWW1 : MonoBehaviour {
 
-    //public string url = "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1GJzk?ver=8b59&q=60&m=6&h=600&w=2048&b=%23FFFFFFFF&l=f&o=t&aim=true";
-    //public string url2 = "http://192.168.1.168:8080/DatabaseConnectServiceHololens/rest/UserInfoService/run/YourName";
-    WWW request;
-    public string webServiceUrl = "http://192.168.1.195:8080/getevents.py?ts="; //2018-12-03 18:29:33
-    bool isDone = false;
-    public float timer = 2f;
-    public SensorData data;
+    public GameObject Light_table;
+    public GameObject Lampbutton_Livingroom_001;
+    public GameObject lampButton2;
+    public GameObject lampButton3;
+
+    List<SensorData> listSensorData;
+
+    public string id;
+
+    public Material lampOn;
+    public Material lampOff;
+
+    public string webServiceUrl = "http://192.168.1.195:8080/getevents.py";
+    public float timer;
+    public string time;
 
     private void Start() {
-        //request = new WWW(webServiceUrl);
-    }
+        timer = 2.0f;
+        time = "";
+        listSensorData = new List<SensorData>();
+        //time = "2018-12-05 10:30:00";
 
-    public IEnumerator OnResponse(WWW req) {
-        yield return req;
-        //Debug.Log(req.text);
-        Processjson(request.text);
-    }
+        WWW request = new WWW(webServiceUrl);
+        StartCoroutine(OnResponse(request));
 
+        //id = "a78a81027d6e4fa5980ec51d32598212";
+        listSensorData.Add(new SensorData(Lampbutton_Livingroom_001, "a78a81027d6e4fa5980ec51d32598212", false));
+        
+    }
+    
     private void Update() {
         timer -= Time.deltaTime;
         if (timer <= 0) {
-            timer = 3f;
-            request = new WWW(webServiceUrl + data.db_time_stamp);
+            timer = 1.0f;
+            string url = webServiceUrl + "?ts=" + time;
+            WWW request = new WWW(url);
             StartCoroutine(OnResponse(request));
-
-            /*
-            if (request.error == null) {
-                //Processjson(request.text);
-                //Debug.Log(request.text);
-            }
-            else {
-                Debug.Log("ERROR: " + request.error);
-            }*/
         }
+    }
+    
+    public IEnumerator OnResponse(WWW req) {
+        yield return req;
+        Processjson(req.text);
     }
 
     [System.Serializable]
-    public class SensorData {
+    private class SensorData {
+        public GameObject sensorObject;
         public string resource;
-        public string sample;
+        public bool sample;
         public string db_time_stamp;
+
+        public SensorData() { }
+
+        public SensorData(GameObject go, string s, bool b) {
+            sensorObject = go;
+            resource = s;
+            sample = b;
+            
+        }
     }
-
+    
     private void Processjson(string jsonString) {
-        
-        jsonString = jsonString.Replace("'", "\"");
-        jsonString = jsonString.Remove(0, 1);
-        jsonString = jsonString.Replace(",)", "");
-
-        string jsonData = "";
-        /*if(string.IsNullOrEmpty(request.error)) {
-            jsonData = System.Text.Encoding.UTF8.GetString(request.bytes, 3, request.bytes.Length - 3);
-        }*/
         //Debug.Log(jsonString);
-        //Debug.Log(request.bytes);
-        data = JsonUtility.FromJson<SensorData>(jsonString);
-
-        data.db_time_stamp = data.db_time_stamp.Replace("T"," ");
-        int i = data.db_time_stamp.IndexOf(".");
-        data.db_time_stamp = data.db_time_stamp.Remove(i, 13);
+        string[] jsonArray = jsonString.Split('\n');
+        //Debug.Log(jsonArray.ToString());
 
 
-        Debug.Log(data.resource);
-        Debug.Log(data.sample);
-        Debug.Log(data.db_time_stamp);
+        SensorData data = new SensorData();
+     
+        for (int i = 0; i<jsonArray.Length-1; i++) {
+            data.resource = "";
+
+            jsonArray[i] = jsonArray[i].Replace("'", "\"");
+            jsonArray[i] = jsonArray[i].Replace(",)", "");
+            jsonArray[i] = jsonArray[i].Remove(0, 1);
+            jsonArray[i] = jsonArray[i].Replace("True", "true");
+            jsonArray[i] = jsonArray[i].Replace("False", "false");
+            data = JsonUtility.FromJson<SensorData>(jsonArray[i]);
+
+            data.db_time_stamp = data.db_time_stamp.Replace("T", " ");
+
+            
+            time = data.db_time_stamp.Remove(19, data.db_time_stamp.Length - 19);
+            
+            
+            data.db_time_stamp = time;
+
+            Debug.Log("Iteration: " + i);
+            Debug.Log("Resource: " + data.resource);
+            Debug.Log("Sample: " + data.sample);
+            Debug.Log("Time: " + data.db_time_stamp);
+
+            foreach (SensorData sensorData in listSensorData) {
+                string s = sensorData.resource;
+                if (data.resource != null) {
+                    if (data.resource.Equals(s)) {
+                        sensorData.sample = data.sample;
+                        sensorData.db_time_stamp = data.db_time_stamp;
+
+                        if (sensorData.sample) {
+                            sensorData.sensorObject.GetComponent<Renderer>().material = lampOn;
+                            if (sensorData.resource.Equals("a78a81027d6e4fa5980ec51d32598212")) {
+                                Light_table.SetActive(true);
+                            }
+                        }
+                        else {
+                            sensorData.sensorObject.GetComponent<Renderer>().material = lampOff;
+                            if (sensorData.resource.Equals("a78a81027d6e4fa5980ec51d32598212")) {
+                                Light_table.SetActive(false);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

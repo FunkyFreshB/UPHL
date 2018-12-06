@@ -4,15 +4,13 @@
 using UnityEngine;
 using System;
 
-namespace HoloToolkit.Unity.InputModule
-{
+namespace HoloToolkit.Unity.InputModule {
     /// <summary>
     /// Component that allows dragging an object with your hand on HoloLens.
     /// Dragging is done by calculating the angular delta and z-delta between the current and previous hand positions,
     /// and then repositioning the object based on that.
     /// </summary>
-    public class HandDraggable : MonoBehaviour, IFocusable, IInputHandler, ISourceStateHandler
-    {
+    public class HandDraggable : MonoBehaviour, IFocusable, IInputHandler, ISourceStateHandler {
         /// <summary>
         /// Event triggered when dragging starts.
         /// </summary>
@@ -29,8 +27,7 @@ namespace HoloToolkit.Unity.InputModule
         [Tooltip("Scale by which hand movement in z is multiplied to move the dragged object.")]
         public float DistanceScale = 2f;
 
-        public enum RotationModeEnum
-        {
+        public enum RotationModeEnum {
             Default,
             LockObjectRotation,
             OrientTowardUser,
@@ -64,35 +61,29 @@ namespace HoloToolkit.Unity.InputModule
         private IInputSource currentInputSource;
         private uint currentInputSourceId;
         private Rigidbody hostRigidbody;
-        private bool hostRigidbodyWasKinematic;
 
-        private void Start()
-        {
-            if (HostTransform == null)
-            {
+        private InputEventData ied;
+
+        private void Start() {
+            if (HostTransform == null) {
                 HostTransform = transform;
             }
 
             hostRigidbody = HostTransform.GetComponent<Rigidbody>();
         }
 
-        private void OnDestroy()
-        {
-            if (isDragging)
-            {
+        private void OnDestroy() {
+            if (isDragging) {
                 StopDragging();
             }
 
-            if (isGazed)
-            {
+            if (isGazed) {
                 OnFocusExit();
             }
         }
 
-        private void Update()
-        {
-            if (IsDraggingEnabled && isDragging)
-            {
+        private void Update() {
+            if (IsDraggingEnabled && isDragging) {
                 UpdateDragging();
             }
         }
@@ -100,15 +91,12 @@ namespace HoloToolkit.Unity.InputModule
         /// <summary>
         /// Starts dragging the object.
         /// </summary>
-        public void StartDragging(Vector3 initialDraggingPosition)
-        {
-            if (!IsDraggingEnabled)
-            {
+        public void StartDragging(Vector3 initialDraggingPosition) {
+            if (!IsDraggingEnabled) {
                 return;
             }
 
-            if (isDragging)
-            {
+            if (isDragging) {
                 return;
             }
 
@@ -119,11 +107,6 @@ namespace HoloToolkit.Unity.InputModule
             InputManager.Instance.PushModalInputHandler(gameObject);
 
             isDragging = true;
-            if (hostRigidbody != null)
-            {
-                hostRigidbodyWasKinematic = hostRigidbody.isKinematic;
-                hostRigidbody.isKinematic = true;
-            }
 
             Transform cameraTransform = CameraCache.Main.transform;
 
@@ -131,8 +114,7 @@ namespace HoloToolkit.Unity.InputModule
 #if UNITY_2017_2_OR_NEWER
             InteractionSourceInfo sourceKind;
             currentInputSource.TryGetSourceKind(currentInputSourceId, out sourceKind);
-            switch (sourceKind)
-            {
+            switch (sourceKind) {
                 case InteractionSourceInfo.Hand:
                     currentInputSource.TryGetGripPosition(currentInputSourceId, out inputPosition);
                     break;
@@ -175,8 +157,7 @@ namespace HoloToolkit.Unity.InputModule
         /// Gets the pivot position for the hand, which is approximated to the base of the neck.
         /// </summary>
         /// <returns>Pivot position for the hand.</returns>
-        private Vector3 GetHandPivotPosition(Transform cameraTransform)
-        {
+        private Vector3 GetHandPivotPosition(Transform cameraTransform) {
             return cameraTransform.position + new Vector3(0, -0.2f, 0) - cameraTransform.forward * 0.2f; // a bit lower and behind
         }
 
@@ -184,17 +165,14 @@ namespace HoloToolkit.Unity.InputModule
         /// Enables or disables dragging.
         /// </summary>
         /// <param name="isEnabled">Indicates whether dragging should be enabled or disabled.</param>
-        public void SetDragging(bool isEnabled)
-        {
-            if (IsDraggingEnabled == isEnabled)
-            {
+        public void SetDragging(bool isEnabled) {
+            if (IsDraggingEnabled == isEnabled) {
                 return;
             }
 
             IsDraggingEnabled = isEnabled;
 
-            if (isDragging)
-            {
+            if (isDragging) {
                 StopDragging();
             }
         }
@@ -202,16 +180,14 @@ namespace HoloToolkit.Unity.InputModule
         /// <summary>
         /// Update the position of the object being dragged.
         /// </summary>
-        private void UpdateDragging()
-        {
+        private void UpdateDragging() {
             Transform cameraTransform = CameraCache.Main.transform;
 
             Vector3 inputPosition = Vector3.zero;
 #if UNITY_2017_2_OR_NEWER
             InteractionSourceInfo sourceKind;
             currentInputSource.TryGetSourceKind(currentInputSourceId, out sourceKind);
-            switch (sourceKind)
-            {
+            switch (sourceKind) {
                 case InteractionSourceInfo.Hand:
                     currentInputSource.TryGetGripPosition(currentInputSourceId, out inputPosition);
                     break;
@@ -239,12 +215,10 @@ namespace HoloToolkit.Unity.InputModule
 
             draggingPosition = pivotPosition + (targetDirection * targetDistance);
 
-            if (RotationMode == RotationModeEnum.OrientTowardUser || RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright)
-            {
+            if (RotationMode == RotationModeEnum.OrientTowardUser || RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright) {
                 draggingRotation = Quaternion.LookRotation(HostTransform.position - pivotPosition);
             }
-            else if (RotationMode == RotationModeEnum.LockObjectRotation)
-            {
+            else if (RotationMode == RotationModeEnum.LockObjectRotation) {
                 draggingRotation = HostTransform.rotation;
             }
             else // RotationModeEnum.Default
@@ -254,30 +228,29 @@ namespace HoloToolkit.Unity.InputModule
                 draggingRotation = Quaternion.LookRotation(objForward, objUp);
             }
 
+            //-----------------------------------------------------------------------
+
             Vector3 newPosition = Vector3.Lerp(HostTransform.position, draggingPosition + cameraTransform.TransformDirection(objRefGrabPoint), PositionLerpSpeed);
             // Apply Final Position
-            if (hostRigidbody == null)
-            {
+            if (hostRigidbody == null) {
                 HostTransform.position = newPosition;
             }
-            else
-            {
+            else {
                 hostRigidbody.MovePosition(newPosition);
             }
 
+            //-----------------------------------------------------------------------
+
             // Apply Final Rotation
             Quaternion newRotation = Quaternion.Lerp(HostTransform.rotation, draggingRotation, RotationLerpSpeed);
-            if (hostRigidbody == null)
-            {
+            if (hostRigidbody == null) {
                 HostTransform.rotation = newRotation;
             }
-            else
-            {
+            else {
                 hostRigidbody.MoveRotation(newRotation);
             }
 
-            if (RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright)
-            {
+            if (RotationMode == RotationModeEnum.OrientTowardUserAndKeepUpright) {
                 Quaternion upRotation = Quaternion.FromToRotation(HostTransform.up, Vector3.up);
                 HostTransform.rotation = upRotation * HostTransform.rotation;
             }
@@ -286,10 +259,8 @@ namespace HoloToolkit.Unity.InputModule
         /// <summary>
         /// Stops dragging the object.
         /// </summary>
-        public void StopDragging()
-        {
-            if (!isDragging)
-            {
+        public void StopDragging() {
+            if (!isDragging) {
                 return;
             }
 
@@ -299,58 +270,46 @@ namespace HoloToolkit.Unity.InputModule
             isDragging = false;
             currentInputSource = null;
             currentInputSourceId = 0;
-            if (hostRigidbody != null)
-            {
-                hostRigidbody.isKinematic = hostRigidbodyWasKinematic;
-            }
             StoppedDragging.RaiseEvent();
         }
 
-        public void OnFocusEnter()
-        {
-            if (!IsDraggingEnabled)
-            {
+        public void OnFocusEnter() {
+            if (!IsDraggingEnabled) {
                 return;
             }
 
-            if (isGazed)
-            {
+            if (isGazed) {
                 return;
             }
 
             isGazed = true;
         }
 
-        public void OnFocusExit()
-        {
-            if (!IsDraggingEnabled)
-            {
+        public void OnFocusExit() {
+            if (!IsDraggingEnabled) {
                 return;
             }
 
-            if (!isGazed)
-            {
+            if (!isGazed) {
                 return;
             }
 
             isGazed = false;
         }
 
-        public void OnInputUp(InputEventData eventData)
-        {
+        public void OnInputUp(InputEventData eventData) {
             if (currentInputSource != null &&
-                eventData.SourceId == currentInputSourceId)
-            {
+                eventData.SourceId == currentInputSourceId) {
                 eventData.Use(); // Mark the event as used, so it doesn't fall through to other handlers.
 
                 StopDragging();
             }
         }
 
-        public void OnInputDown(InputEventData eventData)
-        {
-            if (isDragging)
-            {
+        public void OnInputDown(InputEventData eventData) {
+            ied = eventData;
+
+            if (isDragging) {
                 // We're already handling drag input, so we can't start a new drag operation.
                 return;
             }
@@ -358,10 +317,8 @@ namespace HoloToolkit.Unity.InputModule
 #if UNITY_2017_2_OR_NEWER
             InteractionSourceInfo sourceKind;
             eventData.InputSource.TryGetSourceKind(eventData.SourceId, out sourceKind);
-            if (sourceKind != InteractionSourceInfo.Hand)
-            {
-                if (!eventData.InputSource.SupportsInputInfo(eventData.SourceId, SupportedInputInfo.GripPosition))
-                {
+            if (sourceKind != InteractionSourceInfo.Hand) {
+                if (!eventData.InputSource.SupportsInputInfo(eventData.SourceId, SupportedInputInfo.GripPosition)) {
                     // The input source must provide grip positional data for this script to be usable
                     return;
                 }
@@ -388,17 +345,34 @@ namespace HoloToolkit.Unity.InputModule
             StartDragging(initialDraggingPosition);
         }
 
-        public void OnSourceDetected(SourceStateEventData eventData)
-        {
+        public void OnSourceDetected(SourceStateEventData eventData) {
             // Nothing to do
         }
 
-        public void OnSourceLost(SourceStateEventData eventData)
-        {
-            if (currentInputSource != null && eventData.SourceId == currentInputSourceId)
-            {
+        public void OnSourceLost(SourceStateEventData eventData) {
+            if (currentInputSource != null && eventData.SourceId == currentInputSourceId) {
                 StopDragging();
             }
+        }
+
+        // ----------------------------------
+
+        // RIGIDBODY NEEDS TO BE KINEMATIC & NOT USE GRAVITY
+
+        // when colliding with wall
+        public void OnCollisionEnter(Collision collision) {
+            // option 1: stop dragging
+            //StopDragging();
+
+            // option 2: freeze position while colliding
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        }
+
+        // when stop colliding (only used with option 2)
+        public void OnCollisionExit(Collision collision) {
+            // option 2: unfreeze position
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 }

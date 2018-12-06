@@ -160,34 +160,35 @@ MonoBehaviour:
   useTightFollow: 0
   SquareButtonPrefab: {fileID: 1210820392543280, guid: 40da8a1b3b26ba743b892d890b95a9f9,
     type: 2}
-  UseRemove: 1
+  UseRemove: 0
   UseAdjust: 1
-  UseHide: 1
+  UseHide: 0
   DisplayType: 0
   State: 0
   CustomButtonIconProfile: {fileID: 0}
   buttons:
-  - DefaultPosition: 1
+  - DefaultPosition: 0
     ManipulationPosition: 0
     Type: 0
     Name: WallsButton
     Icon: KeyboardKeyGlyphs_Down
-    Text: Hide walls
+    Text: Toggle Walls
     EventTarget: {fileID: 0}
     OnTappedEvent:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 1
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - DefaultPosition: 1
+    ManipulationPosition: 0
+    Type: 0
+    Name: ScaleButton
+    Icon: ObjectCollectionDefault
+    Text: Large Scale
+    EventTarget: {fileID: 0}
+    OnTappedEvent:
+      m_PersistentCalls:
+        m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   buttonParent: {fileID: 4691479528535670}

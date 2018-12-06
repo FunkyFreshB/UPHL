@@ -221,18 +221,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets/HoloToolkit/Utilities/Scripts/GLTF/Plugins/JsonNet/Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Data.Tds">
-      <HintPath>Assets/Plugins/Mono.Data.Tds.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Security">
-      <HintPath>Assets/Plugins/Mono.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Npgsql">
-      <HintPath>Assets/Plugins/Npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data">
-      <HintPath>Assets/Plugins/System.Data.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/hololens/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/UnityEngine.Analytics.dll</HintPath>
     </Reference>
@@ -943,17 +931,9 @@
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\ScaleThemeWidget.cs" />
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\TextMeshColorThemeWidget.cs" />
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\TextureThemeWidget.cs" />
-    <Compile Include="Assets\Scripts\Client.cs" />
-    <Compile Include="Assets\Scripts\Database.cs" />
-    <Compile Include="Assets\Scripts\HanddraggableHH.cs" />
-    <Compile Include="Assets\Scripts\HideWallsButtonAppBar.cs" />
-    <Compile Include="Assets\Scripts\InteractionMenuButtonBehaviour.cs" />
-    <Compile Include="Assets\Scripts\LampBehaviour.cs" />
-    <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
-    <Compile Include="Assets\Scripts\SensorClick.cs" />
-    <Compile Include="Assets\Scripts\SensorInput.cs" />
-    <Compile Include="Assets\Scripts\Server.cs" />
-    <Compile Include="Assets\Scripts\StartInteractionMenu.cs" />
+    <Compile Include="Assets\Scripts\MenuButtonFocus.cs" />
+    <Compile Include="Assets\Scripts\SmallScaleButtonPress.cs" />
+    <Compile Include="Assets\Scripts\WWW1.cs" />
     <Compile Include="Assets\TestModel\LampButtonZoom.cs" />
   </ItemGroup>
   <ItemGroup>

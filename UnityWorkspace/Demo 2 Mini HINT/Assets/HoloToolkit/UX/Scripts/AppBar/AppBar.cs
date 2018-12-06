@@ -28,7 +28,7 @@ namespace HoloToolkit.Unity.UX
         /// This can be set to negative values
         /// to force the app bar to appear below the object
         /// </summary>
-        public float HoverOffsetYScale = 0.25f;
+        public float HoverOffsetYScale = -0.25f; //0.25f
 
         /// <summary>
         /// Pushes the app bar away from the object
@@ -173,7 +173,11 @@ namespace HoloToolkit.Unity.UX
         private BoundingBoxHelper helper;
 
         private GameObject walls;
-        private bool wallsState;
+        private bool wallsState = false;
+        private GameObject hintmodel;
+        private GameObject menu;
+        private float originalTransformY;
+        private bool isLarge = false;
 
         public void Reset()
         {
@@ -185,8 +189,12 @@ namespace HoloToolkit.Unity.UX
         public void Start()
         {
             State = AppBarStateEnum.Default;
+
             walls = GameObject.Find("Walls");
-            wallsState = false;
+            hintmodel = GameObject.Find("Demo2_MiniHINT_19_ScaledDownToOneMeter");
+            originalTransformY = hintmodel.transform.position.y;
+            menu = GameObject.Find("MenuFrame");
+            menu.SetActive(false);
 
             if (interactables.Count == 0)
             {
@@ -220,9 +228,25 @@ namespace HoloToolkit.Unity.UX
             {
                 case "WallsButton":
                     if (walls != null) {
-                       walls.SetActive(wallsState);
-                       wallsState = !wallsState;
+                        walls.SetActive(wallsState);
+                        wallsState = !wallsState;
                     }
+                    break;
+                case "ScaleButton":
+                    if (isLarge) {
+                        hintmodel.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+                        hintmodel.transform.position = new Vector3(hintmodel.transform.position.x, originalTransformY, hintmodel.transform.position.z);
+                        menu.SetActive(false);
+                    }
+                    else {
+                        RaycastHit hit;
+                        if (Physics.Raycast(hintmodel.transform.position, Vector3.down, out hit)) {
+                            hintmodel.transform.position = new Vector3(hintmodel.transform.position.x, hit.point.y, hintmodel.transform.position.z);
+                        }
+                        hintmodel.transform.localScale = new Vector3(0.1725f, 0.1725f, 0.1725f);
+                        menu.SetActive(true);
+                    }
+                    isLarge = !isLarge;
                     break;
                 case "Remove":
                     // Destroy the target object, Bounding Box, Bounding Box Rig and App Bar

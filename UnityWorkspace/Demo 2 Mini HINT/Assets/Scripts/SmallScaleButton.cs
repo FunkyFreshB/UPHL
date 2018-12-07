@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmallScaleButtonPress : MonoBehaviour, IInputClickHandler {
+public class SmallScaleButton : MonoBehaviour, IInputClickHandler {
 
     public GameObject HINTModel;
     private float OriginalTransformY;

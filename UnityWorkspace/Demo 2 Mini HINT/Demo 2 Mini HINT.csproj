@@ -232,6 +232,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AddShader.cs" />
     <Compile Include="Assets\HoloToolkit\Boundary\Scripts\BoundaryManager.cs" />
     <Compile Include="Assets\HoloToolkit\Boundary\Scripts\Edge.cs" />
     <Compile Include="Assets\HoloToolkit\Boundary\Scripts\EdgeHelpers.cs" />
@@ -931,9 +932,12 @@
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\ScaleThemeWidget.cs" />
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\TextMeshColorThemeWidget.cs" />
     <Compile Include="Assets\HoloToolkit-Examples\UX\Scripts\Widgets\TextureThemeWidget.cs" />
+    <Compile Include="Assets\Scripts\ExitButtonPress.cs" />
     <Compile Include="Assets\Scripts\MenuButtonFocus.cs" />
+    <Compile Include="Assets\Scripts\SensorManager.cs" />
+    <Compile Include="Assets\Scripts\ShowInfoButtonPress.cs" />
     <Compile Include="Assets\Scripts\SmallScaleButtonPress.cs" />
-    <Compile Include="Assets\Scripts\WWW1.cs" />
+    <Compile Include="Assets\Scripts\ToggleWallsButtonPress.cs" />
     <Compile Include="Assets\TestModel\LampButtonZoom.cs" />
   </ItemGroup>
   <ItemGroup>

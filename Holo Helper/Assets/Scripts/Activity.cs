@@ -38,7 +38,7 @@ public class Activity{
 
     public void reInitializer()
     {
-        foreach(Instructions i in instructions)
+        foreach (Instructions i in instructions)
         {
             i.reInitializer(this.name);
         }
@@ -55,11 +55,6 @@ public class Activity{
 
         temp.removeIndicator();
         instructions.Remove(temp);
-
-        if (temp == null)
-        {
-            // Debug.Log("Activity " + temp + " destroyed");
-        }
     }
 
     public string NextStep()

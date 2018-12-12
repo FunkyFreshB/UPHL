@@ -6,6 +6,7 @@ using UnityEngine.Windows.Speech;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using HoloToolkit.Unity.SpatialMapping;
 
 // kan nog kallas MenuManager istället
 public class ActivityManager : MonoBehaviour {
@@ -39,6 +40,8 @@ public class ActivityManager : MonoBehaviour {
     private Instructions foundInstruction;          // instruction found on a gameobject
     private GameObject newInstruction;              // used when creating an instruction
 
+    public GameObject savingText;
+
     public AudioClip tap;
 
     KeywordRecognizer keywordRecognizer;
@@ -51,6 +54,8 @@ public class ActivityManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        SpatialMappingManager.Instance.gameObject.SetActive(false);
+
         activityPos[0] = new Vector3(0, 0.10415f, 0);
         activityPos[1] = new Vector3(0, 0.0749f, 0);
         activityPos[2] = new Vector3(0, 0.04565f, 0);
@@ -768,6 +773,20 @@ public class ActivityManager : MonoBehaviour {
 
     public void Save()
     {
+        savingText.SetActive(true);
+
+        foreach (Activity a in container.activities)
+        {
+
+            foreach (Instructions i in a.instructions)
+            {
+                i.indicator.SetActive(true);
+            }
+
+           // a.reInitializer();
+            
+        }
+
         if (Application.isEditor)
         {
             container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
@@ -776,6 +795,16 @@ public class ActivityManager : MonoBehaviour {
         {
             container.Save(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
         }
+
+        foreach (Activity a in container.activities)
+        {
+            foreach (Instructions i in a.instructions)
+            {
+               // i.indicator.SetActive(false);
+            }
+        }
+
+        savingText.SetActive(false);
     }
 
 }

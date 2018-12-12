@@ -7,6 +7,7 @@ using HoloToolkit.UX.ToolTips;
 
 public class SensorManager : MonoBehaviour {
 
+    /*
     public GameObject Bedroom_Bed;
     public GameObject Bedroom_Chair_1;
     public GameObject Bedroom_Chair_2;
@@ -68,31 +69,41 @@ public class SensorManager : MonoBehaviour {
     public GameObject Light_Livingroom;
     public GameObject Light_Table;
     public GameObject Light_StorageArea;
+    */
 
     public Material lampOn;
     public Material lampOff;
     public Material sensorOn;
-
-    public List<SensorData> sensorDataList;
-
-    string webServiceUrl = "http://192.168.1.195:8080/getevents.py";
+    
+    List<GameObject> sensorList;
+    readonly string webServiceUrl = "http://192.168.1.195:8080/getevents.py";
     float timer;
     string lastUpdateTime;
 
     private void Start() {
+
+        sensorList = new List<GameObject>();
+        SetupSensorList();
+        foreach (GameObject obj in sensorList)
+            Debug.Log(obj);
+            //Debug.Log(obj.GetComponent<Sensor>().sensorObject.name);
         timer = 2.0f;
         lastUpdateTime = "";
-        sensorDataList = new List<SensorData>();
-
-        WWW request = new WWW(webServiceUrl);
-        StartCoroutine(OnResponse(request));
-
-        //id = "a78a81027d6e4fa5980ec51d32598212";
-        
-        addSensorData(Lampbutton_Livingroom_2, "a78a81027d6e4fa5980ec51d32598212", "Lamp button");
-        addSensorData(Livingroom_Sofa_Cushion_1, "_resource_", "Pressure sensor");
+        //a78a81027d6e4fa5980ec51d32598212
     }
 
+    private void SetupSensorList() {
+        FindSensors(gameObject);
+    }
+
+    private void FindSensors(GameObject parent) {
+        for (int i = 0; i < parent.transform.childCount; i++) {
+            FindSensors(parent.transform.GetChild(i).gameObject);
+        }
+        if (parent.GetComponent<Sensor>() != null)
+            sensorList.Add(parent);
+    }
+/*
     private void addSensorData(GameObject sensorObject, String resource, String description) {
         GameObject toolTip = setupToolTip(sensorObject, resource, description);
         SensorData sensor = new SensorData(sensorObject, toolTip, resource);
@@ -107,7 +118,7 @@ public class SensorManager : MonoBehaviour {
         toolTip.SetActive(false);
         return toolTip;
     }
-    
+*/
     private void Update() {
         timer -= Time.deltaTime;
         if (timer <= 0) {
@@ -117,12 +128,24 @@ public class SensorManager : MonoBehaviour {
             StartCoroutine(OnResponse(request));
         }
     }
-    
+
     public IEnumerator OnResponse(WWW req) {
         yield return req;
         Processjson(req.text);
     }
-    
+
+    private class SensorData {
+        public String resource;
+        public bool sample;
+        public String db_time_stamp;
+
+        public SensorData() {
+            resource = "";
+            sample = false;
+            db_time_stamp = "";
+        }
+    }
+
     private void Processjson(string jsonString) {
         //Debug.Log(jsonString);
         string[] jsonArray = jsonString.Split('\n');
@@ -132,7 +155,6 @@ public class SensorManager : MonoBehaviour {
         SensorData data = new SensorData();
      
         for (int i = 0; i<jsonArray.Length-1; i++) {
-            data.resource = "";
 
             jsonArray[i] = jsonArray[i].Replace("'", "\"");
             jsonArray[i] = jsonArray[i].Replace(",)", "");
@@ -150,25 +172,30 @@ public class SensorManager : MonoBehaviour {
             Debug.Log("Sample: " + data.sample);
             Debug.Log("Time: " + data.db_time_stamp);
 
-            foreach (SensorData sensorData in sensorDataList) {
-                string s = sensorData.resource;
-                if (data.resource != null) {
-                    if (data.resource.Equals(s)) {
-                        sensorData.sample = data.sample;
-                        sensorData.db_time_stamp = data.db_time_stamp;
+            if (data.resource != "") {
+                foreach (GameObject sensorObject in sensorList) {
+                    Sensor sensor = sensorObject.GetComponent<Sensor>();
+                    if (data.resource.Equals(sensor.resource)) {
+                        sensor.sample = data.sample;
+                        sensor.db_time_stamp = data.db_time_stamp;
 
-                        if (sensorData.sample) {
-                            sensorData.sensorObject.GetComponent<Renderer>().material = lampOn;
-                            /*if (sensorData.resource.Equals("a78a81027d6e4fa5980ec51d32598212")) {
-                                Light_Table.SetActive(true);
-                            }*/
+                        if (sensor.sample && sensor.isLamp) {
+                            sensor.sensorObject.GetComponent<Renderer>().material = lampOn;
+                            //if (sensor.resource.Equals("a78a81027d6e4fa5980ec51d32598212")) {
+                            //    Light_Table.SetActive(true);
+                            //}
                         }
-                        else {
-                            sensorData.sensorObject.GetComponent<Renderer>().material = lampOff;
-                            /*if (sensorData.resource.Equals("a78a81027d6e4fa5980ec51d32598212")) {
-                                Light_Table.SetActive(false);
-                            }*/
+                        else if(!sensor.sample && sensor.isLamp) {
+                            sensor.sensorObject.GetComponent<Renderer>().material = lampOff;
                         }
+                        else if(sensor.sample && !sensor.isLamp) {
+                            sensor.sensorObject.GetComponent<Renderer>().material = sensorOn;
+                            //if (sensor.resource.Equals("a78a81027d6e4fa5980ec51d32598212")) {
+                            //    Light_Table.SetActive(false);
+                            //}
+                        }
+                        else
+                            sensor.sensorObject.GetComponent<Renderer>().material = sensor.originalMaterial;
                     }
                 }
             }

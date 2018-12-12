@@ -13,6 +13,11 @@ public class MenuButtonFocus : MonoBehaviour, IFocusable {
     }
 
     public void OnFocusExit() {
-        gameObject.GetComponent<Renderer>().material = offFocusMaterial;
+            gameObject.GetComponent<Renderer>().material = offFocusMaterial;
+    }
+
+    private void Start() {
+        if (onFocusMaterial == null) onFocusMaterial = gameObject.GetComponent<Renderer>().material;
+        if (offFocusMaterial == null) offFocusMaterial = gameObject.GetComponent<Renderer>().material;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SensorData {
+public class TempSensorData : MonoBehaviour {
     public GameObject sensorObject;
     public Material originalMaterial;
     public GameObject sensorToolTip;
@@ -11,13 +11,14 @@ public class SensorData {
     public bool sample;
     public string db_time_stamp;
 
-    public SensorData() { }
+    public TempSensorData() { }
 
-    public SensorData(GameObject go, GameObject toolTip, string resource) {
+    public TempSensorData(GameObject go, GameObject toolTip, string resource) {
         sensorObject = go;
         originalMaterial = sensorObject.GetComponent<Renderer>().material;
         sensorToolTip = toolTip;
         this.resource = resource;
         sample = false;
     }
+
 }

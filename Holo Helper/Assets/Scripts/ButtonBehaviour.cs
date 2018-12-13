@@ -264,8 +264,17 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
     {
         if (isExit)
         {
+            ams.exitingText.SetActive(true);
             ams.menuBg.SetActive(false);
             menus[0].SetActive(false);
+
+            foreach(Activity a in ams.container.activities)
+            {
+                foreach(Instructions i in a.instructions)
+                {
+                    i.indicator.SetActive(true);
+                }
+            }
             
             Application.Quit();
         }

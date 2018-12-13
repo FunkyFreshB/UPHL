@@ -41,6 +41,7 @@ public class ActivityManager : MonoBehaviour {
     private GameObject newInstruction;              // used when creating an instruction
 
     public GameObject savingText;
+    public GameObject exitingText;
 
     public AudioClip tap;
 
@@ -775,18 +776,6 @@ public class ActivityManager : MonoBehaviour {
     {
         savingText.SetActive(true);
 
-        foreach (Activity a in container.activities)
-        {
-
-            foreach (Instructions i in a.instructions)
-            {
-                i.indicator.SetActive(true);
-            }
-
-           // a.reInitializer();
-            
-        }
-
         if (Application.isEditor)
         {
             container.Save(Path.Combine(Application.dataPath, "ActivityList.xml"));
@@ -794,14 +783,6 @@ public class ActivityManager : MonoBehaviour {
         else
         {
             container.Save(Path.Combine(Application.persistentDataPath, "ActivityList.xml"));
-        }
-
-        foreach (Activity a in container.activities)
-        {
-            foreach (Instructions i in a.instructions)
-            {
-               // i.indicator.SetActive(false);
-            }
         }
 
         savingText.SetActive(false);

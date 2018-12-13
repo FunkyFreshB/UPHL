@@ -24,6 +24,7 @@ public class Instructions
         instructionText = text;
         isEditMode = false;
         this.reInitializer(activityName);
+        this.SpawnInFront();
     }
 
     public void reInitializer(string activityName)
@@ -49,6 +50,11 @@ public class Instructions
         indicator = cube;
         indicator.transform.parent = GameObject.Find("Indicators").transform;
         indicator.SetActive(false);
+    }
+
+    public void SpawnInFront()
+    {
+        indicator.transform.localPosition += Camera.main.transform.position  + Camera.main.transform.forward * 2.0f;
     }
 
     public void removeIndicator()

@@ -8,7 +8,6 @@ public class SmallScaleButton : MonoBehaviour, IInputClickHandler, IFocusable {
 
     public GameObject HINTModel;
     private float OriginalTransformY;
-
     public Material onFocusMaterial;
     public Material offFocusMaterial;
 
@@ -17,7 +16,6 @@ public class SmallScaleButton : MonoBehaviour, IInputClickHandler, IFocusable {
         HINTModel.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         HINTModel.transform.position = new Vector3(HINTModel.transform.position.x, OriginalTransformY, HINTModel.transform.position.z);
         gameObject.transform.parent.gameObject.SetActive(false);
-        
     }
 
     public void OnFocusEnter() {
@@ -29,7 +27,6 @@ public class SmallScaleButton : MonoBehaviour, IInputClickHandler, IFocusable {
     }
 
     private void Start() {
-        //buttonPressAudio = GetComponent<AudioSource>();
         OriginalTransformY = HINTModel.transform.position.y;
         if (onFocusMaterial == null) onFocusMaterial = gameObject.GetComponent<Renderer>().material;
         if (offFocusMaterial == null) offFocusMaterial = gameObject.GetComponent<Renderer>().material;

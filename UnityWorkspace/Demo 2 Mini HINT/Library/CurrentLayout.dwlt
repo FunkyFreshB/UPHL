@@ -424,20 +424,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Materials
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Materials
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\hololens\Desktop\Github\UPHL\UnityWorkspace\Demo 2 Mini
     HINT
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 1143}
-    m_SelectedIDs: 9a4c0000
-    m_LastClickedID: 19610
-    m_ExpandedIDs: 000000006e3b0000863b0000e83d00000c450000ba470000f4470000ce490000d44c0000aa4e0000164f000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 1207}
+    m_SelectedIDs: 98490000
+    m_LastClickedID: 18840
+    m_ExpandedIDs: 00000000703b0000883b0000ea3d000010450000be470000f84700004c480000d2490000d84c0000ae4e00001a4f000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -465,7 +465,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006e3b0000863b0000e83d00000c450000ba470000f4470000ce490000d44c0000aa4e0000164f0000
+    m_ExpandedIDs: 00000000703b0000883b0000ea3d000010450000be470000f8470000d2490000d84c0000ae4e00001a4f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -582,21 +582,21 @@ MonoBehaviour:
     height: 439
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
-    scrollPos: {x: 0, y: 522}
-    m_SelectedIDs: 0c540000
-    m_LastClickedID: 21516
-    m_ExpandedIDs: 38fbffff3afbffff88fbffff96fbffff0000000038530000505300000c540000
+    scrollPos: {x: 0, y: 506}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: aa5cf5ff52f8ffff7af8ffff96fbfffff4ffffff0000000042530000725300009a530000e053000066540000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Lampbutton_Bathroom
-      m_OriginalName: Lampbutton_Bathroom
+      m_Name: Light_Kitchen
+      m_OriginalName: Light_Kitchen
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 21282
+      m_UserData: 21268
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -636,14 +636,14 @@ MonoBehaviour:
     height: 439
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 9078.2466615
+  lastFramingTime: 7966.8332346
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.0014918372, y: -0.39162767, z: 2.1254547}
+    m_Target: {x: -0.048762187, y: -0.4440583, z: 2.0023146}
     speed: 2
-    m_Value: {x: -0.0014918372, y: -0.39162767, z: 2.1254547}
+    m_Value: {x: -0.048762187, y: -0.4440583, z: 2.0023146}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -667,13 +667,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.19610716, y: -0.5824043, z: 0.14736998, w: 0.77500284}
+    m_Target: {x: -0.31430727, y: 0.64176446, z: -0.3258628, w: -0.6190014}
     speed: 2
-    m_Value: {x: 0.19610716, y: -0.5824043, z: 0.14736998, w: 0.77500284}
+    m_Value: {x: -0.31430727, y: 0.64176446, z: -0.3258628, w: -0.6190014}
   m_Size:
-    m_Target: 0.10928947
+    m_Target: 0.5005187
     speed: 2
-    m_Value: 0.10928947
+    m_Value: 0.5005187
   m_Ortho:
     m_Target: 0
     speed: 2

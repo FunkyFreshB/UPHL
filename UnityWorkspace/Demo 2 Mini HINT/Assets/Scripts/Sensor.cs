@@ -7,6 +7,7 @@ public class Sensor : MonoBehaviour {
     public GameObject sensorObject;
     public Material originalMaterial;
     public bool isLamp;
+    public GameObject Lamp;
     //public GameObject sensorToolTip;
     public string resource;
     public bool sample;

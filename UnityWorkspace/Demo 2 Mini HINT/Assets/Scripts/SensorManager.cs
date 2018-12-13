@@ -84,9 +84,10 @@ public class SensorManager : MonoBehaviour {
 
         sensorList = new List<GameObject>();
         SetupSensorList();
+#if UNITY_EDITOR
         foreach (GameObject obj in sensorList)
-            Debug.Log(obj);
-            //Debug.Log(obj.GetComponent<Sensor>().sensorObject.name);
+            Debug.Log("Sensor found in: " + obj);
+#endif
         timer = 2.0f;
         lastUpdateTime = "";
         //a78a81027d6e4fa5980ec51d32598212
@@ -131,30 +132,23 @@ public class SensorManager : MonoBehaviour {
 
     public IEnumerator OnResponse(WWW req) {
         yield return req;
-        Processjson(req.text);
+        UpdateSensors(ProcessJSON(req.text));
     }
 
     private class SensorData {
         public String resource;
         public bool sample;
         public String db_time_stamp;
-
-        public SensorData() {
-            resource = "";
-            sample = false;
-            db_time_stamp = "";
-        }
     }
 
-    private void Processjson(string jsonString) {
-        //Debug.Log(jsonString);
+    private SensorData[] ProcessJSON(string jsonString) {
+
         string[] jsonArray = jsonString.Split('\n');
-        //Debug.Log(jsonArray.ToString());
-
-
-        SensorData data = new SensorData();
+        //jsonArray.Length-1 because jsonString.Split('\n'); generates one extra empty space at the end of the array
+        SensorData[] dataArray = new SensorData[jsonArray.Length-1];
+        SensorData data;
      
-        for (int i = 0; i<jsonArray.Length-1; i++) {
+        for (int i = 0; i<dataArray.Length; i++) {
 
             jsonArray[i] = jsonArray[i].Replace("'", "\"");
             jsonArray[i] = jsonArray[i].Replace(",)", "");
@@ -172,6 +166,15 @@ public class SensorManager : MonoBehaviour {
             Debug.Log("Sample: " + data.sample);
             Debug.Log("Time: " + data.db_time_stamp);
 
+            dataArray[i] = data;
+
+        }
+        return dataArray;
+    }
+
+    private void UpdateSensors(SensorData[] dataArray) {
+
+        foreach (SensorData data in dataArray) {
             if (data.resource != "") {
                 foreach (GameObject sensorObject in sensorList) {
                     Sensor sensor = sensorObject.GetComponent<Sensor>();
@@ -181,18 +184,14 @@ public class SensorManager : MonoBehaviour {
 
                         if (sensor.sample && sensor.isLamp) {
                             sensor.sensorObject.GetComponent<Renderer>().material = lampOn;
-                            //if (sensor.resource.Equals("a78a81027d6e4fa5980ec51d32598212")) {
-                            //    Light_Table.SetActive(true);
-                            //}
+                            sensor.Lamp.SetActive(true);
                         }
-                        else if(!sensor.sample && sensor.isLamp) {
+                        else if (!sensor.sample && sensor.isLamp) {
                             sensor.sensorObject.GetComponent<Renderer>().material = lampOff;
+                            sensor.Lamp.SetActive(false);
                         }
-                        else if(sensor.sample && !sensor.isLamp) {
+                        else if (sensor.sample && !sensor.isLamp) {
                             sensor.sensorObject.GetComponent<Renderer>().material = sensorOn;
-                            //if (sensor.resource.Equals("a78a81027d6e4fa5980ec51d32598212")) {
-                            //    Light_Table.SetActive(false);
-                            //}
                         }
                         else
                             sensor.sensorObject.GetComponent<Renderer>().material = sensor.originalMaterial;

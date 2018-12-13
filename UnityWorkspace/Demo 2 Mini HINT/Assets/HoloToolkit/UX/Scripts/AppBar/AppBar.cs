@@ -189,7 +189,7 @@ namespace HoloToolkit.Unity.UX
             State = AppBarStateEnum.Default;
 
             walls = GameObject.Find("Walls");
-            HINTModel = GameObject.Find("Demo2_MiniHINT_19_ScaledDownToOneMeter");
+            HINTModel = GameObject.Find("MiniHINT");
             originalTransformY = HINTModel.transform.position.y;
             menu = GameObject.Find("MenuFrame");
             menu.SetActive(false);

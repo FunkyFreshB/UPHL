@@ -15,4 +15,5 @@ public class ToggleWallsButton : MonoBehaviour, IInputClickHandler {
             walls.SetActive(true);
         }
     }
+
 }

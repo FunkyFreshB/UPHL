@@ -103,5 +103,38 @@
       <name />
       <CurrentStep>0</CurrentStep>
     </Activity>
+    <Activity>
+      <Instructions>
+        <Instruction>
+          <instructionText>New instruction</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>New instruction</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>New instruction</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>New instruction</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>New instruction</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>New instruction</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>New instruction</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>New instruction</instructionText>
+        </Instruction>
+        <Instruction>
+          <instructionText>New instruction</instructionText>
+        </Instruction>
+      </Instructions>
+      <name>yyyuuuu</name>
+      <CurrentStep>0</CurrentStep>
+    </Activity>
   </Activities>
 </AcitivitlistsAndInstructions>

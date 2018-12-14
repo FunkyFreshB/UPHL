@@ -31,6 +31,8 @@ public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
+        actMan.GetComponent<AudioSource>().PlayOneShot(ams.tap);
+
         if (okOrCancel)
         {
             if (WorldAnchorManager.Instance != null)
@@ -46,12 +48,14 @@ public class IndicatorOkOrCancel : MonoBehaviour, IInputClickHandler, IFocusable
             WorldAnchorManager.Instance.AttachAnchor(ams.GetSelectedInstruction().indicator);
         }
 
+        ams.SetSelectedObject(null);
         ams.GetSelectedInstruction().indicator.GetComponent<TapToPlace>().IsBeingPlaced = false;
         ams.GetSelectedInstruction().indicator.GetComponent<TapToPlace>().enabled = false;
         ams.menus[3].SetActive(true);
         storedInstructions.SetActive(true);
         ams.GetSelectedInstruction().isEditMode = false;
         ams.GetSelectedInstruction().indicator.SetActive(false);
+
         this.gameObject.GetComponent<Renderer>().material = materials[0];
 
         this.gameObject.transform.parent.gameObject.SetActive(false);

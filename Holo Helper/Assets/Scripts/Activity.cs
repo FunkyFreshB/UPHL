@@ -21,7 +21,7 @@ public class Activity{
         this.name = name;
         currentStep = 0;
         instructions = new List<Instructions>();
-        instructions.Add(new Instructions("Insert description", this.name));
+        instructions.Add(new Instructions("New instruction", this.name));
     }
 
     public Activity()    {}

@@ -91,11 +91,6 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
                         menus[2].transform.GetChild(0).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetActivityPageAmount() + 1);
                         break;
 
-                    case 2: // when creating instruction
-                        InstantiateInstructionButton(keyboardText, null);
-                        menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetInstructionPageAmount() + 1);
-                        break;
-
                     case 3: // when editing instructions
                         ams.SetNameInstruction(keyboardText);
                         ams.GetSelectedInstruction().indicator.SetActive(true);
@@ -429,7 +424,8 @@ public class ButtonBehaviour : MonoBehaviour, IInputClickHandler, IFocusable /*,
     {
         if (isCreate)
         {
-            CreateKeyboard(2, null);
+            InstantiateInstructionButton("New instruction", null);
+            menus[3].transform.GetChild(1).GetComponent<TextMesh>().text = "Page " + (ams.GetCurrentPage() + 1) + " / " + (ams.GetInstructionPageAmount() + 1);
         }
         else if (isInstruction)
         {

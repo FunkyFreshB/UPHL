@@ -944,6 +944,8 @@
     <Compile Include="Assets\Scripts\SmallScaleButton.cs" />
     <Compile Include="Assets\Scripts\tempSensorData.cs" />
     <Compile Include="Assets\Scripts\ToggleWallsButton.cs" />
+    <Compile Include="Assets\Scripts\ToolTipLine.cs" />
+    <Compile Include="Assets\Scripts\ToolTipRotation.cs" />
     <Compile Include="Assets\TestModel\LampButtonZoom.cs" />
   </ItemGroup>
   <ItemGroup>

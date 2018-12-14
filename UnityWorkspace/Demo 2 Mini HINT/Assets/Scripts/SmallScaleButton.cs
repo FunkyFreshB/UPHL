@@ -15,6 +15,7 @@ public class SmallScaleButton : MonoBehaviour, IInputClickHandler, IFocusable {
         gameObject.GetComponent<Renderer>().material = offFocusMaterial;
         HINTModel.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         HINTModel.transform.position = new Vector3(HINTModel.transform.position.x, OriginalTransformY, HINTModel.transform.position.z);
+        HINTModel.GetComponent<SensorManager>().isLarge = false;
         gameObject.transform.parent.gameObject.SetActive(false);
     }
 

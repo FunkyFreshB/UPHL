@@ -235,9 +235,10 @@ namespace HoloToolkit.Unity.UX
                     break;
                 case "ScaleButton":
                     if (HINTModel != null) {
-                        if (HINTModel.transform.localScale.x == 0.1725f) {
+                        if (HINTModel.GetComponent<SensorManager>().isLarge) {
                             HINTModel.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
                             HINTModel.transform.position = new Vector3(HINTModel.transform.position.x, originalTransformY, HINTModel.transform.position.z);
+                            HINTModel.GetComponent<SensorManager>().isLarge = false;
                             menu.SetActive(false);
                             walls.GetComponent<HandDraggable>().enabled = true;
                         }
@@ -247,6 +248,7 @@ namespace HoloToolkit.Unity.UX
                                 HINTModel.transform.position = new Vector3(HINTModel.transform.position.x, hit.point.y, HINTModel.transform.position.z);
                             }
                             HINTModel.transform.localScale = new Vector3(0.1725f, 0.1725f, 0.1725f);
+                            HINTModel.GetComponent<SensorManager>().isLarge = true;
                             menu.SetActive(true);
                             walls.GetComponent<HandDraggable>().enabled = false;
                         }

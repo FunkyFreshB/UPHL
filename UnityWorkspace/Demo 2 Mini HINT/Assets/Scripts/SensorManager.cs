@@ -74,9 +74,12 @@ public class SensorManager : MonoBehaviour {
     public Material lampOn;
     public Material lampOff;
     public Material sensorOn;
+
+    public bool isLarge;
     
     List<GameObject> sensorList;
-    readonly string webServiceUrl = "http://192.168.1.195:8080/getevents.py";
+    public readonly string getEventsUrl = "http://192.168.1.195:8080/getevents.py";
+    public readonly string setEventsUrl = "http://192.168.1.195:8080/setevents.py";
     float timer;
     string lastUpdateTime;
 
@@ -88,6 +91,7 @@ public class SensorManager : MonoBehaviour {
         foreach (GameObject obj in sensorList)
             Debug.Log("Sensor found in: " + obj);
 #endif
+        isLarge = false;
         timer = 2.0f;
         lastUpdateTime = "";
         //a78a81027d6e4fa5980ec51d32598212
@@ -124,7 +128,7 @@ public class SensorManager : MonoBehaviour {
         timer -= Time.deltaTime;
         if (timer <= 0) {
             timer = 1.0f;
-            string url = webServiceUrl + "?ts=" + lastUpdateTime;
+            string url = getEventsUrl + "?ts=" + lastUpdateTime;
             WWW request = new WWW(url);
             StartCoroutine(OnResponse(request));
         }
@@ -175,7 +179,7 @@ public class SensorManager : MonoBehaviour {
     private void UpdateSensors(SensorData[] dataArray) {
 
         foreach (SensorData data in dataArray) {
-            if (data.resource != "") {
+            if (data.resource != null) {
                 foreach (GameObject sensorObject in sensorList) {
                     Sensor sensor = sensorObject.GetComponent<Sensor>();
                     if (data.resource.Equals(sensor.resource)) {

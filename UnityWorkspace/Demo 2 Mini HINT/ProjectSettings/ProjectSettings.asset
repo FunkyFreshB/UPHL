@@ -3,7 +3,7 @@
 --- !u!129 &1
 PlayerSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 14
+  serializedVersion: 15
   productGUID: 7f8369f862abc4b44adfe886a1ff8050
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
@@ -39,7 +39,8 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos: []
-  m_VirtualRealitySplashScreen: {fileID: 0}
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: c9c6e53d3ed4fe44eb8b6478188a244c,
+    type: 3}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
@@ -130,7 +131,7 @@ PlayerSettings:
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
-  m_HolographicPauseOnTrackingLoss: 1
+  m_HolographicPauseOnTrackingLoss: 0
   xboxOneDisableKinectGpuReservation: 0
   xboxOneEnable7thCore: 0
   vrSettings:
@@ -239,7 +240,7 @@ PlayerSettings:
   tvOSManualSigningProvisioningProfileID: 
   appleEnableAutomaticSigning: 0
   clonedFromGUID: 00000000000000000000000000000000
-  AndroidTargetDevice: 0
+  AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: 
@@ -255,7 +256,14 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   resolutionDialogBanner: {fileID: 0}
-  m_BuildTargetIcons: []
+  m_BuildTargetIcons:
+  - m_BuildTarget: 
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 04ed32daf57e97646b924f1abb89fe3a, type: 3}
+      m_Width: 128
+      m_Height: 128
+      m_Kind: 0
   m_BuildTargetBatching:
   - m_BuildTarget: Windows Store Apps
     m_StaticBatching: 1
@@ -576,8 +584,16 @@ PlayerSettings:
   metroCertificateIssuer: DefaultCompany
   metroCertificateNotAfter: 806986b55184d501
   metroApplicationDescription: Demo 2 Mini HINT
-  wsaImages: {}
-  metroTileShortName: 
+  wsaImages:
+    65636: Assets/MiniHint Logo/mh_50.png
+    131272: Assets/MiniHint Logo/mhwide_1240.png
+    2031816: Assets/MiniHint Logo/mh_88.png
+    2097352: Assets/MiniHint Logo/mh_142.png
+    2162888: Assets/MiniHint Logo/mh_300.png
+    2228424: Assets/MiniHint Logo/mh_620.png
+    2293960: Assets/MiniHint Logo/mhwide_620-correct.png
+    2294160: 
+  metroTileShortName: Mini HINT
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0

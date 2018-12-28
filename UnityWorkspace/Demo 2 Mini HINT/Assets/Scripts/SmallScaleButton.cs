@@ -18,7 +18,7 @@ public class SmallScaleButton : MonoBehaviour, IInputClickHandler, IFocusable {
         HINTModel.GetComponent<SensorManager>().isLarge = false;
         gameObject.transform.parent.gameObject.SetActive(false);
     }
-
+    
     public void OnFocusEnter() {
         gameObject.GetComponent<Renderer>().material = onFocusMaterial;
     }

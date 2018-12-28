@@ -78,8 +78,6 @@ public class SensorManager : MonoBehaviour {
     public IEnumerator OnResponse(WWW req) {
         yield return req;
         UpdateSensors(ProcessJSON(req.text));
-
-        
     }
 
 
@@ -96,7 +94,7 @@ public class SensorManager : MonoBehaviour {
         string[] jsonArray = jsonString.Split('\n');
         //jsonArray.Length-1 because jsonString.Split('\n'); generates one extra empty space at the end of the array
         SensorData[] dataArray = new SensorData[jsonArray.Length-1];
-        SensorData data;
+        SensorData newData;
      
         for (int i = 0; i<dataArray.Length; i++) {
 
@@ -105,48 +103,37 @@ public class SensorManager : MonoBehaviour {
             jsonArray[i] = jsonArray[i].Remove(0, 1);
             jsonArray[i] = jsonArray[i].Replace("True", "true");
             jsonArray[i] = jsonArray[i].Replace("False", "false");
-            data = JsonUtility.FromJson<SensorData>(jsonArray[i]);
+            newData = JsonUtility.FromJson<SensorData>(jsonArray[i]);
 
-            lastUpdateTime = data.db_time_stamp.Replace("T", " ");
-            lastUpdateTime = lastUpdateTime.Remove(19, data.db_time_stamp.Length - 19);
-            data.db_time_stamp = lastUpdateTime;
+            lastUpdateTime = newData.db_time_stamp.Replace("T", " ");
+            lastUpdateTime = lastUpdateTime.Remove(19, newData.db_time_stamp.Length - 19);
+            newData.db_time_stamp = lastUpdateTime;
 
-            dataArray[i] = data;
+            dataArray[i] = newData;
 
         }
         return dataArray;
     }
 
     private void UpdateSensors(SensorData[] dataArray) {
-
-        
-
-        foreach (SensorData data in dataArray) {
-            if (data.resource != null) {
-                
-
+        foreach (SensorData newData in dataArray) {
+            if (newData.resource != null) {
                 foreach (GameObject sensorObject in sensorList) {
                     Sensor sensor = sensorObject.GetComponent<Sensor>();
-
-                    
-
-                    if (data.resource.Equals(sensor.resource)) {
-                        sensor.sample = data.sample;
-                        sensor.db_time_stamp = data.db_time_stamp;
-
+                    if (newData.resource.Equals(sensor.resource)) {
+                        sensor.sample = newData.sample;
+                        sensor.db_time_stamp = newData.db_time_stamp;
                         if (sensor.sample && sensor.isLamp) {
                             sensor.sensorObject.GetComponent<Renderer>().material = lampOn;
                             sensor.Lamp.SetActive(true);
-                        }
-                        else if (!sensor.sample && sensor.isLamp) {
+                        } else if (!sensor.sample && sensor.isLamp) {
                             sensor.sensorObject.GetComponent<Renderer>().material = lampOff;
                             sensor.Lamp.SetActive(false);
-                        }
-                        else if (sensor.sample && !sensor.isLamp) {
+                        } else if (sensor.sample && !sensor.isLamp) {
                             sensor.sensorObject.GetComponent<Renderer>().material = sensorOn;
-                        }
-                        else
+                        } else {
                             sensor.sensorObject.GetComponent<Renderer>().material = sensor.originalMaterial;
+                        }
                     }
                 }
             }

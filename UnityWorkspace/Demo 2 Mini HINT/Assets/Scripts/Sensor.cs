@@ -8,7 +8,6 @@ public class Sensor : MonoBehaviour {
     public Material originalMaterial;
     public bool isLamp;
     public GameObject Lamp;
-    public GameObject toolTip;
     public string resource;
     public bool sample;
     public string db_time_stamp;
@@ -20,13 +19,6 @@ public class Sensor : MonoBehaviour {
         if (resource == null) resource = "_no_resource_found_";
         sample = false;
         db_time_stamp = "";
-
-        /*foreach(GameObject obj in gameObject.transform.) {
-
-        }
-        if(gameObject.transform.GetChild(0) != null && gameObject.transform.GetChild(0)) {
-            toolTip = gameObject.transform.GetChild(0).gameObject;
-        }*/
 	}
 
 }

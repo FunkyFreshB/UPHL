@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -998,7 +998,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 1
   Lamp: {fileID: 1908571214}
-  toolTip: {fileID: 0}
   resource: abc5fceb66974958a3fdd818c694586a
   sample: 0
   db_time_stamp: 
@@ -1118,7 +1117,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 1
   Lamp: {fileID: 1740541973}
-  toolTip: {fileID: 0}
   resource: a7beeca677d348648142e4b2a3f86354
   sample: 0
   db_time_stamp: 
@@ -1471,7 +1469,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 0
   Lamp: {fileID: 0}
-  toolTip: {fileID: 0}
   resource: ad256ec626fe4ebd931588b0362662b0
   sample: 0
   db_time_stamp: 
@@ -1857,7 +1854,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 0
   Lamp: {fileID: 0}
-  toolTip: {fileID: 0}
   resource: a67daf3a5dd94007bfaa361d9c9167ee
   sample: 0
   db_time_stamp: 
@@ -2460,7 +2456,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 0
   Lamp: {fileID: 0}
-  toolTip: {fileID: 0}
   resource: a2c6fe1ca54d49c5b06118286f2bd07f
   sample: 0
   db_time_stamp: 
@@ -2523,10 +2518,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210d8f5ac5e9c4148b73a1fea0c1e61b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLarge: 0
   lampOn: {fileID: 2100000, guid: f2a6475a20342d245956a156a7b80f5c, type: 2}
   lampOff: {fileID: 2100000, guid: 8cffa914048f1964c9c038fe402ab1e9, type: 2}
   sensorOn: {fileID: 2100000, guid: 338c106f10556ea4dabec55b24fa407a, type: 2}
-  isLarge: 0
 --- !u!95 &523724448
 Animator:
   serializedVersion: 3
@@ -2896,7 +2891,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 0
   Lamp: {fileID: 0}
-  toolTip: {fileID: 0}
   resource: adf3035e0e8d4bd0bcc03ffb1b1e0926
   sample: 0
   db_time_stamp: 
@@ -2961,7 +2955,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 1
   Lamp: {fileID: 1948742569}
-  toolTip: {fileID: 0}
   resource: a78a81027d6e4fa5980ec51d32598212
   sample: 0
   db_time_stamp: 
@@ -3257,7 +3250,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 0
   Lamp: {fileID: 0}
-  toolTip: {fileID: 0}
   resource: afc73a6069fc4877b179fb8a935d1218
   sample: 0
   db_time_stamp: 
@@ -6201,7 +6193,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 0
   Lamp: {fileID: 0}
-  toolTip: {fileID: 0}
   resource: ac20f1e4bccf4db3ad8815e0d8b5f6ee
   sample: 0
   db_time_stamp: 
@@ -6860,7 +6851,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 0
   Lamp: {fileID: 0}
-  toolTip: {fileID: 0}
   resource: aed1fb17d05e4bd5b9d76196dc5ba1e6
   sample: 0
   db_time_stamp: 
@@ -7809,7 +7799,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 1
   Lamp: {fileID: 533327766}
-  toolTip: {fileID: 0}
   resource: a37dd524f9eb4da790946c0448560ddf
   sample: 0
   db_time_stamp: 
@@ -8149,7 +8138,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 1
   Lamp: {fileID: 1490312724}
-  toolTip: {fileID: 0}
   resource: a7c07f1dd4944d76830b87b72ca303f6
   sample: 0
   db_time_stamp: 
@@ -8467,7 +8455,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 0
   Lamp: {fileID: 0}
-  toolTip: {fileID: 0}
   resource: a38ccda8eebf4a70bb6c4a5f1f85757c
   sample: 0
   db_time_stamp: 
@@ -8913,7 +8900,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 0
   Lamp: {fileID: 0}
-  toolTip: {fileID: 0}
   resource: a27e154c10044a1abbf7e5427b917ffb
   sample: 0
   db_time_stamp: 
@@ -9234,7 +9220,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 0
   Lamp: {fileID: 0}
-  toolTip: {fileID: 0}
   resource: ac4a0ae3dffe4f7b8d7904c0970961c8
   sample: 0
   db_time_stamp: 
@@ -9894,7 +9879,6 @@ MonoBehaviour:
   originalMaterial: {fileID: 0}
   isLamp: 1
   Lamp: {fileID: 17986843}
-  toolTip: {fileID: 0}
   resource: a97c21ae41574f64828d6f74ef501444
   sample: 0
   db_time_stamp: 
@@ -10082,6 +10066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HINTModel: {fileID: 523724445}
+  walls: {fileID: 921504170}
   onFocusMaterial: {fileID: 2100000, guid: be4efb757986fad4fbf9b374a95eb6d0, type: 2}
   offFocusMaterial: {fileID: 2100000, guid: 73d66771b1049d144aabe1e7c0517e54, type: 2}
 --- !u!1 &2132054355

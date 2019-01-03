@@ -7,6 +7,7 @@ using UnityEngine;
 public class SmallScaleButton : MonoBehaviour, IInputClickHandler, IFocusable {
 
     public GameObject HINTModel;
+    public GameObject walls;
     private float originalTransformY;
     public Material onFocusMaterial;
     public Material offFocusMaterial;
@@ -20,6 +21,7 @@ public class SmallScaleButton : MonoBehaviour, IInputClickHandler, IFocusable {
         HINTModel.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         HINTModel.transform.position = new Vector3(HINTModel.transform.position.x, originalTransformY, HINTModel.transform.position.z);
         HINTModel.GetComponent<SensorManager>().isLarge = false;
+        walls.GetComponent<HandDraggable>().enabled = true;
         gameObject.transform.parent.gameObject.SetActive(false);
     }
     

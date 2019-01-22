@@ -224,7 +224,7 @@ namespace HoloToolkit.Unity.UX
 
             switch (obj.name)
             {
-                case "WallsButton":
+                case "Walls":
                     if (walls != null) {
                         if (walls.activeSelf) {
                             walls.SetActive(false);
@@ -233,7 +233,7 @@ namespace HoloToolkit.Unity.UX
                             walls.SetActive(true);
                     }
                     break;
-                case "ScaleButton":
+                case "Scale":
                     if (HINTModel != null) {
                         if (HINTModel.GetComponent<SensorManager>().isLarge) {
                             HINTModel.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
@@ -244,15 +244,22 @@ namespace HoloToolkit.Unity.UX
                         }
                         else {
                             RaycastHit hit;
+                            HINTModel.transform.localScale = new Vector3(0.1725f, 0.1725f, 0.1725f);
+                            HINTModel.transform.Rotate(new Vector3(0,0,HINTModel.transform.rotation.y));
                             if (Physics.Raycast(HINTModel.transform.position, Vector3.down, out hit)) {
                                 HINTModel.transform.position = new Vector3(HINTModel.transform.position.x, hit.point.y, HINTModel.transform.position.z);
                             }
-                            HINTModel.transform.localScale = new Vector3(0.1725f, 0.1725f, 0.1725f);
                             HINTModel.GetComponent<SensorManager>().isLarge = true;
                             menu.SetActive(true);
                             walls.GetComponent<HandDraggable>().enabled = false;
                         }
                     }
+                    break;
+                case "Reset":
+                    HINTModel.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+                    HINTModel.transform.position = new Vector3(HINTModel.transform.position.x, originalTransformY, HINTModel.transform.position.z);
+                    HINTModel.transform.rotation = Quaternion.identity;
+                    Debug.Log("Hello");
                     break;
                 case "Remove":
                     // Destroy the target object, Bounding Box, Bounding Box Rig and App Bar

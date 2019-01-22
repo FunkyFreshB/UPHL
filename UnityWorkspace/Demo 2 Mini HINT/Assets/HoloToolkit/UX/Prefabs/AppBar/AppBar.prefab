@@ -170,7 +170,7 @@ MonoBehaviour:
   - DefaultPosition: 0
     ManipulationPosition: 0
     Type: 0
-    Name: WallsButton
+    Name: Walls
     Icon: KeyboardKeyGlyphs_Down
     Text: Toggle Walls
     EventTarget: {fileID: 0}
@@ -182,9 +182,21 @@ MonoBehaviour:
   - DefaultPosition: 1
     ManipulationPosition: 0
     Type: 0
-    Name: ScaleButton
+    Name: Scale
     Icon: ObjectCollectionDefault
     Text: Large Scale
+    EventTarget: {fileID: 0}
+    OnTappedEvent:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - DefaultPosition: 2
+    ManipulationPosition: 0
+    Type: 0
+    Name: Reset
+    Icon: ObjectCollectionDefault
+    Text: Reset transform
     EventTarget: {fileID: 0}
     OnTappedEvent:
       m_PersistentCalls:

@@ -110,6 +110,10 @@ ModelImporter:
     100208: Livingroom_Table
     100210: Livingroom_Table_2
     100212: Walls
+    100214: Bedroom_Bed_sheet
+    100216: Kitchen_Left_Stove_door
+    100218: Kitchen_Left_Stove_handle
+    100220: Kitchen_Left_Counter
     400000: Bathroom_Shelf
     400002: Bathroom_Sink
     400004: Bathroom_Toilet
@@ -217,6 +221,10 @@ ModelImporter:
     400208: Livingroom_Table
     400210: Livingroom_Table_2
     400212: Walls
+    400214: Bedroom_Bed_sheet
+    400216: Kitchen_Left_Stove_door
+    400218: Kitchen_Left_Stove_handle
+    400220: Kitchen_Left_Counter
     2100000: unnamed
     2300000: Bathroom_Shelf
     2300002: Bathroom_Sink
@@ -325,6 +333,10 @@ ModelImporter:
     2300208: Livingroom_Table
     2300210: Livingroom_Table_2
     2300212: Walls
+    2300214: Bedroom_Bed_sheet
+    2300216: Kitchen_Left_Stove_door
+    2300218: Kitchen_Left_Stove_handle
+    2300220: Kitchen_Left_Counter
     3300000: Bathroom_Shelf
     3300002: Bathroom_Sink
     3300004: Bathroom_Toilet
@@ -432,6 +444,10 @@ ModelImporter:
     3300208: Livingroom_Table
     3300210: Livingroom_Table_2
     3300212: Walls
+    3300214: Bedroom_Bed_sheet
+    3300216: Kitchen_Left_Stove_door
+    3300218: Kitchen_Left_Stove_handle
+    3300220: Kitchen_Left_Counter
     4300000: Walls_Floor
     4300002: Bathroom_Shelf
     4300004: Livingroom_Stool_001
@@ -539,6 +555,10 @@ ModelImporter:
     4300208: Kitchen_Left_Drawer_2
     4300210: Kitchen_Left_Drawer_3
     4300212: Bathroom_Toilet
+    4300214: Bedroom_Bed_sheet
+    4300216: Kitchen_Left_Stove_handle
+    4300218: Kitchen_Left_Stove_door
+    4300220: Kitchen_Left_Counter
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}

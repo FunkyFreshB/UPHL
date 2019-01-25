@@ -245,7 +245,7 @@ namespace HoloToolkit.Unity.UX
                         else {
                             RaycastHit hit;
                             HINTModel.transform.localScale = new Vector3(0.1725f, 0.1725f, 0.1725f);
-                            HINTModel.transform.Rotate(new Vector3(0,0,HINTModel.transform.rotation.y));
+                            HINTModel.transform.eulerAngles = new Vector3(0, HINTModel.transform.eulerAngles.y, 0); //HINTModel.transform.eulerAngles.y
                             if (Physics.Raycast(HINTModel.transform.position, Vector3.down, out hit)) {
                                 HINTModel.transform.position = new Vector3(HINTModel.transform.position.x, hit.point.y, HINTModel.transform.position.z);
                             }
